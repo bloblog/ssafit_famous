@@ -3,12 +3,14 @@ package com.ssafit.pjt.dto;
 public class Review {
 	private int reviewKey;
 	private String reviewContent;
+	private int viewCnt;
 	
 	public Review() {}
 
-	public Review(int reviewKey, String reviewContent) {
+	public Review(int reviewKey, String reviewContent, int viewCnt) {
 		this.reviewKey = reviewKey;
 		this.reviewContent = reviewContent;
+		this.viewCnt = viewCnt;
 	}
 
 	public int getReviewKey() {
@@ -27,9 +29,17 @@ public class Review {
 		this.reviewContent = reviewContent;
 	}
 
+	public int getViewCnt() {
+		return viewCnt;
+	}
+
+	public void setViewCnt(int viewCnt) {
+		this.viewCnt = viewCnt;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewKey=" + reviewKey + ", reviewContent=" + reviewContent + "]";
+		return "Review [reviewKey=" + reviewKey + ", reviewContent=" + reviewContent + ", viewCnt=" + viewCnt + "]";
 	}
 	
 }

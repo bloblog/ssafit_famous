@@ -4,13 +4,15 @@ public class Member {
 	private int memberKey;
 	private String id;
 	private String password;
+	private int exp;
 	
 	public Member() {}
-	
-	public Member(int memberKey, String id, String password) {
+
+	public Member(int memberKey, String id, String password, int exp) {
 		this.memberKey = memberKey;
 		this.id = id;
 		this.password = password;
+		this.exp = exp;
 	}
 
 	public int getMemberKey() {
@@ -37,9 +39,17 @@ public class Member {
 		this.password = password;
 	}
 
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
 	@Override
 	public String toString() {
-		return "member [memberKey=" + memberKey + ", id=" + id + ", password=" + password + "]";
+		return "Member [memberKey=" + memberKey + ", id=" + id + ", password=" + password + ", exp=" + exp + "]";
 	}
 	
 }

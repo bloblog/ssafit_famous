@@ -4,19 +4,25 @@ import java.sql.Date;
 
 public class Study {
 	private int studyKey;
+	private int leaderKey;
 	private String studyName;
 	private String category;
 	private Date studyStart;
 	private Date studyEnd;
+	private int alarm;
 	
 	public Study() {}
 
-	public Study(int studyKey, String studyName, String category, Date studyStart, Date studyEnd) {
+	public Study(int studyKey, int leaderKey, String studyName, String category, Date studyStart, Date studyEnd,
+			int alarm) {
+		super();
 		this.studyKey = studyKey;
+		this.leaderKey = leaderKey;
 		this.studyName = studyName;
 		this.category = category;
 		this.studyStart = studyStart;
 		this.studyEnd = studyEnd;
+		this.alarm = alarm;
 	}
 
 	public int getStudyKey() {
@@ -25,6 +31,14 @@ public class Study {
 
 	public void setStudyKey(int studyKey) {
 		this.studyKey = studyKey;
+	}
+
+	public int getLeaderKey() {
+		return leaderKey;
+	}
+
+	public void setLeaderKey(int leaderKey) {
+		this.leaderKey = leaderKey;
 	}
 
 	public String getStudyName() {
@@ -59,10 +73,19 @@ public class Study {
 		this.studyEnd = studyEnd;
 	}
 
+	public int getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(int alarm) {
+		this.alarm = alarm;
+	}
+
 	@Override
 	public String toString() {
-		return "Study [studyKey=" + studyKey + ", studyName=" + studyName + ", category=" + category + ", studyStart="
-				+ studyStart + ", studyEnd=" + studyEnd + "]";
+		return "Study [studyKey=" + studyKey + ", leaderKey=" + leaderKey + ", studyName=" + studyName + ", category="
+				+ category + ", studyStart=" + studyStart + ", studyEnd=" + studyEnd + ", alarm=" + alarm + "]";
 	}
+
 	
 }
