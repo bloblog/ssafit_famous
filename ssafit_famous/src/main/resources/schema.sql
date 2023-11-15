@@ -13,7 +13,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `review` (
   `reviewKey` INT NOT NULL AUTO_INCREMENT ,
   `reviewContent` TEXT,
-  `reviewDate` DATETIME NOT NULL,
+  `reviewDate` TIMESTAMP NOT NULL,
   `reviewImgPath` VARCHAR(255),
   `viewCnt` INT,
   PRIMARY KEY (`reviewKey`)
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `study` (
   `leaderKey` INT NOT NULL,
   `studyName` VARCHAR(100) NOT NULL,
   `category` VARCHAR(100) NOT NULL,
-  `studyStart` DATETIME NOT NULL,
-  `studyEnd` DATETIME NOT NULL,
+  `studyStart` TIMESTAMP NOT NULL,
+  `studyEnd` TIMESTAMP NOT NULL,
   `alarm` INT,
   PRIMARY KEY (`studyKey`),
   FOREIGN KEY (`leaderKey`) REFERENCES member(`userKey`) ON DELETE CASCADE
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `study` (
 CREATE TABLE IF NOT EXISTS `schedule` (
   `scheduleKey` INT NOT NULL AUTO_INCREMENT ,
   `studyKey` INT NOT NULL,
-  `scheduleDate` DATETIME NOT NULL,
+  `scheduleDate` TIMESTAMP NOT NULL,
   `scheduleContent` TEXT NOT NULL,
-  `schedulePlace` VARCHAR(300) NOT NULL,
+  `schedulePlace` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`scheduleKey`),
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `schedule` (
 CREATE TABLE IF NOT EXISTS `todo` (
   `todoKey` INT NOT NULL AUTO_INCREMENT ,
   `studyKey` INT NOT NULL,
-  `todoStart` DATETIME NOT NULL,
-  `todoEnd` DATETIME NOT NULL,
+  `todoStart` TIMESTAMP NOT NULL,
+  `todoEnd` TIMESTAMP NOT NULL,
   `todoContent` TEXT NOT NULL,
   PRIMARY KEY (`todoKey`),
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE
