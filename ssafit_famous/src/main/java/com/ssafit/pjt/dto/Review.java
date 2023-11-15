@@ -1,16 +1,23 @@
 package com.ssafit.pjt.dto;
 
+import java.io.File;
+import java.sql.Date;
+
 public class Review {
 	private int reviewKey;
 	private String reviewContent;
 	private int viewCnt;
+	private Date reviewDate;
+	private String reviewImgPath;
 	
 	public Review() {}
 
-	public Review(int reviewKey, String reviewContent, int viewCnt) {
+	public Review(int reviewKey, String reviewContent, int viewCnt, Date reviewDate, String reviewImgPath) {
 		this.reviewKey = reviewKey;
 		this.reviewContent = reviewContent;
 		this.viewCnt = viewCnt;
+		this.reviewDate = reviewDate;
+		this.reviewImgPath = reviewImgPath;
 	}
 
 	public int getReviewKey() {
@@ -37,9 +44,26 @@ public class Review {
 		this.viewCnt = viewCnt;
 	}
 
+	public Date getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(Date reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+
+	public String getReviewImgPath() {
+		return reviewImgPath;
+	}
+
+	public void setReviewImgPath(String reviewImgPath) {
+		this.reviewImgPath = reviewImgPath;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewKey=" + reviewKey + ", reviewContent=" + reviewContent + ", viewCnt=" + viewCnt + "]";
+		return "Review [reviewKey=" + reviewKey + ", reviewContent=" + reviewContent + ", viewCnt=" + viewCnt
+				+ ", reviewDate=" + reviewDate + ", reviewImgPath=" + reviewImgPath + "]";
 	}
-	
+
 }

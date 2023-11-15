@@ -5,14 +5,16 @@ public class Member {
 	private String id;
 	private String password;
 	private int exp;
+	private String memberImgPath;
 	
 	public Member() {}
 
-	public Member(int memberKey, String id, String password, int exp) {
+	public Member(int memberKey, String id, String password, int exp, String memberImgPath) {
 		this.memberKey = memberKey;
 		this.id = id;
 		this.password = password;
 		this.exp = exp;
+		this.memberImgPath = memberImgPath;
 	}
 
 	public int getMemberKey() {
@@ -47,9 +49,18 @@ public class Member {
 		this.exp = exp;
 	}
 
+	public String getMemberImgPath() {
+		return memberImgPath;
+	}
+
+	public void setMemberImgPath(String memberImgPath) {
+		this.memberImgPath = memberImgPath;
+	}
+
 	@Override
 	public String toString() {
-		return "Member [memberKey=" + memberKey + ", id=" + id + ", password=" + password + ", exp=" + exp + "]";
+		return "Member [memberKey=" + memberKey + ", id=" + id + ", password=" + password + ", exp=" + exp
+				+ ", memberImgPath=" + memberImgPath + "]";
 	}
-	
+
 }
