@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `memberKey` INT NOT NULL AUTO_INCREMENT ,
   `id` VARCHAR(30) NOT NULL,
   `password` VARCHAR(30) NOT NULL,
+  `memberImgPath` VARCHAR(255),
   `exp` INT,
   PRIMARY KEY (`memberKey`))
 ENGINE = InnoDB;
@@ -12,6 +13,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `review` (
   `reviewKey` INT NOT NULL AUTO_INCREMENT ,
   `reviewContent` TEXT,
+  `reviewDate` DATETIME NOT NULL,
+  `reviewImgPath` VARCHAR(255),
   `viewCnt` INT,
   PRIMARY KEY (`reviewKey`)
 ) ENGINE = InnoDB;
