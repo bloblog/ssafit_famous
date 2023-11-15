@@ -1,13 +1,13 @@
 CREATE DATABASE IF NOT EXISTS ssafit;
 USE ssafit;
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `userKey` INT NOT NULL AUTO_INCREMENT ,
+CREATE TABLE IF NOT EXISTS `member` (
+  `memberKey` INT NOT NULL AUTO_INCREMENT ,
   `id` VARCHAR(30) NOT NULL,
   `password` VARCHAR(30) NOT NULL,
-  `userImgPath` VARCHAR(255),
+  `memberImgPath` VARCHAR(255),
   `exp` INT,
-  PRIMARY KEY (`userrKey`))
+  PRIMARY KEY (`memberKey`))
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `review` (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `study` (
   `studyEnd` DATETIME NOT NULL,
   `alarm` INT,
   PRIMARY KEY (`studyKey`),
-  FOREIGN KEY (`leaderKey`) REFERENCES member(`userKey`) ON DELETE CASCADE
+  FOREIGN KEY (`leaderKey`) REFERENCES member(`memberKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `schedule` (
@@ -51,22 +51,22 @@ CREATE TABLE IF NOT EXISTS `todo` (
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `user_todo` (
-  `userKey` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `member_todo` (
+  `memberKey` INT NOT NULL,
   `todoKey` INT NOT NULL,
   `success` BOOLEAN NOT NULL,
-  PRIMARY KEY (`userKey`, `todoKey`),
-  FOREIGN KEY (`userKey`) REFERENCES member(`userKey`) ON DELETE CASCADE,
+  PRIMARY KEY (`memberKey`, `todoKey`),
+  FOREIGN KEY (`memberKey`) REFERENCES member(`memberKey`) ON DELETE CASCADE,
   FOREIGN KEY (`todoKey`) REFERENCES todo(`todoKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `study_user_review` (
+CREATE TABLE IF NOT EXISTS `study_member_review` (
   `studyKey` INT NOT NULL,
-  `userKey` INT NOT NULL,
+  `memberKey` INT NOT NULL,
   `reviewKey` INT,
-  PRIMARY KEY (`studyKey`, `userKey`),
+  PRIMARY KEY (`studyKey`, `memberKey`),
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE,
-  FOREIGN KEY (`userKey`) REFERENCES member(`userKey`) ON DELETE CASCADE
+  FOREIGN KEY (`memberKey`) REFERENCES member(`memberKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `study_schedule` (
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `study_todo` (
   FOREIGN KEY (`todoKey`) REFERENCES todo(`todoKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-INSERT INTO user 
+INSERT INTO member 
 	(id, password, exp)
 VALUES 
     ('ssafy','1234', 0),
