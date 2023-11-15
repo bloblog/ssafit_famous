@@ -1,0 +1,5 @@
+package com.ssafit.pjt.model.dao;
+
+public class ReviewDao {
+
+}
