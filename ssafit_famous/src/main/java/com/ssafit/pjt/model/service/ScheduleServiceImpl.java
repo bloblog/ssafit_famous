@@ -24,7 +24,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	private StudyDao studyDao;
 
 	@Override
-	public int createSchedule(Schedule schedule) {
+	public int addSchedule(Schedule schedule) {
 		return scheduleDao.insertSchedule(schedule);
 	}
 
@@ -50,7 +50,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public Schedule scheduleDetail(int scheduleKey) {
+	public Schedule getSchedule(int scheduleKey) {
 		return scheduleDao.selectOne(scheduleKey);
 	}
 

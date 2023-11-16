@@ -24,7 +24,7 @@ public class TodoServiceImpl implements TodoService {
 	private StudyDao studyDao;
 
 	@Override
-	public int createTodo(Todo todo) {
+	public int addTodo(Todo todo) {
 		return todoDao.insertTodo(todo);
 	}
 
@@ -50,7 +50,7 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public Todo todoDetail(int todoKey) {
+	public Todo getTodo(int todoKey) {
 		return todoDao.selectOne(todoKey);
 	}
 

@@ -21,7 +21,7 @@ public class StudyServiceImpl implements StudyService {
 	private StudyDao studyDao;
 
 	@Override
-	public int createStudy(Study study) {
+	public int addStudy(Study study) {
 		return studyDao.insertStudy(study);
 	}
 
@@ -47,7 +47,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public Study studyDetail(int studyKey) {
+	public Study getStudy(int studyKey) {
 		return studyDao.selectOne(studyKey);
 	}
 
