@@ -17,10 +17,13 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public int writeReview(Review review) {
-		try {
-			return reviewDao.insertReview(review);
-		} catch(Exception e) {
+		int result = reviewDao.insertReview(review);
+		
+		if (result == 0) {
 			return 0;
+		} else {
+			reviewDao.updateExp(reviewDao.selectWriter(review.getReviewKey()));
+			return result;
 		}
 	}
 
@@ -30,10 +33,9 @@ public class ReviewServiceImpl implements ReviewService {
 		Review r = reviewDao.selectReview(review.getReviewKey());
 		if (r == null) 
 			return 0; // 해당 리뷰가 없으면 0 반환
-		else if (reviewDao.selectWriter(r.getReviewKey()).equals(loginUserId)) 
+		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId)) 
 			// 해당 리뷰를 작성한 사람을 찾는 dao 메서드 selectWriter
 			// reviewKey를 받아서 해당 리뷰 작성자 찾기 -> loginUser 랑 같으면 수정 가능
-			// 해당 메서드 반환 타입 string으로 해라
 			return reviewDao.updateReview(review);
 		else
 			return -1; // 권한 없으면 -1 반환
@@ -45,7 +47,7 @@ public class ReviewServiceImpl implements ReviewService {
 		Review r = reviewDao.selectReview(reviewKey);
 		if (r == null) 
 			return 0; // 리뷰 없으면 0 반환
-		else if (reviewDao.selectWriter(r.getReviewKey()).equals(loginUserId))
+		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId))
 			return reviewDao.deleteReview(reviewKey);
 		else
 			return -1; // 권한 없으면 -1 반환
@@ -53,6 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public Review getReview(int reviewKey) {
+		reviewDao.updateViewCnt(reviewKey);
 		return reviewDao.selectReview(reviewKey);
 	}
 

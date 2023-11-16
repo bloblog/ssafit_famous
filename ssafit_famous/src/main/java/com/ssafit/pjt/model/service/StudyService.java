@@ -1,7 +1,5 @@
 package com.ssafit.pjt.model.service;
 
-import com.ssafit.pjt.model.dto.Study;
-
 public interface StudyService {
 	// 일정 생성
 	int addStudy(Study study);
