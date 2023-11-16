@@ -1,6 +1,26 @@
 package com.ssafit.pjt.model.dao;
 
-public class ReviewDao {
-	// 회고 상세보기 하면 조회수 올리는 거 까먹지마라~
-	// 회고 작성시 경험치 업데이트도 해라! (스터디 열때도, 참여할때도 업뎃)
+import java.util.List;
+
+import com.ssafit.pjt.model.dto.Review;
+import com.ssafit.pjt.model.dto.SearchCondition;
+
+public interface ReviewDao {
+
+	int insertReview(Review review);
+	
+	void updateExp(int userKey);
+	
+	void updateViewCnt(int reviewKey);
+	
+	Review selectReview(int reviewKey);
+	
+	int selectWriter(int reviewKey);
+
+	int updateReview(Review review);
+
+	int deleteReview(int reviewKey);
+
+	List<Review> selectList(SearchCondition condition);
+	
 }
