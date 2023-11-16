@@ -1,5 +1,7 @@
 package com.ssafit.pjt.model.service;
 
+import com.ssafit.pjt.model.dto.Schedule;
+
 public interface ScheduleService {
 	// 일정 생성
 	int addSchedule(Schedule schedule);

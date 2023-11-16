@@ -1,5 +1,7 @@
 package com.ssafit.pjt.model.service;
 
+import com.ssafit.pjt.model.dto.Todo;
+
 public interface TodoService {
 	// 일정 생성
 	int addTodo(Todo todo);
