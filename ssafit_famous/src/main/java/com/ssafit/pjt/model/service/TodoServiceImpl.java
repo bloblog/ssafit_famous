@@ -25,6 +25,8 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public int addTodo(Todo todo) {
+		// study-todo 생성
+		// user-todo 생성
 		return todoDao.insertTodo(todo);
 	}
 

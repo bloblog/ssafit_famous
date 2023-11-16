@@ -22,6 +22,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public int addStudy(Study study) {
+		// study-user-review테이블에  review null로 생성
 		return studyDao.insertStudy(study);
 	}
 

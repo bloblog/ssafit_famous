@@ -25,6 +25,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public int addSchedule(Schedule schedule) {
+		// study-schedule 생성
 		return scheduleDao.insertSchedule(schedule);
 	}
 

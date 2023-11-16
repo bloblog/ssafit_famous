@@ -18,7 +18,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int writeReview(Review review) {
 		int result = reviewDao.insertReview(review);
-		
+		// study-user-review 테이블 업데이트
 		if (result == 0) {
 			return 0;
 		} else {
