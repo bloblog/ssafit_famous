@@ -1,5 +1,12 @@
 package com.ssafit.pjt.model.service;
 
 public interface ScheduleService {
-
+	// 일정 생성
+	int addSchedule(Schedule schedule);
+	// 일정 수정
+	int modifySchedule(Schedule schedule, String loginUserId);
+	// 일정 삭제
+	int removeSchedule(int scheduleKey, String loginUserId);
+	// 일정 상세
+	Schedule getSchedule(int scheduleKey);
 }
