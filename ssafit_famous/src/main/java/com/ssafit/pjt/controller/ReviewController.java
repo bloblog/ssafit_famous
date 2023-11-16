@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api")
-@Api(tags = "�쉶怨� 而⑦듃濡ㅻ윭")
+@Api(tags = "회고 컨트롤러")
 public class ReviewController {
 	
 	@Autowired
