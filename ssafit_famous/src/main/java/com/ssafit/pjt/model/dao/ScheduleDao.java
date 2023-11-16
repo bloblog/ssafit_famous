@@ -8,7 +8,7 @@ public interface ScheduleDao {
 	// 일정 수정
 	int updateSchedule(Schedule schedule);
 	// 일정 삭제
-	int deleteSchedule(int reviewKey);
+	int deleteSchedule(int scheduleKey);
 	// 일정 상세
-	Schedule selectOne(int reviewKey);
+	Schedule selectOne(int scheduleKey);
 }
