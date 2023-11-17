@@ -15,9 +15,11 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	// getUser 랑 기능 같음 -> 통합 필요?
 	public User login(User user) {
-		return userDao.selectUser(user.getUserKey());
+		User tmp = userDao.selectUserById(user.getId());
+        if (tmp != null && tmp.getPassword().equals(user.getPassword()))
+            return tmp;
+        return null;
 	}
 
 	@Override

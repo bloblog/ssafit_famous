@@ -9,7 +9,7 @@ public interface StudyDao {
 	int insertStudy(Study study);
 	
 	// 관계 생성 (study - user)
-	int insertRelation(Map<String,Integer> map);
+	int insertRelation(Map<String, Object> map);
 	
 	// 스터디 수정
 	int updateStudy(Study study);
@@ -21,4 +21,6 @@ public interface StudyDao {
 	
 	// 스터디 상세
 	Study selectOne(int studyKey);
+	
+	Study selectOneByName(String name);
 }

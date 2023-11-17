@@ -24,19 +24,23 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public int addStudy(Study study) {
+		int result = studyDao.insertStudy(study);
+		
+		Study tmp = studyDao.selectOneByName(study.getStudyName());
+		
 		// study-user-review테이블에  review null로 생성 (팀장)
-		Map<String, Integer> map = new HashMap<>();
-		map.put("studyKey", study.getStudyKey());
-		map.put("userKey", study.getLeaderKey());
+		Map<String, Object> map = new HashMap<>();
+		map.put("studyKey", tmp.getStudyKey());
+		map.put("userKey", tmp.getLeaderKey());
 		studyDao.insertRelation(map);
-		return studyDao.insertStudy(study);
+		return result;
 	}
 	
 	public int addMember(Study study, int[] list) {
 		// study-user-review테이블에  review null로 생성 (팀원)
 		int result = 0;
 		for(int key : list) {
-			Map<String, Integer> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>();
 			map.put("studyKey", study.getStudyKey());
 			map.put("userKey", key);
 			result += studyDao.insertRelation(map);
@@ -48,8 +52,8 @@ public class StudyServiceImpl implements StudyService {
 	public int modifyStudy(Study study, String loginUserKey, int[] out, int[] in) {
 		if(study == null) {
 			return 0;
-		}else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
-			if (out.length > 0) {
+		} else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
+			if (out != null && out.length > 0) {
 				for (int key : out) {
 					// study-user 관계에서 제거
 					Map<String, Integer> map = new HashMap<>();
@@ -58,7 +62,7 @@ public class StudyServiceImpl implements StudyService {
 					studyDao.deleteRelation(map);
 				}
 			}
-			if (in.length > 0) {
+			if (in != null && in.length > 0) {
 				addMember(study, in);
 			}
 			return studyDao.updateStudy(study);

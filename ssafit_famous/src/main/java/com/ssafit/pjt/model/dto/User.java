@@ -4,17 +4,14 @@ public class User {
 	private int userKey;
 	private String id;
 	private String password;
-	private int exp;
+	private int exp = 0;
 	private String userImgPath;
 	
 	public User() {}
 
-	public User(int userKey, String id, String password, int exp, String userImgPath) {
-		this.userKey = userKey;
+	public User(String id, String password) {
 		this.id = id;
 		this.password = password;
-		this.exp = exp;
-		this.userImgPath = userImgPath;
 	}
 
 	public int getUserKey() {

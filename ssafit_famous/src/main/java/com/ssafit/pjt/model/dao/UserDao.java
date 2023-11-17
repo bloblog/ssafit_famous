@@ -8,6 +8,8 @@ public interface UserDao {
 	
 	User selectUser(int userKey);
 	
+	User selectUserById(String id);
+	
 	int insertUser(User user);
 	
 	int updateUser(User user);

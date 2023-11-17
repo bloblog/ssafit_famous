@@ -23,4 +23,6 @@ public interface TodoDao {
 	
 	// 목표 상세
 	Todo selectOne(int todoKey);
+	
+	Todo selectOneByTodo(Todo todo);
 }

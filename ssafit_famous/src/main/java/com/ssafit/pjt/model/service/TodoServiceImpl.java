@@ -28,21 +28,25 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public int addTodo(Todo todo, int[] users) {
+		int result = todoDao.insertTodo(todo);
+		
+		Todo tmp = todoDao.selectOneByTodo(todo);
+		
 		// study-todo 생성
 		Map<String, Integer> map = new HashMap<>();
-		map.put("studyKey", todo.getStudyKey());
-		map.put("todoKey", todo.getTodoKey());
+		map.put("studyKey", tmp.getStudyKey());
+		map.put("todoKey", tmp.getTodoKey());
 		todoDao.insertRelation(map);
 		
 		// user-todo 생성
 		for (int key : users) {
 			Map<String, Integer> map2 = new HashMap<>();
 			map2.put("userKey", key);
-			map2.put("todoKey", todo.getTodoKey());
+			map2.put("todoKey", tmp.getTodoKey());
 			todoDao.insertUserRelation(map2);
 		}
 		
-		return todoDao.insertTodo(todo);
+		return result;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ssafit.pjt.model.dao.ScheduleDao;
 import com.ssafit.pjt.model.dao.StudyDao;
 import com.ssafit.pjt.model.dto.Schedule;
+import com.ssafit.pjt.model.dto.Study;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -28,12 +29,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public int addSchedule(Schedule schedule) {
+		int result = scheduleDao.insertSchedule(schedule);
+		
+		Schedule tmp = scheduleDao.selectOneBySchedule(schedule);
 		// study-schedule 생성
 		Map<String, Integer> map = new HashMap<>();
-		map.put("studyKey", schedule.getStudyKey());
-		map.put("scheduleKey", schedule.getScheduleKey());
-		scheduleDao.insertRelation(map);
-		return scheduleDao.insertSchedule(schedule);
+		map.put("studyKey", tmp.getStudyKey());
+		map.put("scheduleKey", tmp.getScheduleKey());
+		
+		return scheduleDao.insertRelation(map);
 	}
 
 	@Override

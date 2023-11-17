@@ -25,5 +25,7 @@ public interface ReviewDao {
 	int deleteReview(int reviewKey);
 
 	List<Review> selectList(SearchCondition condition);
+	
+	Review selectReviewKeys(Map<String, Integer> map);
 
 }

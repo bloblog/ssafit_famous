@@ -33,7 +33,7 @@ public class StudyController {
 	// 스터디 삭제하기
 	@DeleteMapping("/study/{studyKey}")
 	public ResponseEntity<Integer> delete(@PathVariable int studyKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		
 		int result = studyService.removeStudy(studyKey, loginUserId);
 
@@ -67,7 +67,7 @@ public class StudyController {
 	// 스터디 수정하기
 	@PutMapping("/study/{studyKey}")
 	public ResponseEntity<Integer> update(@RequestBody Study study, int[] out, int[] in, @PathVariable int studyKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		
 		study.setStudyKey(studyKey);
 		int result = studyService.modifyStudy(study, loginUserId, out, in);

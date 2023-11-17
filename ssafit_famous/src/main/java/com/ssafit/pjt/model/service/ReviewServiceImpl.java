@@ -25,6 +25,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public int writeReview(Review review, String loginUser) {
 		int result = reviewDao.insertReview(review);
 		
+		Map<String, Integer> map3 = new HashMap<>();
+		map3.put("userKey", Integer.parseInt(loginUser));
+		map3.put("studyKey", review.getStudyKey());
+		
+		Review tmp = reviewDao.selectReviewKeys(map3);
+		
 		if (result == 0) {
 			return 0;
 		} else {
@@ -37,8 +43,8 @@ public class ReviewServiceImpl implements ReviewService {
 			// study-user-review 테이블 업데이트
 			Map<String, Integer> map2 = new HashMap<>();
 			map2.put("userKey", Integer.parseInt(loginUser));
-			map2.put("studyKey", review.getStudyKey());
-			map2.put("reviewKey", review.getReviewKey());
+			map2.put("studyKey", tmp.getStudyKey());
+			map2.put("reviewKey", tmp.getReviewKey());
 			reviewDao.updateRelation(map2);
 			
 			return result;

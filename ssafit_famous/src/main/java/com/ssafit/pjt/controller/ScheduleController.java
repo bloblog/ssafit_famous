@@ -37,7 +37,7 @@ public class ScheduleController {
 	// 일정 수정하기
 	@PutMapping("/schedule/{scheduleKey}")
 	public ResponseEntity<Integer> update(@RequestBody Schedule schedule, @PathVariable int scheduleKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		schedule.setScheduleKey(scheduleKey);
 		
 		int result = scheduleService.modifySchedule(schedule, loginUserId);
@@ -52,7 +52,7 @@ public class ScheduleController {
 	// 일정 삭제하기
 	@DeleteMapping("/schedule/{scheduleKey}")
 	public ResponseEntity<Integer> delete(@PathVariable int scheduleKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		
 		int result = scheduleService.removeSchedule(scheduleKey, loginUserId);
 		if (result == -1) {

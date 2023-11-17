@@ -13,10 +13,7 @@ public class Study {
 	
 	public Study() {}
 
-	public Study(int studyKey, int leaderKey, String studyName, String category, Date studyStart, Date studyEnd,
-			int alarm) {
-		super();
-		this.studyKey = studyKey;
+	public Study(int leaderKey, String studyName, String category, Date studyStart, Date studyEnd, int alarm) {
 		this.leaderKey = leaderKey;
 		this.studyName = studyName;
 		this.category = category;

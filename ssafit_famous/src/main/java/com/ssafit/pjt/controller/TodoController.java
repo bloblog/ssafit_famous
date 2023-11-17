@@ -41,7 +41,7 @@ public class TodoController {
 	// 목표 수정하기
 	@PutMapping("/todo/{todoKey}")
 	public ResponseEntity<Integer> update(@RequestBody Todo todo, @PathVariable int todoKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 
 		todo.setTodoKey(todoKey);
 		int result = todoService.modifyTodo(todo, loginUserId);
@@ -57,7 +57,7 @@ public class TodoController {
 	// 목표 삭제하기
 	@DeleteMapping("/todo/{todoKey}")
 	public ResponseEntity<Integer> delete(@PathVariable int todoKey, HttpSession session) {
-		String loginUserId = (String) session.getAttribute("loginUser");
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 
 		int result = todoService.removeTodo(todoKey, loginUserId);
 		if (result == -1) {

@@ -22,4 +22,6 @@ public interface ScheduleDao {
 	
 	// 일정 상세
 	Schedule selectOne(int scheduleKey);
+	
+	Schedule selectOneBySchedule(Schedule sc);
 }
