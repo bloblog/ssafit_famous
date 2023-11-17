@@ -27,6 +27,12 @@
 		DELETE FROM user
 		WHERE userKey = #{userKey}
 	</delete>
+	
+	<select id="selectUserList" parameterType="String" resultType="User">
+		SELECT *
+		FROM user
+		WHERE id LIKE concat("%", #{id}, "%")
+	</select>
 
 
 </mapper>
