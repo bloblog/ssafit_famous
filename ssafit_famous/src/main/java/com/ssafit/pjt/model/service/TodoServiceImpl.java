@@ -27,13 +27,20 @@ public class TodoServiceImpl implements TodoService {
 	private StudyDao studyDao;
 
 	@Override
-	public int addTodo(Todo todo) {
+	public int addTodo(Todo todo, int[] users) {
 		// study-todo 생성
 		Map<String, Integer> map = new HashMap<>();
 		map.put("studyKey", todo.getStudyKey());
 		map.put("todoKey", todo.getTodoKey());
 		todoDao.insertRelation(map);
+		
 		// user-todo 생성
+		for (int key : users) {
+			Map<String, Integer> map2 = new HashMap<>();
+			map2.put("userKey", key);
+			map2.put("todoKey", todo.getTodoKey());
+			todoDao.insertUserRelation(map2);
+		}
 		
 		return todoDao.insertTodo(todo);
 	}
@@ -54,11 +61,8 @@ public class TodoServiceImpl implements TodoService {
 		if(todo == null) {
 			return 0;
 		}else if(studyDao.selectOne(todo.getStudyKey()).getLeaderKey() == Integer.parseInt(loginUserKey)) {
-			Map<String, Integer> map = new HashMap<>();
-			map.put("studyKey", todo.getStudyKey());
-			map.put("todoKey", todo.getTodoKey());
-			todoDao.deleteRelation(map);
-			return todoDao.updateTodo(todo);
+			
+			return todoDao.deleteTodo(todoKey);
 		}
 		return -1;
 	}

@@ -7,7 +7,7 @@ import com.ssafit.pjt.model.dto.SearchCondition;
 
 public interface ReviewService {
 	
-	public int writeReview(Review review);
+	public int writeReview(Review review, String loginUserId);
 	
 	public int modifyReview(Review review, String loginUserId);
 	
