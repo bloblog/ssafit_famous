@@ -59,6 +59,17 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
+	// 회원 검색
+	@GetMapping("/search/{id}")
+	private ResponseEntity<?> searchUser(@PathVariable String id) {
+		List<User> list = userService.getUserList(id);
+		if (list.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+		}
+	}
+	
 	// 회원정보 디테일
 	@GetMapping("/user/{userKey}")
 	public ResponseEntity<?> detail(@PathVariable int userKey) {

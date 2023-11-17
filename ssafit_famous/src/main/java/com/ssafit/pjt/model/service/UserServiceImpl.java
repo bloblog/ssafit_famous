@@ -1,5 +1,7 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,11 @@ public class UserServiceImpl implements UserService {
 			return userDao.deleteUser(userKey);
 		else
 			return -1; // 권한 없으면 -1 반환
+	}
+
+	@Override
+	public List<User> getUserList(String id) {
+		return userDao.selectUserList(id);
 	}
 	
 }
