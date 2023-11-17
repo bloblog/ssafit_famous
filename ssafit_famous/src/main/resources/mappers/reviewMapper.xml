@@ -62,7 +62,10 @@
 	
 	<select id="selectList" parameterType="SearchCondition" resultType="Review">
 		SELECT * 
-		FROM review
+		FROM review r
+			INNER JOIN study_user_review sur
+			ON r.studyKey = sur.studyKey
+				AND r.reviewKey = sur.reviewKey
 		<if test="key != 'none'">
 			WHERE ${key} = #{word}
 		</if>

@@ -67,12 +67,13 @@ CREATE TABLE IF NOT EXISTS `user_todo` (
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `study_user_review` (
-  `studyKey` INT NOT NULL,
-  `userKey` INT NOT NULL,
+  `studyKey` INT,
+  `userKey` INT,
   `reviewKey` INT,
   PRIMARY KEY (`studyKey`, `userKey`),
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE,
-  FOREIGN KEY (`userKey`) REFERENCES `user`(`userKey`) ON DELETE CASCADE
+  FOREIGN KEY (`userKey`) REFERENCES `user`(`userKey`) ON DELETE CASCADE,
+  FOREIGN KEY (`reviewKey`) REFERENCES review(`reviewKey`) ON DELETE SET NULL
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `study_schedule` (
