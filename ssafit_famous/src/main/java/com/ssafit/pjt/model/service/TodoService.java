@@ -4,7 +4,7 @@ import com.ssafit.pjt.model.dto.Todo;
 
 public interface TodoService {
 	// 일정 생성
-	int addTodo(Todo todo);
+	int addTodo(Todo todo, int[] users);
 	// 일정 수정
 	int modifyTodo(Todo todo, String loginUserId);
 	// 일정 삭제

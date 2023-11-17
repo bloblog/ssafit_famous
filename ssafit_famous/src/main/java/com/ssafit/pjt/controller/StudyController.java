@@ -66,11 +66,11 @@ public class StudyController {
 	
 	// 스터디 수정하기
 	@PutMapping("/study/{studyKey}")
-	public ResponseEntity<Integer> update(@RequestBody Study study, @PathVariable int studyKey, HttpSession session) {
+	public ResponseEntity<Integer> update(@RequestBody Study study, int[] out, int[] in, @PathVariable int studyKey, HttpSession session) {
 		String loginUserId = (String) session.getAttribute("loginUser");
 		
 		study.setStudyKey(studyKey);
-		int result = studyService.modifyStudy(study, loginUserId);
+		int result = studyService.modifyStudy(study, loginUserId, out, in);
 		if (result == -1) {
 			return new ResponseEntity<Integer>(result, HttpStatus.UNAUTHORIZED);
 		} else if (result == 0){

@@ -20,6 +20,11 @@
 		WHERE studyKey = #{studyKey}
 	</update>
 	
+	<delete id="deleteRelation" parameterType="hashMap">
+		DELETE FROM study_user_review
+		WHERE studyKey = #{studyKey} AND userKey = #{userKey}
+	</delete>
+	
 	<delete id="deleteStudy" parameterType="int">
 		DELETE FROM study
 		WHERE studyKey = #{studyKey}

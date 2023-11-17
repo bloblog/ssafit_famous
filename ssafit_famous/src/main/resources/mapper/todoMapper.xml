@@ -13,6 +13,11 @@
 		INSERT INTO study_todo
 		VALUES (#{studyKey}, #{todoKey})
 	</insert>
+	
+	<insert id="insertUserRelation" parameterType="hashMap">
+		INSERT INTO user_todo
+		VALUES (#{userKey}, #{todoKey}, 0)
+	</insert>
 
 	<update id="updateTodo" parameterType="Todo">
 		UPDATE todo 
@@ -25,10 +30,6 @@
 		WHERE todoKey = #{todoKey}
 	</delete>
 	
-	<delete id="deleteRelation" parameterType="hashMap">
-		DELETE FROM study_todo
-		WHERE todoKey = #{todoKey} AND studyKey = #{studyKey}
-	</delete>
 	
 	<select id="selectOne" parameterType="int" resultType="Todo">
 		SELECT *

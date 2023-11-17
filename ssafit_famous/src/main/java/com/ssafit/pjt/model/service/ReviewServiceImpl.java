@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafit.pjt.model.dao.ReviewDao;
+import com.ssafit.pjt.model.dao.UserDao;
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.SearchCondition;
 
@@ -21,18 +22,25 @@ public class ReviewServiceImpl implements ReviewService {
 	private UserDao userDao;
 
 	@Override
-	public int writeReview(Review review) {
+	public int writeReview(Review review, String loginUser) {
 		int result = reviewDao.insertReview(review);
-		// study-user-review 테이블 업데이트
+		
 		if (result == 0) {
 			return 0;
 		} else {
 			// 사용자랑 경험치 map 형태로 넣어
 			Map<String, Integer> map = new HashMap<>();
-			int writer = reviewDao.selectWriter(review.getReviewKey());
-			map.put("userKey", writer);
-			map.put("userExp", userDao.selectUser(writer).getExp());
+			map.put("userKey", Integer.parseInt(loginUser));
+			map.put("userExp", userDao.selectUser(Integer.parseInt(loginUser)).getExp());
 			reviewDao.updateExp(map);
+			
+			// study-user-review 테이블 업데이트
+			Map<String, Integer> map2 = new HashMap<>();
+			map2.put("userKey", Integer.parseInt(loginUser));
+			map2.put("studyKey", review.getStudyKey());
+			map2.put("reviewKey", review.getReviewKey());
+			reviewDao.updateRelation(map2);
+			
 			return result;
 		}
 	}

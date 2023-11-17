@@ -6,9 +6,9 @@ public interface ScheduleService {
 	// 일정 생성
 	int addSchedule(Schedule schedule);
 	// 일정 수정
-	int modifySchedule(Schedule schedule, String loginUserId);
+	int modifySchedule(Schedule schedule, String loginUser);
 	// 일정 삭제
-	int removeSchedule(int scheduleKey, String loginUserId);
+	int removeSchedule(int scheduleKey, String loginUser);
 	// 일정 상세
 	Schedule getSchedule(int scheduleKey);
 }

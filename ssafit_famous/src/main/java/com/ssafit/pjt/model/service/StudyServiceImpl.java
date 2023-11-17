@@ -19,7 +19,6 @@ public class StudyServiceImpl implements StudyService {
 		return service;
 	}
 	
-	
 	@Autowired
 	private StudyDao studyDao;
 
@@ -52,8 +51,11 @@ public class StudyServiceImpl implements StudyService {
 		}else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
 			if (out.length > 0) {
 				for (int key : out) {
-					// 제거
-					
+					// study-user 관계에서 제거
+					Map<String, Integer> map = new HashMap<>();
+					map.put("studyKey", study.getStudyKey());
+					map.put("userKey", key);
+					studyDao.deleteRelation(map);
 				}
 			}
 			if (in.length > 0) {

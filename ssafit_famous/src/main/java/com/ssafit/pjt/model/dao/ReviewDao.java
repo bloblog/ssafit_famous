@@ -9,6 +9,8 @@ import com.ssafit.pjt.model.dto.SearchCondition;
 public interface ReviewDao {
 
 	int insertReview(Review review);
+	
+	void updateRelation(Map<String, Integer> map);
 
 	void updateExp(Map<String, Integer> map);
 
