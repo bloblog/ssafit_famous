@@ -13,9 +13,12 @@ import com.ssafit.pjt.model.dto.SearchCondition;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-	
+
 	@Autowired
 	private ReviewDao reviewDao;
+
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public int writeReview(Review review) {
@@ -24,7 +27,12 @@ public class ReviewServiceImpl implements ReviewService {
 		if (result == 0) {
 			return 0;
 		} else {
-			reviewDao.updateExp(reviewDao.selectWriter(review.getReviewKey()));
+			// 사용자랑 경험치 map 형태로 넣어
+			Map<String, Integer> map = new HashMap<>();
+			int writer = reviewDao.selectWriter(review.getReviewKey());
+			map.put("userKey", writer);
+			map.put("userExp", userDao.selectUser(writer).getExp());
+			reviewDao.updateExp(map);
 			return result;
 		}
 	}
@@ -33,9 +41,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public int modifyReview(Review review, String loginUserId) {
 		// 권한 확인
 		Review r = reviewDao.selectReview(review.getReviewKey());
-		if (r == null) 
+		if (r == null)
 			return 0; // 해당 리뷰가 없으면 0 반환
-		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId)) 
+		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId))
 			// 해당 리뷰를 작성한 사람을 찾는 dao 메서드 selectWriter
 			// reviewKey를 받아서 해당 리뷰 작성자 찾기 -> loginUser 랑 같으면 수정 가능
 			return reviewDao.updateReview(review);
@@ -47,14 +55,14 @@ public class ReviewServiceImpl implements ReviewService {
 	public int removeReview(int reviewKey, String loginUserId) {
 		// 권한 확인
 		Review r = reviewDao.selectReview(reviewKey);
-		if (r == null) 
+		if (r == null)
 			return 0; // 리뷰 없으면 0 반환
 		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId))
 			return reviewDao.deleteReview(reviewKey);
 		else
 			return -1; // 권한 없으면 -1 반환
 	}
-	
+
 	@Override
 	public Review getReview(int reviewKey) {
 		reviewDao.updateViewCnt(reviewKey);

@@ -9,10 +9,9 @@
 		VALUES (#{reviewContent}, #{reviewDate}, #{reviewImgPath});
 	</insert>
 	
-	<!-- 리뷰 쓰면 사용자 경험치 올리고 싶음... 근데 오류날 것 같음... -->
-	<update id="updateExp" parameterType="String">
+	<update id="updateExp" parameterType="hashMap">
 		UPDATE user
-		SET exp = #{exp} + 100
+		SET exp = #{userExp} + 100
 		WHERE userKey = #{userKey}
 	</update>
 	
