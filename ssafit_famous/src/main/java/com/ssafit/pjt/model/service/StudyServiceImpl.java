@@ -1,5 +1,8 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +25,40 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public int addStudy(Study study) {
-		// study-user-review테이블에  review null로 생성
+		// study-user-review테이블에  review null로 생성 (팀장)
+		Map<String, Integer> map = new HashMap<>();
+		map.put("studyKey", study.getStudyKey());
+		map.put("userKey", study.getLeaderKey());
+		studyDao.insertRelation(map);
 		return studyDao.insertStudy(study);
+	}
+	
+	public int addMember(Study study, int[] list) {
+		// study-user-review테이블에  review null로 생성 (팀원)
+		int result = 0;
+		for(int key : list) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("studyKey", study.getStudyKey());
+			map.put("userKey", key);
+			result += studyDao.insertRelation(map);
+		}
+		return result;
 	}
 
 	@Override
-	public int modifyStudy(Study study, String loginUserKey) {
+	public int modifyStudy(Study study, String loginUserKey, int[] out, int[] in) {
 		if(study == null) {
 			return 0;
 		}else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
+			if (out.length > 0) {
+				for (int key : out) {
+					// 제거
+					
+				}
+			}
+			if (in.length > 0) {
+				addMember(study, in);
+			}
 			return studyDao.updateStudy(study);
 		}
 		return -1;

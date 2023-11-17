@@ -8,6 +8,11 @@
 		INSERT INTO todo
 		VALUES (#{studyKey}, #{todoStart}, #{todoEnd}, #{todoContent})
 	</insert>
+	
+	<insert id="insertRelation" parameterType="hashMap">
+		INSERT INTO study_todo
+		VALUES (#{studyKey}, #{todoKey})
+	</insert>
 
 	<update id="updateTodo" parameterType="Todo">
 		UPDATE todo 
@@ -18,6 +23,11 @@
 	<delete id="deleteTodo" parameterType="int">
 		DELETE FROM todo
 		WHERE todoKey = #{todoKey}
+	</delete>
+	
+	<delete id="deleteRelation" parameterType="hashMap">
+		DELETE FROM study_todo
+		WHERE todoKey = #{todoKey} AND studyKey = #{studyKey}
 	</delete>
 	
 	<select id="selectOne" parameterType="int" resultType="Todo">

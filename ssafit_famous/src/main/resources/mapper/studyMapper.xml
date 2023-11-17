@@ -8,6 +8,11 @@
 		INSERT INTO study
 		VALUES (#{leaderKey}, #{studyName}, #{category}, #{studyStart}, #{studyEnd}, #{alarm})
 	</insert>
+	
+	<insert id="insertRelation" parameterType="hashMap">
+		INSERT INTO study_user_review (studyKey, userKey)
+		VALUES (#{studyKey}, #{userKey})
+	</insert>
 
 	<update id="updateStudy" parameterType="Study">
 		UPDATE study 

@@ -1,5 +1,8 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +29,12 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public int addTodo(Todo todo) {
 		// study-todo 생성
+		Map<String, Integer> map = new HashMap<>();
+		map.put("studyKey", todo.getStudyKey());
+		map.put("todoKey", todo.getTodoKey());
+		todoDao.insertRelation(map);
 		// user-todo 생성
+		
 		return todoDao.insertTodo(todo);
 	}
 
@@ -46,6 +54,10 @@ public class TodoServiceImpl implements TodoService {
 		if(todo == null) {
 			return 0;
 		}else if(studyDao.selectOne(todo.getStudyKey()).getLeaderKey() == Integer.parseInt(loginUserKey)) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("studyKey", todo.getStudyKey());
+			map.put("todoKey", todo.getTodoKey());
+			todoDao.deleteRelation(map);
 			return todoDao.updateTodo(todo);
 		}
 		return -1;

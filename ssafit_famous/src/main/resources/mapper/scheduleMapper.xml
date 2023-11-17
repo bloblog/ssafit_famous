@@ -8,6 +8,11 @@
 		INSERT INTO schedule
 		VALUES (#{studyKey}, #{scheduleDate}, #{scheduleContent}, #{schedulePlace})
 	</insert>
+	
+	<insert id="insertRelation" parameterType="hashMap">
+		INSERT INTO study_schedule
+		VALUES (#{studyKey}, #{scheduleKey})
+	</insert>
 
 	<update id="updateSchedule" parameterType="Schedule">
 		UPDATE schedule 
@@ -17,8 +22,14 @@
 	
 	<delete id="deleteSchedule" parameterType="int">
 		DELETE FROM schedule
-		WHERE scheduleKey = #{scheduleKeyv}
+		WHERE scheduleKey = #{scheduleKey}
 	</delete>
+	
+	<delete id="deleteRelation" parameterType="hashMap">
+		DELETE FROM study_schedule
+		WHERE scheduleKey = #{scheduleKey} AND studyKey = #{studyKey}
+	</delete>
+	
 	
 	<select id="selectOne" parameterType="int" resultType="Schedule">
 		SELECT *

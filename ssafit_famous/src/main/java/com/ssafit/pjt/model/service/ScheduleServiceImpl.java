@@ -1,5 +1,8 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public int addSchedule(Schedule schedule) {
 		// study-schedule 생성
+		Map<String, Integer> map = new HashMap<>();
+		map.put("studyKey", schedule.getStudyKey());
+		map.put("scheduleKey", schedule.getScheduleKey());
+		scheduleDao.insertRelation(map);
 		return scheduleDao.insertSchedule(schedule);
 	}
 
@@ -45,6 +52,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 		if(tmp == null) {
 			return 0;
 		}else if(studyDao.selectOne(tmp.getStudyKey()).getLeaderKey() == Integer.parseInt(loginUserKey)) {
+			// study-schedule 삭제
+			Map<String, Integer> map = new HashMap<>();
+			map.put("studyKey", tmp.getStudyKey());
+			map.put("scheduleKey", scheduleKey);
+			scheduleDao.deleteRelation(map);
 			return scheduleDao.deleteSchedule(scheduleKey);
 		}
 		return -1;
