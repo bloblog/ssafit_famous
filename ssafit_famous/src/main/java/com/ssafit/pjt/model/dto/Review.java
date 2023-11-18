@@ -5,7 +5,8 @@ import java.sql.Date;
 public class Review {
 	private int reviewKey;
 	private int studyKey;
-	private String reviewContent;
+	private String reviewTitle;
+    private String reviewContent;
 	private int viewCnt;
 	private Date reviewDate;
 	private String reviewImgPath;
@@ -14,10 +15,11 @@ public class Review {
 	public Review() {}
 
 
-	public Review(int reviewKey, int studyKey, String reviewContent, int viewCnt, Date reviewDate,
+	public Review(int reviewKey, int studyKey, String reviewTitle, String reviewContent, int viewCnt, Date reviewDate,
 			String reviewImgPath) {
 		this.reviewKey = reviewKey;
 		this.studyKey = studyKey;
+		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.viewCnt = viewCnt;
 		this.reviewDate = reviewDate;
@@ -54,6 +56,13 @@ public class Review {
 		this.reviewContent = reviewContent;
 	}
 
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
+	}
 
 	public int getViewCnt() {
 		return viewCnt;
@@ -87,9 +96,14 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [reviewKey=" + reviewKey + ", studyKey=" + studyKey + ", reviewContent=" + reviewContent
-				+ ", viewCnt=" + viewCnt + ", reviewDate=" + reviewDate + ", reviewImgPath=" + reviewImgPath + "]";
+		return "Review{" +
+				"reviewKey=" + reviewKey +
+				", studyKey=" + studyKey +
+				", reviewTitle='" + reviewTitle + '\'' +
+				", reviewContent='" + reviewContent + '\'' +
+				", viewCnt=" + viewCnt +
+				", reviewDate=" + reviewDate +
+				", reviewImgPath='" + reviewImgPath + '\'' +
+				'}';
 	}
-
-	
 }

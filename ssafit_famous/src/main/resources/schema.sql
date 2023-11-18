@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `study` (
 CREATE TABLE IF NOT EXISTS `review` (
   `reviewKey` INT NOT NULL AUTO_INCREMENT ,
   `studyKey` INT NOT NULL,
+  `reviewTitle` VARCHAR(255),
   `reviewContent` TEXT,
   `reviewDate` TIMESTAMP NOT NULL,
   `reviewImgPath` VARCHAR(255) UNIQUE,
