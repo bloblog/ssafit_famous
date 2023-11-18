@@ -2,7 +2,7 @@
     <div>
         <button @click="loginForm">로그인</button>
         <button @click="registForm">회원가입</button>
-        <router-link to="/main">그냥 둘러볼래</router-link>
+        <a href="/nested/index.html">그냥 둘러볼래</a>
         <div class="modals">
             <div class="black-bg" v-if="loginModal == true">
                 <div class="white-bg">
