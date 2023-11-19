@@ -19,14 +19,29 @@ const router = createRouter({
       name: 'main',
       component: MainView
     },
-    { path: '/info',
-      name: 'info',
-      component: MyInfo
-    },
     { path: '/infoView',
       name: 'infoView',
       component: MyInfoView
-    },
+    }, // 마이페이지
+    { path: '/myinfo',
+      name: 'myinfo',
+      component: MyInfo
+    }, // 마이페이지 내부 회원정보 뷰
+    {
+      path: '/ongoing',
+      name: 'ongoing',
+      component: OngoingList
+    }, // 마이페이지 내부 진행중인 스터디 뷰
+    {
+      path: '/done',
+      name: 'done',
+      component: CompleteList
+    }, // 마이페이지 내부 지난 스터디 뷰
+    {
+      path: '/myreview',
+      name: 'myreview',
+      component: MyReview
+    }, // 마이페이지 내부 작성한 회고 뷰
     { path: '/dashboard',
       name: 'dashboard',
       component: DashBoard
@@ -35,21 +50,7 @@ const router = createRouter({
       name: 'createStudy',
       component: CreateStudy
     },
-    {
-      path: '/ongoing',
-      name: 'ongoing',
-      component: OngoingList
-    },
-    {
-      path: '/done',
-      name: 'done',
-      component: CompleteList
-    },
-    {
-      path: '/review',
-      name: 'review',
-      component: MyReview
-    },
+    
   ]
 })
 
