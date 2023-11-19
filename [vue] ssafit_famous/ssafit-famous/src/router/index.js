@@ -11,6 +11,8 @@ import OngoingList from '../components/study/OngoingList.vue'
 import CompleteList from '../components/study/CompleteList.vue'
 import MyReview from '../components/review/MyReview.vue'
 
+import studyDetail from '../views/StudyInfoView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -53,7 +55,11 @@ const router = createRouter({
       name: 'createStudy',
       component: CreateStudy
     },
-    
+    {
+      path: '/studyDetail',
+      name: 'studyDetail',
+      component: studyDetail
+    }
   ]
 })
 

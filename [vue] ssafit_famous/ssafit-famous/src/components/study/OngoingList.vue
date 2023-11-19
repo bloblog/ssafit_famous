@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><a href="#">빛나는 코드 마법사들</a></td>
+                    <td><RouterLink to="studyDetail">빛나는 코드 마법사들</RouterLink></td>
                     <td>코딩</td>
                     <td>2023.09.30</td>
                     <td>2023.12.31</td>
