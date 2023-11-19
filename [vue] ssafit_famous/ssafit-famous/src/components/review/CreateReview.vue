@@ -23,12 +23,19 @@
             </div>
             <input type="submit" value="작성완료">
         </form>
-        <button>취소</button>
+        <button @click="move">취소</button>
     </div>
 </template>
 
 <script setup>
+import {useRouter, useRoute} from 'vue-router';
 
+const router = useRouter();
+const route = useRoute();
+
+const move = function() {
+    router.go(-1);
+}
 </script>
 
 <style scoped>
