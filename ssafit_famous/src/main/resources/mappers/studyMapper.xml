@@ -14,6 +14,12 @@
 		VALUES (#{studyKey}, #{userKey})
 	</insert>
 
+	<select id="getTodoKeys" parameterType="int" resultType="list">
+		SELECT todoKey
+		FROM study_todo
+		WHERE studyKey = #{studyKey}
+	</select>
+
 	<update id="updateStudy" parameterType="Study">
 		UPDATE study 
 		SET studyName = #{studyName}, category = #{category}, studyEnd = #{studyEnd}, alarm = #{alarm}

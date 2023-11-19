@@ -13,7 +13,11 @@ public interface TodoDao {
 	
 	// todo 관계 생성
 	int insertUserRelation(Map<String,Integer> map);
-	
+
+	// todo 관계 삭제
+	int deleteUserRelation(Map<String,Integer> map);
+
+
 	// 목표 수정
 	int updateTodo(Todo todo);
 	

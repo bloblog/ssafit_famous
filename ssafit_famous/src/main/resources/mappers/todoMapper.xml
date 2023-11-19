@@ -19,6 +19,11 @@
 		VALUES (#{userKey}, #{todoKey})
 	</insert>
 
+	<delete id="deleteUserRelation" parameterType="hashMap">
+		DELETE FROM user_todo
+		WHERE userKey=#{userKey} AND todoKey = #{todoKey}
+	</delete>
+
 	<update id="updateTodo" parameterType="Todo">
 		UPDATE todo 
 		SET todoStart = #{todoStart}, todoEnd = #{todoEnd}, todoContent = #{todoContent}

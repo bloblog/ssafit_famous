@@ -3,6 +3,7 @@ package com.ssafit.pjt.model.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ssafit.pjt.model.dao.TodoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class StudyServiceImpl implements StudyService {
 	
 	@Autowired
 	private StudyDao studyDao;
+
+	@Autowired
+	private TodoDao todoDao;
 
 	@Override
 	public int addStudy(Study study) {
@@ -44,6 +48,14 @@ public class StudyServiceImpl implements StudyService {
 			map.put("studyKey", study.getStudyKey());
 			map.put("userKey", key);
 			result += studyDao.insertRelation(map);
+
+			// user-todo 생성
+			for (int todoKey : studyDao.getTodoKeys(study.getStudyKey())) {
+				Map<String, Integer> map2 = new HashMap<>();
+				map2.put("userKey", key);
+				map2.put("todoKey", todoKey);
+				todoDao.insertUserRelation(map2);
+			}
 		}
 		return result;
 	}
@@ -60,6 +72,14 @@ public class StudyServiceImpl implements StudyService {
 					map.put("studyKey", study.getStudyKey());
 					map.put("userKey", key);
 					studyDao.deleteRelation(map);
+
+					// user-todo 삭제
+					for (int todoKey : studyDao.getTodoKeys(study.getStudyKey())) {
+						Map<String, Integer> map2 = new HashMap<>();
+						map2.put("userKey", key);
+						map2.put("todoKey", todoKey);
+						todoDao.deleteUserRelation(map2);
+					}
 				}
 			}
 			if (in != null && in.length > 0) {
