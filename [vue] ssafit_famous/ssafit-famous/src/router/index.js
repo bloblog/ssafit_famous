@@ -15,7 +15,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/main',
+      path: '/nested/index.html',
       name: 'main',
       component: MainView
     },

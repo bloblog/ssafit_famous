@@ -1,9 +1,9 @@
 <template>
     <div>
+        <h1>메인페이지</h1>
         <header>
             <HeaderBar/>
         </header>
-        <h1>메인페이지</h1>
         <RouterView></RouterView>
         
     </div>

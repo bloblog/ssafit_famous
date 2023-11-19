@@ -1,1 +1,13 @@
-- 메인에 띄울 광고 이벤트 어쩌구
+<template>
+    <div>
+        <h2>캐러셀 (광고 이벤트)</h2>
+    </div>
+</template>
+
+<script setup>
+
+</script>
+
+<style scoped>
+
+</style>
