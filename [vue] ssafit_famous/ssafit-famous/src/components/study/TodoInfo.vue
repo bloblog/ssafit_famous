@@ -19,12 +19,32 @@
                 <input type="checkbox">
             </li>
         </ol>
-        <button>추가</button>
+        <button @click="addForm">추가</button>
+        <div v-if="add">
+            <h4>todo 추가 모달</h4>
+            <form>
+                <label for="todoContent">내용</label>
+                <input type="text"><br/>
+                <label for="todoStart">시작일</label>
+                <input type="text"><br/>
+                
+                <label for="todoEnd">마감일</label>
+                <input type="text"><br/>
+            </form>
+            <button @click="addForm">취소</button>
+            <!--- 추가 반영 처리 필요 -->
+            <button @click="addForm">추가</button> 
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+const add = ref(false);
+const addForm = ref(function(){
+    add.value = !add.value;
+})
 </script>
 
 <style scoped>
