@@ -20,7 +20,7 @@
                     <td>코딩</td>
                     <td>2023.09.30</td>
                     <td>2023.10.31</td>
-                    <td><a href="#">회고 작성하러 가기</a></td>
+                    <RouterLink to="createReview">회고 작성하러 가기</RouterLink>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -28,7 +28,7 @@
                     <td>운동</td>
                     <td>2023.09.01</td>
                     <td>2023.09.30</td>
-                    <td><a href="#">내가 작성한 회고 보기</a></td>
+                    <RouterLink to="reviewDetail">내가 작성한 회고 보기</RouterLink>
                 </tr>
             </tbody>
         </table>

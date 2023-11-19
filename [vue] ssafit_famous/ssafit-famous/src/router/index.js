@@ -12,6 +12,8 @@ import CompleteList from '../components/study/CompleteList.vue'
 import MyReview from '../components/review/MyReview.vue'
 
 import studyDetail from '../views/StudyInfoView.vue'
+import reviewDetail from '../components/review/ReviewDetail.vue'
+import createReview from '../components/review/createReview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,6 +61,16 @@ const router = createRouter({
       path: '/studyDetail',
       name: 'studyDetail',
       component: studyDetail
+    },
+    {
+      path: '/reviewDetail',
+      name: 'reviewDetail',
+      component: reviewDetail
+    },
+    {
+      path: '/createReview',
+      name: 'createReview',
+      component: createReview
     }
   ]
 })
