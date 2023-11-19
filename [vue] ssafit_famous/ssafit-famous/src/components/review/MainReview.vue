@@ -8,6 +8,7 @@
         <a href="#">#취미 </a>
         <a href="#">#독서 </a>
         <TopReview/>
+        
     </div>
 </template>
 

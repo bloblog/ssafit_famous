@@ -7,6 +7,9 @@
             <a href="#">즐거운 스터디~</a><br/>
             <a href="#">다들 멋져</a><br/>
         </div>
+        <div>
+            <router-link to="/reviewDetailView">더보기</router-link>
+        </div>
 
 
     </div>

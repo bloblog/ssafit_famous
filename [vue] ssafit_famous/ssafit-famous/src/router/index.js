@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import MainView from '@/views/MainView.vue'
-import MyInfo from '../components/user/MyInfo.vue'
-import MyInfoView from '../views/MyInfoView.vue'
+import MainHome from '@/components/main/MainHome.vue'
+import ReviewBoard from '@/views/reviewDetailView.vue'
+import MyInfo from '@/components/user/MyInfo.vue'
+import MyInfoView from '@/views/MyInfoView.vue'
 
 import DashBoard from '../views/DashBoardView.vue'
 import CreateStudy from '../views/CreateStudyView.vue'
@@ -21,7 +23,19 @@ const router = createRouter({
     {
       path: '/nested/index.html',
       name: 'main',
-      component: MainView
+      component: MainView,
+      redirect: {name: 'mainHome'},
+      children: [
+        { path : '/mainHome',
+          name : 'mainHome',
+          component: MainHome
+        }, // 맨 처음 뜨는 홈 화면
+        { path : '/reviewDetailView',
+          name : 'reviewBoard',
+          component: ReviewBoard
+        }, // 회고 게시판으로 넘어가
+        
+      ]
     },
     { path: '/infoView',
       name: 'infoView',
