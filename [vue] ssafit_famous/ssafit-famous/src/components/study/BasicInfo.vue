@@ -16,6 +16,7 @@
         <div v-if="modify">
             <h4>스터디 정보 수정 모달</h4>
             <CreateFormItem/>
+            <SearchMemberItem/>
             <button @click="modifyForm">취소</button>
             <!--- 수정 반영 처리 필요 -->
             <button @click="modifyForm">수정</button> 
@@ -24,6 +25,7 @@
 </template>
 
 <script setup>
+import SearchMemberItem from '../user/SearchMemberItem.vue';
 import CreateFormItem from './CreateFormItem.vue';
 import { ref } from 'vue';
 
