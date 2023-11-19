@@ -9,15 +9,29 @@
                 <SearchMemberItem/>
             </div>
         </div>
-        <button type="reset">취소</button>
-        <button type="submit">생성</button>
+        <button @click="exit">취소</button>
+        <button @click="create">생성</button>
+        
     </div>
 </template>
 
 <script setup>
 import SearchMemberItem from '@/components/user/SearchMemberItem.vue'
 import CreateFormItem from '../components/study/CreateFormItem.vue';
+import {useRouter, useRoute} from 'vue-router';
 
+const router = useRouter();
+const route = useRoute();
+
+const exit = function() {
+    router.go(-1);
+}
+
+const create = function() {
+    // api 보내고, api 반환값을 해당 스터디 번호로 해야 함
+    const studyKey = 0; // 일단 0으로 해두자
+    router.push("/studyDetail");
+}
 
 </script>
 
