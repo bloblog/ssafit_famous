@@ -2,15 +2,13 @@
 <template>
     <div>
         <h2>회원정보 페이지 입니다.</h2>
-        <router-link to="myinfo">회원정보</router-link> | 
-        <router-link to="ongoing">진행중인 스터디</router-link> | 
-        <router-link to="done">지난 스터디</router-link> | 
-        <router-link to="myreview">작성한 회고</router-link>
+        <MenuNav/>
         <router-view/>
     </div>
 </template>
 
 <script setup>
+import MenuNav from '../components/user/MenuNav.vue';
 </script>
 
 <style scoped>
