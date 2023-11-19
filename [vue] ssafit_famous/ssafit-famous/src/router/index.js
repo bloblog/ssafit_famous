@@ -22,6 +22,7 @@ const router = createRouter({
     { path: '/infoView',
       name: 'infoView',
       component: MyInfoView,
+      redirect: {name: 'myinfo'},
       children:[
         { path: '/myinfo',
           name: 'myinfo',
