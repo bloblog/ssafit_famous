@@ -12,12 +12,25 @@
         </p>
         <p>시작일 2023.09.31</p>
         <p>종료일 2023.12.31</p>
-        <button>수정하기</button>
+        <button @click="modifyForm">수정하기</button>
+        <div v-if="modify">
+            <h4>스터디 정보 수정 모달</h4>
+            <CreateFormItem/>
+            <button @click="modifyForm">취소</button>
+            <!--- 수정 반영 처리 필요 -->
+            <button @click="modifyForm">수정</button> 
+        </div>
     </div>
 </template>
 
 <script setup>
+import CreateFormItem from './CreateFormItem.vue';
+import { ref } from 'vue';
 
+const modify = ref(false);
+const modifyForm = ref(function(){
+    modify.value = !modify.value;
+})
 </script>
 
 <style scoped>
