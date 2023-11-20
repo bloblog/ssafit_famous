@@ -34,6 +34,7 @@ public class ReviewController {
 	// 회고 등록
 	@PostMapping("/review")
 	public ResponseEntity<Integer> write(@RequestBody Review review, HttpSession session) {
+		System.out.println(review);
 		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		int result = reviewService.writeReview(review, loginUserId);
 		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);

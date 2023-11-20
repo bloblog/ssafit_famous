@@ -1,12 +1,32 @@
 <template>
     <div>
         <h3>회고게시판 검색 결과</h3>
-        <div>검색 조건 안 넣으면 그냥 전체</div>
-        <router-link to="/reviewDetail">최고의 스터디 짱짱</router-link>
+
+        <div v-for="review in store.searchResult">
+            <router-link to="/reviewDetail" @click="select(review.reviewKey)">{{ review.reviewTitle }} : {{ review.viewCnt }}</router-link><br/>
+        </div>
+
+
     </div>
 </template>
 
 <script setup>
+import { useReviewStore } from '../stores/review'
+import {useRouter, useRoute} from 'vue-router';
+import {watch} from 'vue';
+
+const router = useRouter();
+const route = useRoute();
+
+const store = useReviewStore();
+
+const select = function(key) {
+    store.reviewKey = key;
+}
+
+watch(store.searchResult, () => {
+    this.$router.go();
+});
 
 </script>
 
