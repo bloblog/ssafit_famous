@@ -55,28 +55,28 @@
                                 <label for="userid" class="form-label">아이디</label>
                                 <input type="text" class="form-control" id="userid" v-model.lazy="id">
                                 <button type="button" @click="idCheck">중복확인</button>
-                                <div v-if="validCheck">
-                                    <p v-if="validId">이미 존재하는 아이디입니다.</p>
+                                <div v-if="validIdCheck">
+                                    <p v-if="!validId">이미 존재하는 아이디입니다.</p>
                                     <p v-else>사용할 수 있는 아이디입니다.</p>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="userpw" class="form-label">비밀번호</label>
-                                <input type="password" class="form-control" id="userpw" v-model.lazy="pw">
+                                <input type="password" class="form-control" id="userpw" v-model="pw" v-bind:disabled="!validId">
                             </div>
                             <div class="mb-3">
                                 <label for="userpwcheck" class="form-label">비밀번호 확인</label>
-                                <input type="password" class="form-control" id="userpwcheck" v-model.lazy="pwcheck">
+                                <input type="password" class="form-control" id="userpwcheck" v-model="pwcheck" v-bind:disabled="!validId">
                             </div>
                             <div v-if="pwcheck!=null">
-                                <p v-if="valid">비밀번호가 일치합니다.</p>
+                                <p v-if="signinConfirm">비밀번호가 일치합니다.</p>
                                 <p v-else>비밀번호가 일치하지 않습니다.</p>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signup">회원가입</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signup" v-bind:disabled="!validId || !signinConfirm">회원가입</button>
                     </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, watch } from 'vue';
 import axios from "axios";
 import { useLoginUserStore } from '../stores/loginUser';
 
@@ -95,9 +95,18 @@ const pw = ref();
 const login = ref(false);
 const loginFail = ref(false);
 const validId = ref(false);
-const validCheck = ref(false);
+const validIdCheck = ref(false);
 const pwcheck = ref();
+const signinConfirm = ref(false);
 const store = useLoginUserStore();
+
+watch(pwcheck, ()=>{
+    if(pw.value === pwcheck.value){
+        signinConfirm.value = true;
+    }else{
+        signinConfirm.value = false;
+    }
+});
 
 const signout = function(){
     store.userId = undefined;
@@ -137,10 +146,6 @@ const signup = ref(function(){
         })
         .then(function(response) {
             console.log(response.status);
-            // 204 : 이미 존재하는 아이디 입니다.
-            if(response.status === 204){
-                signupFail.value = true;
-            }
             // 200 : 회원가입 성공!
         })
         .catch(function(error) {
@@ -152,15 +157,15 @@ const idCheck = ref(function(){
     axios
         .get('http://localhost:8080/api/search/'+id.value)
         .then(function(response) {
-            validCheck.value = true;
+            validIdCheck.value = true;
             console.log(response.status);
             // 200 : 이미 존재하는 아이디 입니다.
             if(response.status === 200){
-                validId.value = true;
+                validId.value = false;
             }
             // 204 : 사용할 수 있는 아이디 입니다.
             if(response.status === 204){
-                validId.value = false;
+                validId.value = true;
             }
         })
         .catch(function(error) {
