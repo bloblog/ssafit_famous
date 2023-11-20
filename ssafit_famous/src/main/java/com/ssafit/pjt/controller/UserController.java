@@ -33,6 +33,7 @@ public class UserController {
 	// 로그인
 	@PostMapping("/login")
 	private ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
+		System.out.println(user);
 		User loginUser = userService.login(user);
 		if (loginUser == null) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

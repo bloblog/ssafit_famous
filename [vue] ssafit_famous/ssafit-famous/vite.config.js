@@ -21,5 +21,5 @@ export default defineConfig({
         nested: resolve(__dirname, 'nested/index.html')
       }
     }
-  }
+  },
 })
