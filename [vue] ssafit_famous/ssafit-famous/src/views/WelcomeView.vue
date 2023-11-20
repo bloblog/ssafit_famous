@@ -27,12 +27,11 @@
                             <div class="mb-3">
                                 <label for="userpw" class="form-label">비밀번호</label>
                                 <input type="password" class="form-control" id="userpw" v-model.lazy="pw">
-                                <p v-if="loginFail">아이디 혹은 비밀번호가 틀렸습니다.</p>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="signout">취소</button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signin">로그인</button>
                     </div>
                     </div>
@@ -75,7 +74,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="signout">취소</button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signup" v-bind:disabled="!validId || !signinConfirm">회원가입</button>
                     </div>
                     </div>
@@ -92,11 +91,10 @@ import { useLoginUserStore } from '../stores/loginUser';
 
 const id = ref();
 const pw = ref();
+const pwcheck = ref();
 const login = ref(false);
-const loginFail = ref(false);
 const validId = ref(false);
 const validIdCheck = ref(false);
-const pwcheck = ref();
 const signinConfirm = ref(false);
 const store = useLoginUserStore();
 
@@ -109,6 +107,8 @@ watch(pwcheck, ()=>{
 });
 
 const signout = function(){
+    id.value = null;
+    pw.value = null;
     store.userId = undefined;
     store.userKey = undefined;
     login.value = false;
@@ -124,13 +124,16 @@ const signin = function(){
             console.log(response);
             // 204 : id 혹은 pw가 틀렸습니다.
             if(response.status === 204){
-                loginFail.value = true;
+                alert("아이디 혹은 비밀번호가 틀렸습니다.");
+                id.value = null;
+                pw.value = null;
             }
             // 200 : 로그인!
             if(response.status === 200){
                 store.userId = id.value;
                 store.userKey = response.data;
                 login.value = true;
+                alert("로그인이 성공했습니다.");
             }
         })
         .catch(function(error) {
@@ -151,6 +154,9 @@ const signup = ref(function(){
         .catch(function(error) {
             console.log(error);
         });
+    id.value = null;
+    pw.value = null;
+    pwcheck.value = null;
 });
 
 const idCheck = ref(function(){
