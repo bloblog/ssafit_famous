@@ -1,14 +1,20 @@
 <template>
-    <div>
-        <div v-if="login">
-            <p>{{ store.userId }}님 안녕하세요! </p>
-            <button type="button" class="btn btn-primary" @click="signout" v-if="login">로그아웃</button>
+    <div id="welcome">
+        <div id="top"></div>
+        <div id="bottom">
+            <div id="ask">
+                <p>전에 방문하신 적이 있나요?</p>
+                <p>원하시는 서비스를 선택해주세요!</p>
+            </div>
+            <div id = "logIn">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</button>
+                <a href="/nested/index.html">그냥 둘러볼래</a>
+            </div>
         </div>
-        <div v-else>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</button>
-            <a href="/nested/index.html">그냥 둘러볼래</a>
-        </div>
+        
+        
+        
         <div>
             <!-- 로그인 모달 -->
             <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -182,5 +188,69 @@ const idCheck = ref(function(){
 </script>
 
 <style scoped>
+*{
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    padding-top: 10px;
+}
+
+#welcome{
+    font-size: 100%;
+    widows: 100vw;
+    height: 100vh;
+    background: url("../assets/imges/welcomeView/welcomePage_og.png") no-repeat center;
+    background-size: cover;
+}
+
+#top{
+    width: 100vw;
+    height: 20vh;
+    background: url("../assets/imges/welcomeView/welcomePage_top.png") no-repeat center;
+    background-size: contain;
+}
+
+#bottom{
+    position: absolute;
+    bottom: 25%;
+    width: 100vw;
+    text-align: center;
+}
+
+#ask::before{
+    content: "콩돌";
+    width: fit-content;
+    padding: 60px;
+    background: url("../assets/imges/welcomeView/welcomePage_nameTag.png") no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top: -15%;
+}
+
+#ask{
+    margin: auto;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: url("../assets/imges/welcomeView/welcomePage_bubble.png") no-repeat center;
+    background-size: contain;
+}
+
+#logIn{
+    padding: 80px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: -40%;
+    right: 3%;
+    background: url("../assets/imges/welcomeView/welcomePage_choose.png") no-repeat center;
+    background-size: contain;
+}
 
 </style>
