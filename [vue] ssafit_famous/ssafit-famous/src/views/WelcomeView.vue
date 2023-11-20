@@ -1,33 +1,81 @@
 <template>
     <div>
-        <button @click="signout">로그아웃</button>
-        <button>로그인</button>
-        <button>회원가입</button>
+        <div v-if="login">
+            <p>{{ store.userId }}님 안녕하세요! </p>
+            <button type="button" class="btn btn-primary" @click="signout" v-if="login">로그아웃</button>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal" v-else>로그인</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</button>
         <a href="/nested/index.html">그냥 둘러볼래</a>
         <div class="app">
             <h1>대문페이지입니다.</h1>
-            <div>
-                <h2>=로그인=</h2>
-                <label for="userid">아이디</label>
-                <input type="text" name="userid" v-model.lazy="id"><br/>
-                <label for="userpw">비밀번호</label>
-                <input type="password" name="userpw" v-model.lazy="pw"><br/>
-                <p v-if="loginFail">아이디 혹은 비밀번호가 틀렸습니다.</p>
-                <button @click="signin">로그인</button>
-            </div>
-            <div>
-                <h2>=회원가입=</h2>
-                <label for="userid">아이디</label>
-                <input type="text" name="userid" v-model="id"><br/>
-                <label for="userpw">비밀번호</label>
-                <input type="password" name="userpw" v-model="pw"><br/>
-                <label for="userpwcheck">비밀번호 확인</label>
-                <input type="password" name="userpwcheck" v-model="pwcheck"><br/>
-                <div v-if="pwcheck!=null">
-                    <p v-if="valid">비밀번호가 일치합니다.</p>
-                    <p v-else>비밀번호가 일치하지 않습니다.</p>
+
+            <!-- 로그인 모달 -->
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="loginModalLabel">로그인</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="userid" class="form-label">아이디</label>
+                                <input type="text" class="form-control" id="userid" v-model.lazy="id">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userpw" class="form-label">비밀번호</label>
+                                <input type="password" class="form-control" id="userpw" v-model.lazy="pw">
+                                <p v-if="loginFail">아이디 혹은 비밀번호가 틀렸습니다.</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signin">로그인</button>
+                    </div>
+                    </div>
                 </div>
-                <button @click="signup">회원가입</button>
+            </div>
+
+            <!-- 회원가입 모달 -->
+            <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="signupModalLabel">회원가입</h1>
+                        
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="userid" class="form-label">아이디</label>
+                                <input type="text" class="form-control" id="userid" v-model.lazy="id">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userpw" class="form-label">비밀번호</label>
+                                <input type="password" class="form-control" id="userpw" v-model.lazy="pw">
+                                <p v-if="loginFail">아이디 혹은 비밀번호가 틀렸습니다.</p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userpwcheck" class="form-label">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="userpwcheck" v-model.lazy="pwcheck">
+                            </div>
+                            <div v-if="pwcheck!=null">
+                                <p v-if="valid">비밀번호가 일치합니다.</p>
+                                <p v-else>비밀번호가 일치하지 않습니다.</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="signup">회원가입</button>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
