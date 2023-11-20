@@ -33,7 +33,6 @@ public class UserController {
 	// 로그인
 	@PostMapping("/login")
 	private ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
-		System.out.println(user);
 		User loginUser = userService.login(user);
 		if (loginUser == null) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -63,7 +62,9 @@ public class UserController {
 	// 회원 검색
 	@GetMapping("/search/{id}")
 	private ResponseEntity<?> searchUser(@PathVariable String id) {
+		System.out.println(id);
 		List<User> list = userService.getUserList(id);
+		System.out.println(list.toString());
 		if (list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
