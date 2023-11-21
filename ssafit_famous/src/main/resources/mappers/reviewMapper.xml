@@ -64,19 +64,14 @@
 	<select id="selectList" parameterType="SearchCondition" resultType="Review">
 		SELECT r.*
 		FROM review r
-			INNER JOIN (SELECT DISTINCT(s.studyKey) as studyKey, category, userKey
+			INNER JOIN (SELECT DISTINCT(s.studyKey) as studyKey, category
 						FROM study_user_review sur
 							INNER JOIN study s
 							ON sur.studyKey = s.studyKey) a
 			ON r.studyKey = a.studyKey
-		<choose>
-			<when test="key != 'none'">
-			WHERE ${key} LIKE concat("%", #{word}, "%")
-			</when>
-			<when test="key == 'userKey'">
-			WHERE ${key} = #{word}
-			</when>
-		</choose>
+		<if test="key != 'none'">
+		WHERE ${key} LIKE concat("%", #{word}, "%")
+		</if>
 		<if test="orderBy != 'none'">
 		ORDER BY ${orderBy} ${orderByDir}
 		</if>
