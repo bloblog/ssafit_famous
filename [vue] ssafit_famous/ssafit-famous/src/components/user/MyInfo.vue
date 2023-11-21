@@ -5,7 +5,7 @@
         <form>
             <!-- 아이디(변경 불가), 현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 -->
             <label for="id">아이디</label>
-            <input type="text" name="id">
+            <p>{{ store.userId }}</p>
             <br/>
             <label for="oldPw">현재 비밀번호</label>
             <input type="text" name="oldPw" required/>
@@ -22,7 +22,8 @@
 </template>
 
 <script setup>
-
+import { useLoginUserStore } from '../../stores/loginUser';
+const store = useLoginUserStore();
 </script>
 
 <style scoped>
