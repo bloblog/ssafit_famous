@@ -13,4 +13,6 @@ public interface StudyService {
 	int removeStudy(int studyKey, String loginUserId);
 	
 	Study getStudy(int studyKey);
+
+    Study getStudyByName(String studyName);
 }
