@@ -14,7 +14,8 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+
+import { ref, onMounted } from 'vue'
 import axios from "axios";
 import { useReviewStore } from '../stores/review'
 import {useRouter, useRoute} from 'vue-router';
@@ -25,13 +26,10 @@ const route = useRoute();
 
 const store = useReviewStore();
 
-const reviewKey = ref(0);
-
 const topReviews = ref([]);
 
-const select = function(key) {
-    store.reviewKey = key;
-    // reviewKey 보내야 함
+const select = function(k) {
+    store.reviewKey = k;
 }
 
 const more = function() {
