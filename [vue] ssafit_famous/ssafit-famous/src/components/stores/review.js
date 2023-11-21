@@ -4,14 +4,16 @@ import axios from "axios";
 
 export const useReviewStore = defineStore("review", () => {
   const searchResult = ref([]);
-  const reviewKey = ref(0);
+
   const key = ref(null);
   const word = ref(null);
   const ob = ref(null);
 
-  const searchReview = () => {
-    console.log(key.value + " " + word.value + " " + ob.value);
+  const reviewKey = ref(0);
+  const msg = ref(null);
+  const studyInfo = ref({});
 
+  const searchReview = () => {
     searchResult.value = [];
     const API_URL = `http://localhost:8080/api/review`;
     axios({
@@ -41,5 +43,12 @@ export const useReviewStore = defineStore("review", () => {
       });
   };
 
-  return { searchResult, searchReview, reviewKey, key, word, ob };
+  return {
+    searchResult,
+    searchReview,
+    reviewKey,
+    key,
+    word,
+    ob,
+  };
 });
