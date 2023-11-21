@@ -106,8 +106,4 @@ public class StudyServiceImpl implements StudyService {
 		return studyDao.selectOne(studyKey);
 	}
 
-	public Study getStudyByName(String studyName) {
-		return studyDao.selectOneByName(studyName);
-	}
-
 }

@@ -1,7 +1,6 @@
 package com.ssafit.pjt.model.service;
 
 import com.ssafit.pjt.model.dto.Schedule;
-import com.ssafit.pjt.model.dto.Study;
 
 public interface ScheduleService {
 	// 일정 생성
@@ -12,6 +11,4 @@ public interface ScheduleService {
 	int removeSchedule(int scheduleKey, String loginUser);
 	// 일정 상세
 	Schedule getSchedule(int scheduleKey);
-
-
 }

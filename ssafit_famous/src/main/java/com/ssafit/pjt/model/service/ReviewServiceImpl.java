@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafit.pjt.model.dao.ReviewDao;
+import com.ssafit.pjt.model.dao.StudyDao;
 import com.ssafit.pjt.model.dao.UserDao;
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.SearchCondition;
+import com.ssafit.pjt.model.dto.Study;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -21,6 +23,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private StudyDao studyDao;
+	
 	@Override
 	public int writeReview(Review review, String loginUser) {
 		int result = reviewDao.insertReview(review);
@@ -89,6 +94,18 @@ public class ReviewServiceImpl implements ReviewService {
 		// 활용해서 작성자 기준으로 회고 필터링 및 조회수 순으로 정렬 등 가능하도록
 		List<Review> list = reviewDao.selectList(condition);
 		return list;
+	}
+
+	@Override
+	public String selectWriter(int reviewKey) {
+		String writer = userDao.selectUser(reviewDao.selectWriter(reviewKey)).getId();
+		return writer;
+	}
+
+	@Override
+	public Study selectStudy(int reviewKey) {
+		Study study = studyDao.selectOne(reviewDao.selectStudy(reviewKey));
+		return null;
 	}
 
 }

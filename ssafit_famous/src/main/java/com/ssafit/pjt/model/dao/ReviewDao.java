@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.SearchCondition;
+import com.ssafit.pjt.model.dto.Study;
 
 public interface ReviewDao {
 
@@ -27,5 +28,6 @@ public interface ReviewDao {
 	List<Review> selectList(SearchCondition condition);
 	
 	Review selectReviewKeys(Map<String, Integer> map);
-
+	
+	int selectStudy(int reviewKey);
 }
