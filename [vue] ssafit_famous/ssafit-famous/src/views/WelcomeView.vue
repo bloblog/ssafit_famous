@@ -69,7 +69,7 @@
                             <div class="mb-3">
                                 <label for="userid" class="form-label">아이디</label>
                                 <input type="text" class="form-control" id="userid" v-model.lazy="store.id">
-                                <button type="button" @click="store.idCheck">중복확인</button>
+                                <button type="button" class="btn" @click="store.idCheck">중복확인</button>
                                 <div v-if="store.validIdCheck">
                                     <p v-if="!store.validId">이미 존재하는 아이디입니다.</p>
                                     <p v-else>사용할 수 있는 아이디입니다.</p>
