@@ -1,7 +1,7 @@
 <!-- 일정 표시할 캘린더 -->
 <template>
     <div>
-        <h3>Calendar</h3>
+        <div class="item">Calendar</div>
     </div>
 </template>
 
@@ -10,5 +10,10 @@
 </script>
 
 <style scoped>
+
+.item {
+    padding: 100px;
+    border: 1px solid;
+}
 
 </style>
