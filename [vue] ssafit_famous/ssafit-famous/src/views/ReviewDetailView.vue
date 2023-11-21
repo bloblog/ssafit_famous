@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+
 import SearchResult from '../components/review/SearchResult.vue';
 import SearchBar from '../components/review/SearchBar.vue';
 import ReviewNav from '../components/review/ReviewNav.vue';

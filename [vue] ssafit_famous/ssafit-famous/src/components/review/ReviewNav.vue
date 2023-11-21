@@ -1,6 +1,8 @@
 <template>
-    <div v-for="cat in cats">
-        <router-link to="/reviewDetailView" @click="select">{{ cat }}</router-link>
+    <div class="cat-nav">
+        <div v-for="cat in cats">
+            <router-link to="/reviewDetailView" @click="select(cat)">{{ cat }}</router-link>
+        </div>
     </div>
 </template>
 
@@ -17,10 +19,16 @@ const selectedCat = ref(null);
 
 const store = useReviewStore();
 
-const select = function(event) {
-    selectedCat.value = event.target.innerText.split("#")[1].trim();
-    store.searchReview("category", selectedCat.value);
-    router.push('ReviewDetailView');
+const select = function(category) {
+    if (category == '전체 글 보기') {
+        store.key = store.word = store.ob = null;
+        store.searchReview();
+    } else {
+        store.key = "category";
+        store.word = category.split("#")[1];
+        store.searchReview();
+    }
+    // router.push('ReviewDetailView');
 }
 
 const cats = ref([
@@ -28,10 +36,13 @@ const cats = ref([
     '#운동',
     '#취미',
     '#독서',
+    '전체 글 보기',
 ])
 
 </script>
 
 <style scoped>
-
+.cat-nav {
+    padding: 10px;
+}
 </style>

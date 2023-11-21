@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <router-link to="/mainHome">홈로고</router-link> <br/>
+            <router-link to="/mainHome">모여봐요 유명의 숲 (로고)</router-link> <br/>
             <div id = "logIn">
                 <div class="c" v-if="store.status">
                     <div class="dropdown">
@@ -99,5 +99,14 @@ const store = useLoginUserStore();
 </script>
 
 <style scoped>
+header {
+    display: flex;
+    justify-content: space-between;
+    padding : 30px;
 
+}
+
+.c {
+    display: flex;
+}
 </style>

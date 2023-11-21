@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>캐러셀 (광고 이벤트)</h2>
+        <div class="event">캐러셀 (광고 이벤트)</div>
     </div>
 </template>
 
@@ -9,5 +9,9 @@
 </script>
 
 <style scoped>
-
+.event {
+    padding: 70px;
+    text-align: center;
+    border: solid 1px;
+}
 </style>

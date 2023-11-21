@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>메인 첫 화면</h1>
         <div>
             <CarouselItem/>
         </div>
