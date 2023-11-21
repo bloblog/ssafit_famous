@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useLoginUserStore } from '../../stores/loginUser';
+import { useLoginUserStore } from '../stores/loginUser';
 import axios from 'axios';
 const store = useLoginUserStore();
 

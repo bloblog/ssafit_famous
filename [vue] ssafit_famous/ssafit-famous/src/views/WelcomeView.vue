@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-import { useLoginUserStore } from '../stores/loginUser';
+import { useLoginUserStore } from '../components/stores/loginUser';
 const store = useLoginUserStore();
 
 </script>

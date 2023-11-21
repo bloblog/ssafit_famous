@@ -2,6 +2,7 @@
 <template>
     <div>
         <h3>Todo</h3>
+        
         <ol>
             <li>
                 <p>2023.11.18</p>
@@ -19,6 +20,7 @@
                 <input type="checkbox">
             </li>
         </ol>
+        <!-- 
         <button @click="addForm">추가</button>
         <div v-if="add">
             <h4>todo 추가 모달</h4>
@@ -32,9 +34,9 @@
                 <input type="text"><br/>
             </form>
             <button @click="addForm">취소</button>
-            <!--- 추가 반영 처리 필요 -->
+            \<\!-- 추가 반영 처리 필요 --\>
             <button @click="addForm">추가</button> 
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -45,6 +47,8 @@ const add = ref(false);
 const addForm = ref(function(){
     add.value = !add.value;
 })
+
+
 </script>
 
 <style scoped>

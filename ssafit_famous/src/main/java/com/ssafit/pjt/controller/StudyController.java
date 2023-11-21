@@ -4,17 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.Study;
@@ -30,7 +24,17 @@ public class StudyController {
 	@Autowired
 	private StudyService studyService;
 
-	
+	// new -> 스터디 이름으로 스터디 키 찾기 (새로 생성시 필요)
+	@GetMapping("/study/key/{studyName}")
+	public ResponseEntity<?> key(@PathVariable String studyName) {
+		Study result = studyService.getStudyByName(studyName);
+		if (result == null) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Study>(result, HttpStatus.OK);
+		}
+	}
+
 	// 스터디 삭제하기
 	@DeleteMapping("/study/{studyKey}")
 	public ResponseEntity<Integer> delete(@PathVariable int studyKey, HttpSession session) {
@@ -48,9 +52,12 @@ public class StudyController {
 	
 	
 	// 스터디 생성하기
-	@PostMapping("/study")
-	public ResponseEntity<Integer> add(@RequestBody Study study) {
+	@RequestMapping(value = "/study", method = RequestMethod.POST)
+	public ResponseEntity<?> add(@RequestBody Study study) {
 		int result = studyService.addStudy(study);
+		if (result != 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
 		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
 	}
 	

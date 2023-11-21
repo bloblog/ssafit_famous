@@ -41,7 +41,7 @@
 <script setup>
 
 import { ref, watch } from 'vue';
-import { useLoginUserStore } from '../../stores/loginUser';
+import { useLoginUserStore } from '@/components/stores/loginUser';
 import axios from 'axios';
 const store = useLoginUserStore();
 
