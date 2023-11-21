@@ -28,7 +28,6 @@ public class WebConfig implements WebMvcConfigurer{
 				.addResourceLocations("classpath:/META_INF/resources/webjars/springfox-swagger-ui/");
 	}
 	
-	
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
 //		registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns("/api/review/**");
@@ -36,6 +35,7 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*");
+		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "DELETE", "PUT"); // 이거 추가함
 	}
+	
 }
