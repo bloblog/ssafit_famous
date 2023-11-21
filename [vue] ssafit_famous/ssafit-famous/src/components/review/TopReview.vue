@@ -1,12 +1,13 @@
 <template>
     <div>
-        <h3>조회수 순 상위 3개 게시글</h3>
+        <h3 class="text-center">조회수 순 상위 3개 게시글</h3>
+        <div v-if="topReviews.length == 0">아직 게시글이 없어요!</div>
         <div v-for="review in topReviews.slice(0, 3)">
             <router-link to="/reviewDetail" @click="select(review.reviewKey)">{{ review.reviewTitle }}</router-link><br/>
         </div>
         <br/>
         <div>
-            <router-link to="/reviewDetailView">더보기</router-link>
+            <button @click="more">더보기</button>
         </div>
 
     </div>
@@ -16,6 +17,11 @@
 import {ref, onMounted} from 'vue'
 import axios from "axios";
 import { useReviewStore } from '../stores/review'
+import {useRouter, useRoute} from 'vue-router';
+import ReviewDetailView from '@/views/ReviewDetailView.vue';
+
+const router = useRouter();
+const route = useRoute();
 
 const store = useReviewStore();
 
@@ -26,6 +32,12 @@ const topReviews = ref([]);
 const select = function(key) {
     store.reviewKey = key;
     // reviewKey 보내야 함
+}
+
+const more = function() {
+    store.key = store.word = store.ob = null;
+    store.searchReview();
+    router.push("ReviewDetailView");
 }
 
 onMounted(() => {
@@ -39,14 +51,9 @@ onMounted(() => {
         },
     })
         .then((res) => {
-        if (res.data) {
             for (let i = 0; i < res.data.length; i++) {
                 topReviews.value.push(res.data[i]);
             }
-            
-        } else {
-            alert("리뷰가 존재하지 않습니다.");
-        }
         })
         .catch((err) => {
         console.error(err);

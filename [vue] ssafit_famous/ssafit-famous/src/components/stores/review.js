@@ -5,18 +5,22 @@ import axios from "axios";
 export const useReviewStore = defineStore("review", () => {
   const searchResult = ref([]);
   const reviewKey = ref(0);
+  const key = ref(null);
+  const word = ref(null);
+  const ob = ref(null);
 
-  const searchReview = (k, w) => {
+  const searchReview = () => {
+    console.log(key.value + " " + word.value + " " + ob.value);
+
     searchResult.value = [];
     const API_URL = `http://localhost:8080/api/review`;
     axios({
       url: API_URL,
       method: "GET",
       params: {
-        // 지금은 최신순, 조회순, 제목, 카테고리 검색만 가능하도록
-        key: k,
-        word: w,
-        orderBy: k === "최신순" ? "reviewDate" : "viewCnt",
+        key: key.value,
+        word: word.value,
+        orderBy: ob.value,
         orderByDir: "desc",
       },
     })
@@ -27,7 +31,6 @@ export const useReviewStore = defineStore("review", () => {
             searchResult.value.push(data);
           }
         } else {
-          alert("검색 조건에 해당하는 회고가 없습니다.");
           searchResult.value = [];
         }
       })
@@ -38,5 +41,5 @@ export const useReviewStore = defineStore("review", () => {
       });
   };
 
-  return { searchResult, searchReview, reviewKey };
+  return { searchResult, searchReview, reviewKey, key, word, ob };
 });

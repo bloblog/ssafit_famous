@@ -1,11 +1,14 @@
 <template>
     <div>
-        <h2>회고 검색 + 카테고리 + 상위 게시글</h2>
-        <SearchBar/>
-        <ReviewNav/>
-        <TopReview/>
-        
+        <div>
+            <SearchBar/>
+        </div>
+        <div class="board text-center">
+            <ReviewNav/>
+            <TopReview/>
+        </div>
     </div>
+    
 </template>
 
 <script setup>
@@ -24,14 +27,12 @@ const selectedCat = ref(null);
 
 const store = useReviewStore();
 
-const select = function(event) {
-    selectedCat.value = event.target.innerText.split("#")[1].trim();
-    store.searchReview("category", selectedCat.value);
-    router.push('ReviewDetailView');
-}
-
 </script>
 
 <style scoped>
+.board {
+    display: flex;
+    
+}
 
 </style>
