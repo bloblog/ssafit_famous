@@ -29,6 +29,7 @@ public class StudyController {
 	
 	@Autowired
 	private StudyService studyService;
+
 	
 	// 스터디 삭제하기
 	@DeleteMapping("/study/{studyKey}")

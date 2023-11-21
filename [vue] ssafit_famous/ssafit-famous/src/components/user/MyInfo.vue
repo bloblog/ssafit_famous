@@ -92,21 +92,18 @@ watch(newPwConfirm, ()=>{
 })
 
 const modify = function(){
-    console.log("회원 정보 수정!");
-    // axios
-    //     .put('http://localhost:8080/api/user/'+ store.userKey, {
-    //         'userKey': store.userKey,
-    //         'id': store.userId,
-    //         'password': newPw.value,
-    //         'exp': user.value.exp,
-    //         'userImgPath': user.value.userImgPath,
-    //     })
-    //     .then(function (response) {
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     })
+    user._value.password = newPw.value;
+    console.log(user._value.password);
+    axios
+        .put('http://localhost:8080/api/user/'+ store.userKey, {
+            user,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
 };
 </script>
 
