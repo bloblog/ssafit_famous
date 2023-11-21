@@ -3,13 +3,25 @@
         <div id="top"></div>
         <div id="bottom">
             <div id="ask">
-                <p>전에 방문하신 적이 있나요?</p>
-                <p>원하시는 서비스를 선택해주세요!</p>
+                <div v-if="store.status">
+                    <P>{{ store.userId }}님 안녕하세요!</P>
+                    <P>로그아웃하시겠어요?</P>
+                </div>
+                <div v-else>
+                    <p>전에 방문하신 적이 있나요?</p>
+                    <p>원하시는 서비스를 선택해주세요!</p>
+                </div>
             </div>
             <div id = "logIn">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입</button>
-                <a href="/nested/index.html">그냥 둘러볼래</a>
+                <div class="c" v-if="store.status">
+                    <button type="button" class="btn" @click="signout">로그아웃할래</button>
+                    <a href="/nested/index.html">그냥 둘러볼래~</a>
+                </div>
+                <div class="c" v-else>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인할래</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입하려고~</button>
+                    <a href="/nested/index.html">그냥 둘러볼게!</a>
+                </div>
             </div>
         </div>
         
@@ -91,9 +103,10 @@
 </template>
 
 <script setup>
-import { ref, defineComponent, watch } from 'vue';
+import { ref, watch } from 'vue';
 import axios from "axios";
 import { useLoginUserStore } from '../stores/loginUser';
+import { storeToRefs } from 'pinia';
 
 const id = ref();
 const pw = ref();
@@ -117,7 +130,7 @@ const signout = function(){
     pw.value = null;
     store.userId = undefined;
     store.userKey = undefined;
-    login.value = false;
+    store.status = false;
 }
 
 const signin = function(){
@@ -138,7 +151,7 @@ const signin = function(){
             if(response.status === 200){
                 store.userId = id.value;
                 store.userKey = response.data;
-                login.value = true;
+                store.status = true;
                 alert("로그인이 성공했습니다.");
             }
         })
@@ -156,6 +169,7 @@ const signup = ref(function(){
         .then(function(response) {
             console.log(response.status);
             // 200 : 회원가입 성공!
+            alert("회원가입에 성공했습니다.");
         })
         .catch(function(error) {
             console.log(error);
@@ -224,16 +238,18 @@ a{
 #ask::before{
     content: "콩돌";
     width: fit-content;
-    padding: 60px;
+    padding: 3rem;
     background: url("../assets/imges/welcomeView/welcomePage_nameTag.png") no-repeat center;
     background-size: contain;
     position: absolute;
-    top: -15%;
+    top: 1rem;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
 #ask{
     margin: auto;
-    padding: 100px;
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -241,14 +257,15 @@ a{
     background-size: contain;
 }
 
-#logIn{
-    padding: 80px;
+#logIn .c{
+    padding: 4rem;
     width: fit-content;
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: -40%;
-    right: 3%;
+    top: -1.5rem;
+    left: 60%;
+    transform: translate(-50%, -50%);
     background: url("../assets/imges/welcomeView/welcomePage_choose.png") no-repeat center;
     background-size: contain;
 }
