@@ -1,18 +1,25 @@
 <template>
-    <div>
-        <h2>스터디 생성 폼</h2>
-        <div class="create-form">
-            <CreateFormItem/>
-            <div class="v-line"></div>
-            <div class="form-member">
-                <!-- <label>팀원 목록</label> -->
-                <!-- <SearchMemberItem/> -->
-            </div>
-        </div>
-        <button @click="exit">취소</button>
-        <button @click="create">생성</button>
-        
-    </div>
+  <div>
+
+    <div class="board">
+      <h2 class="highlight">스터디 생성하기 🏃‍♀️</h2>
+          <div class="create-form">
+              <CreateFormItem/>
+              <div class="form-member">
+              <h4>팀원 추가하기</h4>
+              <SearchMemberItem/>
+          </div>
+              
+          </div>
+          
+          <div class="btns">
+
+            <button class="btn btn-secondary m-1" @click="exit">취소</button>
+            <button class="btn btn-primary m-1" @click="create">생성</button>
+          </div>
+          
+      </div>
+  </div>
 </template>
 
 <script setup>
@@ -23,19 +30,21 @@ import {ref} from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useStudyStore } from '@/components/stores/study';
 import { useLoginUserStore } from '@/components/stores/loginUser';
+import { useUserStore } from '@/components/stores/user';
 
 import dayjs from 'dayjs';
 import axios from "axios";
 
 const store = useStudyStore();
 const uStore = useLoginUserStore();
-
+const tStore = useUserStore(); // 팀원 관련해서 사용할 거라 tStore 함
 
 const router = useRouter();
 const route = useRoute();
 
 const exit = function() {
     router.go(-1);
+
 }
 
 const create = () => {
@@ -51,6 +60,8 @@ const create = () => {
     .then((res) => {
       if (res.data !== null) {
         createDone();
+        // 팀원 추가
+        addMember();
       } else {
         
       }
@@ -62,6 +73,27 @@ const create = () => {
     });
 };
 
+const addMember = () => {
+  const API_URL = `http://localhost:8080/api/study/` + store.studyDetail.studyKey;
+    axios.post(API_URL, {
+      study : store.studyDetail,
+      in : tStore.members,
+      studyKey : store.studyDetail.studyKey,
+    })
+      .then((res) => {
+        if (res.status == 200) {
+          router.push("/studyDetail");
+
+        } else {
+          alert('팀원이 없어도 괜찮으신가요?');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("팀원 추가 중 오류가 발생했습니다");
+      });
+}
+
 const createDone = function() {
     // 스터디 만들어진 후, 스터디 이름으로 스터디 정보(key 포함) 찾아서 상세 페이지 가자
     const API_URL = `http://localhost:8080/api/study/key/` + store.studyName;
@@ -70,13 +102,13 @@ const createDone = function() {
         if (res.data !== null) {
           console.log(res.data);
           store.studyDetail = res.data;
-          router.push("/studyDetail");
+          
         } else {
         }
       })
       .catch((err) => {
         console.error(err);
-        alert("페이지 이동 중 오류가 발생했습니다");
+        alert("스터디 생성 중 오류가 발생했습니다");
       });
 
     
@@ -88,13 +120,27 @@ const createDone = function() {
 
 .create-form {
     display: flex;
+    justify-content: space-around;
 }
 
-.v-line {
-    border-left : solid #111111;
-    height : 150px;
-    margin: 10px;
+.board {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10vw;
+  margin: 10px;
+  border-radius: 10vw;
+
 }
 
+.btns {
+  text-align: center;
+  
+}
+
+.highlight{
+    text-decoration: none;
+    color: #7e725c;
+    display: inline;
+    box-shadow: inset 0 -10px 0 #ffcc007d;
+}
 
 </style>

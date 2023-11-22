@@ -1,7 +1,6 @@
 <template>
     <div class="container"> 
-        <h2>회고 게시판</h2>
-        <hr/>
+        <h2 class="highlight">회고 게시판</h2>
         <div>
             <div>
                 <SearchBar/>
@@ -33,5 +32,12 @@ import ReviewNav from '../components/review/ReviewNav.vue';
 .board-area {
     display: flex;
 }
+
+/* .highlight{
+    text-decoration: none;
+    color: #7e725c;
+    display: inline;
+    box-shadow: inset 0 -10px 0 #ffcc007d;
+} */
 
 </style>
