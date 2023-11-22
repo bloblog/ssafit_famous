@@ -11,7 +11,7 @@ export const useReviewStore = defineStore("review", () => {
 
   const reviewKey = ref(0);
   const msg = ref(null);
-  const studyInfo = ref({});
+  
 
   const searchReview = () => {
     searchResult.value = [];
