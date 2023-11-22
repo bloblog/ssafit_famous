@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class = "topReview">
         <h3 class="text-center">조회수 순 상위 3개 게시글</h3>
         <div v-if="topReviews.length == 0">아직 게시글이 없어요!</div>
         <div v-for="review in topReviews.slice(0, 3)">
@@ -71,5 +71,9 @@ onMounted(() => {
     border : none;
     background-color: #1ac8b9;
     color: #ffffff;
+}
+
+.topReview{
+    width: 70%;
 }
 </style>

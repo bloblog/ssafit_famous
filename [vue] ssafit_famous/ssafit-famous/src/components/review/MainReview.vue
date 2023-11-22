@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainReview">
         <div>
             <SearchBar/>
         </div>
@@ -31,8 +31,12 @@ const store = useReviewStore();
 
 <style scoped>
 .board {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 10vw;
+    margin: 10px;
+    border-radius: 10vw;
     display: flex;
-    
+    justify-content: space-between;
 }
 
 </style>

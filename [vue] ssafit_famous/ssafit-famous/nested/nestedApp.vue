@@ -1,14 +1,19 @@
 <template>
     <div id="background">
-        <header>
-            <HeaderBar/>
-        </header>
-        <RouterView></RouterView>
-        
+        <div class="main">
+            <header>
+                <HeaderBar/>
+            </header>
+            <RouterView></RouterView>
+        </div>
+        <footer>
+            <FooterBar/>
+        </footer>
     </div>
 </template>
 
 <script setup>
+import FooterBar from '../src/components/common/FooterBar.vue';
 import HeaderBar from '../src/components/common/HeaderBar.vue';
 
 </script>
@@ -32,21 +37,13 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
   font-family: 'NanumSquareNeo-Variable';
 }
 
-#background{
+.main{
     max-width: 1000px;
     margin: auto;
     height: 100vh;
 }
 
-@media (max-width: 480px) {
-    
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    
+#background{
+    background-color: #6996f8;
 }
 </style>

@@ -49,6 +49,7 @@ const cats = ref([
 .cat-nav {
     padding:30px;
     color: #7e725c;
+    width: 30%;
 }
 
 .highlight{
