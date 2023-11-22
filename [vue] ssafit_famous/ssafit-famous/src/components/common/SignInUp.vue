@@ -50,11 +50,11 @@
 						</div>
 						<div class="mb-3">
 							<label for="newpw" class="form-label">비밀번호</label>
-							<input type="password" class="form-control" id="newpw" v-model="store.pw" v-bind:disabled="!store.validId">
+							<input type="password" class="form-control" id="newpw" v-model="store.pw" v-bind:disabled="store.validIdCheck && !store.validId">
 						</div>
 						<div class="mb-3">
 							<label for="newpwcheck" class="form-label">비밀번호 확인</label>
-							<input type="password" class="form-control" id="newpwcheck" v-model="store.pwcheck" v-bind:disabled="!store.validId">
+							<input type="password" class="form-control" id="newpwcheck" v-model="store.pwcheck" v-bind:disabled="store.validIdCheck && !store.validId">
 						</div>
 						<div v-if="store.pwcheck!=null">
 							<p v-if="store.signinConfirm">비밀번호가 일치합니다.</p>

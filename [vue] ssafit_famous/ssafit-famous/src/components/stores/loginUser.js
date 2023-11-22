@@ -78,6 +78,7 @@ export const useLoginUserStore = defineStore(
         });
       id.value = null;
       pw.value = null;
+      validIdCheck.value = fasle;
       pwcheck.value = null;
     });
 
@@ -85,15 +86,16 @@ export const useLoginUserStore = defineStore(
       axios
         .get("http://localhost:8080/api/search/" + id.value)
         .then(function (response) {
-          validIdCheck.value = true;
           console.log(response.status);
           // 200 : 이미 존재하는 아이디 입니다.
           if (response.status === 200) {
             validId.value = false;
+            validIdCheck.value = true;
           }
           // 204 : 사용할 수 있는 아이디 입니다.
           if (response.status === 204) {
             validId.value = true;
+            validIdCheck.value = true;
           }
         })
         .catch(function (error) {
