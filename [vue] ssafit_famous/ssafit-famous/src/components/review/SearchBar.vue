@@ -7,7 +7,7 @@
                 <li @click="orderBy">조회수</li>
             </ul>
             <input v-model="word" placeholder="제목을 검색해보세요">
-            <button @click="search">조회</button>
+            <button class="searchBtn" @click="search">조회</button>
         </div>
     </div>
 </template>
@@ -54,4 +54,15 @@ const search = function() {
     padding: 10px;
     text-align: center;
 }
+
+.searchBtn {
+    border-radius: 30px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border : none;
+    background-color: #1ac8b9;
+    color: #ffffff;
+}
+
 </style>
