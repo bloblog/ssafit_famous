@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <router-link to="/mainHome">모여봐요 유명의 숲 (로고)</router-link> <br/>
+            <router-link to="/mainHome"><img src="../../../public/mainLogo.png"></router-link> <br/>
             <div>
                 <div class="c" v-if="store.status">
                     <div class="dropdown">
@@ -33,8 +33,13 @@ const store = useLoginUserStore();
 <style scoped>
 header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding : 30px;
+}
+
+img{
+    height: 20vh;
+    object-fit: contain;
 }
 
 .c {

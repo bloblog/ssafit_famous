@@ -5,7 +5,7 @@ import { defineStore } from "pinia";
 export const useLoginUserStore = defineStore(
   "loginUser",
   () => {
-    const status = ref(false);
+    const status = ref(true);
     const userKey = ref("");
     const userId = ref("");
 

@@ -40,10 +40,14 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
 .main{
     max-width: 1000px;
     margin: auto;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #background{
-    background-color: #6996f8;
+    background-color: #6990e4;
+}
+
+header{
+    height: 20vh;
 }
 </style>
