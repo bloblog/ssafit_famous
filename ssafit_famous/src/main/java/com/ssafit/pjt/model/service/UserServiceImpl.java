@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int removeUser(int userKey) {
+		System.out.println(userKey);
 		return userDao.deleteUser(userKey);
 	}
 

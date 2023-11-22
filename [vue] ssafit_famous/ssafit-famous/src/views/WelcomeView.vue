@@ -11,16 +11,16 @@
                     <p>전에 방문하신 적이 있나요?</p>
                     <p>원하시는 서비스를 선택해주세요!</p>
                 </div>
-            </div>
-            <div id = "logIn">
-                <div class="c" v-if="store.status">
-                    <button type="button" class="btn" @click="store.signout">로그아웃할래</button>
-                    <a href="/nested/index.html">그냥 둘러볼래~</a>
-                </div>
-                <div class="c" v-else>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인할래</button>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입하려고~</button>
-                    <a href="/nested/index.html">그냥 둘러볼게!</a>
+                <div id = "logIn">
+                    <div class="c" v-if="store.status">
+                        <button type="button" class="btn" @click="store.signout">로그아웃할래</button>
+                        <a href="/nested/index.html">그냥 둘러볼래~</a>
+                    </div>
+                    <div class="c" v-else>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인할래</button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입하려고~</button>
+                        <a href="/nested/index.html">그냥 둘러볼게!</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,9 +74,9 @@ a{
     padding: 3rem;
     background: url("../assets/imges/welcomeView/welcomePage_nameTag.png") no-repeat center;
     background-size: contain;
-    position: absolute;
-    top: 1rem;
-    left: 40%;
+    position:absolute;
+    top: 10%;
+    left: 38%;
     transform: translate(-50%, -50%);
 }
 
@@ -96,8 +96,8 @@ a{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: -1.5rem;
-    left: 60%;
+    top: 50%;
+    right: 50%;
     transform: translate(-50%, -50%);
     background: url("../assets/imges/welcomeView/welcomePage_choose.png") no-repeat center;
     background-size: contain;

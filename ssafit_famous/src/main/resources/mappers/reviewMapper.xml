@@ -66,6 +66,7 @@
 	<delete id="deleteReview" parameterType="int">
 		DELETE FROM review
 		WHERE reviewKey = #{reviewKey}
+		
 	</delete>
 	
 	<select id="selectList" parameterType="SearchCondition" resultType="Review">

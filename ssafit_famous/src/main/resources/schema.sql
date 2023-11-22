@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `study_user_review` (
   `userKey` INT,
   `reviewKey` INT,
   PRIMARY KEY (`studyKey`, `userKey`),
-  FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE,
-  FOREIGN KEY (`userKey`) REFERENCES `user`(`userKey`) ON DELETE CASCADE,
+  FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`),
+  FOREIGN KEY (`userKey`) REFERENCES user(`userKey`),
   FOREIGN KEY (`reviewKey`) REFERENCES review(`reviewKey`) ON DELETE SET NULL
 ) ENGINE = InnoDB;
 
