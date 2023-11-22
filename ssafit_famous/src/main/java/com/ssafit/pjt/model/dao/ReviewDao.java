@@ -11,6 +11,8 @@ public interface ReviewDao {
 
 	int insertReview(Review review);
 	
+	Review selectReviewKeys(Map<String, Integer> map);
+	
 	void updateRelation(Map<String, Integer> map);
 
 	void updateExp(Map<String, Integer> map);
@@ -27,7 +29,7 @@ public interface ReviewDao {
 
 	List<Review> selectList(SearchCondition condition);
 	
-	Review selectReviewKeys(Map<String, Integer> map);
+	
 	
 	int selectStudy(int reviewKey);
 }

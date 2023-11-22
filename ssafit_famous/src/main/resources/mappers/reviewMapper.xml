@@ -5,8 +5,8 @@
 <mapper namespace="com.ssafit.pjt.model.dao.ReviewDao">
 
 	<insert id="insertReview" parameterType="Review">
-		INSERT INTO review (studyKey, reviewTitle, reviewContent, reviewDate, reviewImgPath)
-		VALUES (#{studyKey}, #{reviewTitle}, #{reviewContent}, #{reviewDate}, #{reviewImgPath});
+		INSERT INTO review (studyKey, reviewTitle, reviewContent)
+		VALUES (#{studyKey}, #{reviewTitle}, #{reviewContent});
 	</insert>
 	
 	<update id="updateRelation" parameterType="hashMap">
@@ -23,7 +23,7 @@
 	
 	<update id="updateViewCnt" parameterType="int">
 		UPDATE review
-		SET viewCnt = #{viewCnt} + 1
+		SET viewCnt = viewCnt + 1
 		WHERE reviewKey = #{reviewKey}
 	</update>
 	
@@ -51,6 +51,7 @@
 			INNER JOIN study_user_review sur
 			ON r.studyKey = sur.studyKey
 		WHERE userKey = #{userKey}
+		LIMIT 1
 	</select>
 
 	
