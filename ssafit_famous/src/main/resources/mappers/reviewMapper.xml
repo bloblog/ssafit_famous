@@ -39,6 +39,12 @@
 		WHERE reviewKey = #{reviewKey}
 	</select>
 	
+	<select id="selectStudy" parameterType="int" resultType="int">
+		SELECT studyKey
+		FROM review
+		WHERE reviewKey = #{reviewKey}
+	</select>
+	
 	<select id="selectReviewKeys" parameterType="hashmap" resultType="Review">
 		SELECT *
 		FROM review r

@@ -108,7 +108,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public Study selectStudy(int reviewKey) {
 		Study study = studyDao.selectOne(reviewDao.selectStudy(reviewKey));
-		return null;
+		return study;
 	}
 
 }
