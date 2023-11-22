@@ -6,6 +6,7 @@ public class Review {
 	private int reviewKey;
 	private int studyKey;
 	private int userKey;
+	
 	public int getUserKey() {
 		return userKey;
 	}
@@ -24,11 +25,6 @@ public class Review {
 	
 	
 	public Review() {}
-
-	public Review(int userKey) {
-		super();
-		this.userKey = userKey;
-	}
 
 
 	public Review(int studyKey, int userKey, String reviewTitle, String reviewContent) {

@@ -49,6 +49,7 @@ const submit = ref(function () {
         url: "http://localhost:8080/api/review",
         data: {
             studyKey: studyInfo.studyKey,
+            userKey: store.userKey,
             reviewTitle: reviewTitle.value,
             reviewContent: reviewContent.value,
         }
