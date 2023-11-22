@@ -22,8 +22,6 @@ public class Review {
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.viewCnt = viewCnt;
-		this.reviewDate = reviewDate;
-		this.reviewImgPath = reviewImgPath;
 	}
 
 
