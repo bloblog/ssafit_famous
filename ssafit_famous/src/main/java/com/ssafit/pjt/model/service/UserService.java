@@ -18,8 +18,8 @@ public interface UserService {
 	
 	public List<Study> getStudyList(int userKey);
 	
-	public int modifyUser(User user, String loginUserId);
+	public int modifyUser(User user);
 	
-	public int removeUser(int userKey, String loginUserId);
+	public int removeUser(int userKey);
 	
 }

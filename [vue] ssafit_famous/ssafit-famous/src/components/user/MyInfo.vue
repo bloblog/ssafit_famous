@@ -34,6 +34,7 @@
                 </div>
             </div>
             <button type="button" class="btn" v-bind:disabled="!approved || same || !success" @click="modify">회원정보 수정</button>
+            <button type="button" class="btn" @click="deleteUser">회원 탈퇴</button>
         </form>
     </div>
 </template>
@@ -43,6 +44,7 @@
 import { ref, watch } from 'vue';
 import { useLoginUserStore } from '@/components/stores/loginUser';
 import axios from 'axios';
+import { useReviewStore } from '../stores/review';
 const store = useLoginUserStore();
 
 const oldPw = ref();
@@ -96,7 +98,11 @@ const modify = function(){
     console.log(user._value.password);
     axios
         .put('http://localhost:8080/api/user/'+ store.userKey, {
-            user,
+            "userKey" : user._value.userKey,
+            "id" : user._value.id,
+            "password" : user._value.password,
+            "exp": user._value.exp,
+            "uerImgPath": user._value.uerImgPath,
         })
         .then(function (response) {
             console.log(response);
@@ -105,6 +111,10 @@ const modify = function(){
             console.log(error);
         })
 };
+
+const deleteUser = function(){
+    console.log("탈퇴");
+}
 </script>
 
 <style scoped>

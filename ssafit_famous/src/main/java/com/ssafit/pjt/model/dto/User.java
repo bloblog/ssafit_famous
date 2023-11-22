@@ -9,6 +9,17 @@ public class User {
 	
 	public User() {}
 
+	public User(int userKey, String id, String password, int exp, String userImgPath) {
+		super();
+		this.userKey = userKey;
+		this.id = id;
+		this.password = password;
+		this.exp = exp;
+		this.userImgPath = userImgPath;
+	}
+
+
+
 	public User(String id, String password) {
 		this.id = id;
 		this.password = password;

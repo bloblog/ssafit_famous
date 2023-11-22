@@ -96,11 +96,9 @@ public class UserController {
 	
 	// 회원정보 업데이트
 	@PutMapping("/user/{userKey}")
-	public ResponseEntity<Integer> update(@RequestBody User user, @PathVariable int userKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
-
+	public ResponseEntity<Integer> update(@RequestBody User user, @PathVariable int userKey) {
 		user.setUserKey(userKey);
-		int result = userService.modifyUser(user, loginUserId);
+		int result = userService.modifyUser(user);
 		if (result == -1) {
 			return new ResponseEntity<Integer>(result, HttpStatus.UNAUTHORIZED);
 		} else if (result == 0) {
@@ -111,10 +109,9 @@ public class UserController {
 	
 	// 회원 정보 삭제
 	@DeleteMapping("/user/{userKey}")
-	public ResponseEntity<Integer> delete(@PathVariable String userKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
+	public ResponseEntity<Integer> delete(@PathVariable String userKey) {
 
-		int result = userService.removeUser(Integer.parseInt(userKey), loginUserId);
+		int result = userService.removeUser(Integer.parseInt(userKey));
 		if (result == -1) {
 			return new ResponseEntity<Integer>(result, HttpStatus.UNAUTHORIZED);
 		} else if (result == 0) {
