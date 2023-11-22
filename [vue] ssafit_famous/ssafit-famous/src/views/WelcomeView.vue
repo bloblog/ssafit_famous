@@ -4,8 +4,8 @@
         <div id="bottom">
             <div id="ask">
                 <div v-if="store.status">
-                    <P>{{ store.userId }}님 안녕하세요!</P>
-                    <P>로그아웃하시겠어요?</P>
+                    <p>{{ store.userId }}님 안녕하세요!</p>
+                    <p>로그아웃하시겠어요?</p>
                 </div>
                 <div v-else>
                     <p>전에 방문하신 적이 있나요?</p>

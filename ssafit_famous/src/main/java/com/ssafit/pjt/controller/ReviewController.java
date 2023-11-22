@@ -87,6 +87,7 @@ public class ReviewController {
 	@GetMapping("/review")
 	@ApiOperation(value="회고 검색", notes="작성자 기준, 조회수 기준 등으로 정렬")
 	public ResponseEntity<?> search(SearchCondition condition){
+		System.out.println(condition);
 		List<Review> list = reviewService.searchReview(condition);
 		if(list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
