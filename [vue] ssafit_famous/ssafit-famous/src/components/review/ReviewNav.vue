@@ -2,15 +2,12 @@
 
     <div class="cat-nav">
         <div style="text-align: center;">카테고리</div>
-        <hr/>
-        <div v-for="cat in cats" style="margin: 10px;">
+        
+        <div v-for="cat in cats" style="margin: 10px; text-align: center;">
             <router-link to="/reviewDetailView" @click="select(cat)" 
                 style="text-decoration: none; 
-                    color: #7e725c;
-                    background-color: #fff9e49d; 
-                    padding: 5px;
-                    border: solid 1px #7e725c ;
-                    border-radius: 10px;">
+                    color: #7e725c;"
+                class="highlight">
             {{ cat }}</router-link>
         </div>
     </div>
@@ -54,8 +51,12 @@ const cats = ref([
 <style scoped>
 .cat-nav {
     padding:30px;
-    
     color: #7e725c;
+}
+
+.highlight{
+  display: inline;
+  box-shadow: inset 0 -10px 0 #ffcc007d;
 }
 
 

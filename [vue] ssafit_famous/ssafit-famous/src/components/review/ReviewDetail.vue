@@ -1,16 +1,25 @@
 <template>
-    <div>
+    <div class="container">
         <div>
             <h3>제목 : {{ reviewInfo.reviewTitle }}</h3>
         </div>
+        <hr/>
         <div>
-            <div>작성자 : {{ reviewWriter }}</div>
-            <div>작성일 : {{ dayjs(reviewInfo.reviewDate).format("YYYY/MM/DD") }} </div>
-            <div>스터디명 : {{ studyInfo.studyName }}</div>
-            <div>카테고리 : {{ studyInfo.category }}</div>
-            <p>{{ reviewInfo.reviewContent }}</p>
+            <div class="study-info">
+              <span class="item">스터디명 : {{ studyInfo.studyName }}</span>
+              <span class="item">카테고리 : {{ studyInfo.category }}</span>
+            </div>
+            <div class="user-info">
+
+              <div class="item">작성자 : {{ reviewWriter }}</div>
+              <div class="item">작성일 : {{ dayjs(reviewInfo.reviewDate).format("YYYY/MM/DD") }} </div>
+              <div class="item">조회수 : {{  }}</div>
+            </div>
+            
+            <hr/>
+            <div class="content">{{ reviewInfo.reviewContent }}</div>
         </div>
-        <button @click="move">닫기</button>
+        <button @click="move" class="searchBtn">닫기</button>
     </div>
 </template>
 
@@ -89,5 +98,29 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.content {
+  padding: 30px;
+}
+.searchBtn {
+    border-radius: 30px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border : none;
+    background-color: #1ac8b9;
+    color: #ffffff;
+}
+.item {
+  margin: 10px;
+}
 
+.study-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+}
 </style>
