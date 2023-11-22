@@ -45,11 +45,15 @@
     margin: 10px;
 }
 
-.carousel-inner {
-    height: 40vw;
+.carousel {
+    height: 30vh;
+    overflow: hidden;
 }
 
-.d-block {
-    object-fit: contain; 
+img{
+    width: 100vw;
+    height: 30vh;
+    object-fit: cover;
+    object-position: center;
 }
 </style>
