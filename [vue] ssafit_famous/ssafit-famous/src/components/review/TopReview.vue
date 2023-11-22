@@ -7,7 +7,7 @@
         </div>
         <br/>
         <div>
-            <button @click="more">더보기</button>
+            <button class="moreBtn" @click="more">더보기</button>
         </div>
 
     </div>
@@ -63,5 +63,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.moreBtn {
+    border-radius: 30px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border : none;
+    background-color: #1ac8b9;
+    color: #ffffff;
+}
 </style>
