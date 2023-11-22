@@ -40,4 +40,25 @@ header {
 .c {
     display: flex;
 }
+
+button:hover{
+    border-radius: 0;
+    /* box-shadow: inset 0 -10px 0 #ffcc007d; */
+    animation: wiggle 2000ms infinite;
+}
+
+@keyframes wiggle{
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(5deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
 </style>

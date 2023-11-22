@@ -4,10 +4,7 @@
         <div style="text-align: center;">카테고리</div>
         
         <div v-for="cat in cats" style="margin: 10px; text-align: center;">
-            <router-link to="/reviewDetailView" @click="select(cat)" 
-                style="text-decoration: none; 
-                    color: #7e725c;"
-                class="highlight">
+            <router-link to="/reviewDetailView" @click="select(cat)" class="highlight">
             {{ cat }}</router-link>
         </div>
     </div>
@@ -55,9 +52,10 @@ const cats = ref([
 }
 
 .highlight{
-  display: inline;
-  box-shadow: inset 0 -10px 0 #ffcc007d;
+    text-decoration: none;
+    color: #7e725c;
+    display: inline;
+    box-shadow: inset 0 -10px 0 #ffcc007d;
 }
-
 
 </style>
