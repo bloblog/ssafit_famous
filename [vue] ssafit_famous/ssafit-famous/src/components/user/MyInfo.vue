@@ -34,7 +34,7 @@
                 </div>
             </div>
             <button type="button" class="btn" v-bind:disabled="!approved || same || !success" @click="modify">회원정보 수정</button>
-            <button type="button" class="btn" @click="deleteUser">회원 탈퇴</button>
+            <!-- <button type="button" class="btn" @click="deleteUser" v-bind:disabled="!approved">회원 탈퇴</button> -->
         </form>
     </div>
 </template>
@@ -114,6 +114,13 @@ const modify = function(){
 
 const deleteUser = function(){
     console.log("탈퇴");
+    axios
+        .delete('http://localhost:8080/api/user/'+ store.userKey)
+        .then(function(response){
+            console.log(response);
+        }).catch(function(error){
+            console.log(error);
+        })
 }
 </script>
 
