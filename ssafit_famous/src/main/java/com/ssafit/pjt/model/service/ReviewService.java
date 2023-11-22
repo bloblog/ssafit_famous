@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.SearchCondition;
+import com.ssafit.pjt.model.dto.Study;
 
 public interface ReviewService {
 	
@@ -17,5 +18,8 @@ public interface ReviewService {
 	
 	public List<Review> searchReview(SearchCondition condition);
 	
+	public String selectWriter(int reviewKey);
+	
+	public Study selectStudy(int reviewKey);
 	
 }

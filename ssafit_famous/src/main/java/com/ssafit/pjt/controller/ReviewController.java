@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafit.pjt.model.dto.Review;
 import com.ssafit.pjt.model.dto.SearchCondition;
+import com.ssafit.pjt.model.dto.Study;
 import com.ssafit.pjt.model.service.ReviewService;
 
 import io.swagger.annotations.Api;
@@ -91,4 +92,25 @@ public class ReviewController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Review>>(list, HttpStatus.OK);
 	}
+	
+	// 작성자 아이디 가져와
+	@GetMapping("/review/user/{reviewKey}")
+	@ApiOperation(value = "작성자 가져오기")
+	public ResponseEntity<?> writer(@PathVariable int reviewKey){
+		String writer = reviewService.selectWriter(reviewKey);
+		if(writer == null)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<String>(writer, HttpStatus.OK);
+	}
+	
+	// 스터디 가져와
+	@GetMapping("/review/study/{reviewKey}")
+	@ApiOperation(value = "스터디 가져오기")
+	public ResponseEntity<?> study(@PathVariable int reviewKey){
+		Study study  = reviewService.selectStudy(reviewKey);
+		if(study == null)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Study>(study, HttpStatus.OK);
+	}
+	
 }

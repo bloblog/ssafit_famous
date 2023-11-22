@@ -76,7 +76,7 @@ const createDone = function() {
       })
       .catch((err) => {
         console.error(err);
-        alert("스터디 생성 중 오류가 발생했습니다");
+        alert("페이지 이동 중 오류가 발생했습니다");
       });
 
     
