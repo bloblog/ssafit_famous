@@ -13,13 +13,14 @@ import com.ssafit.pjt.model.dto.Study;
 @Service
 public class StudyServiceImpl implements StudyService {
 	private static StudyService service = new StudyServiceImpl();
-	
-	private StudyServiceImpl() {}
-	
+
+	private StudyServiceImpl() {
+	}
+
 	public static StudyService getInstance() {
 		return service;
 	}
-	
+
 	@Autowired
 	private StudyDao studyDao;
 
@@ -29,21 +30,21 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public int addStudy(Study study) {
 		int result = studyDao.insertStudy(study);
-		
+
 		Study tmp = studyDao.selectOneByName(study.getStudyName());
-		
-		// study-user-review테이블에  review null로 생성 (팀장)
+
+		// study-user-review테이블에 review null로 생성 (팀장)
 		Map<String, Object> map = new HashMap<>();
 		map.put("studyKey", tmp.getStudyKey());
 		map.put("userKey", tmp.getLeaderKey());
 		studyDao.insertRelation(map);
 		return result;
 	}
-	
+
 	public int addMember(Study study, int[] list) {
-		// study-user-review테이블에  review null로 생성 (팀원)
+		// study-user-review테이블에 review null로 생성 (팀원)
 		int result = 0;
-		for(int key : list) {
+		for (int key : list) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("studyKey", study.getStudyKey());
 			map.put("userKey", key);
@@ -62,9 +63,9 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public int modifyStudy(Study study, String loginUserKey, int[] out, int[] in) {
-		if(study == null) {
+		if (study == null) {
 			return 0;
-		} else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
+		} else if (study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
 			if (out != null && out.length > 0) {
 				for (int key : out) {
 					// study-user 관계에서 제거
@@ -93,9 +94,9 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public int removeStudy(int studyKey, String loginUserKey) {
 		Study study = studyDao.selectOne(studyKey);
-		if(study == null) {
+		if (study == null) {
 			return 0;
-		}else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
+		} else if (study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
 			return studyDao.deleteStudy(studyKey);
 		}
 		return -1;
@@ -106,12 +107,8 @@ public class StudyServiceImpl implements StudyService {
 		return studyDao.selectOne(studyKey);
 	}
 
-<<<<<<< HEAD
 	public Study getStudyByName(String studyName) {
 		return studyDao.selectOneByName(studyName);
 	}
 
 }
-=======
-}
->>>>>>> 250fb41c7e655a8cc28eebe3a12e2ee8a9549d81
