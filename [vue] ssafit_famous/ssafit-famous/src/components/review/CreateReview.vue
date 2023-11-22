@@ -6,38 +6,59 @@
             <div>
                 <!-- 아래 3개는 값 고정 -->
                 <label for="studyName">스터디명</label>
-                <input type="text" name="studyName"><br/>
+                <input type="text" name="studyName" id="studyName"><br />
                 <label for="studyCategory">카테고리</label>
-                <input type="text" name="studyCategory"><br/>
+                <input type="text" name="studyCategory" id="studyCategory"><br />
                 <label for="reviewDate">작성일</label>
-                <input type="text" name="reviewDate"><br/>
-                <label for="reviewImg">대표이미지</label>
-                <input type="file" name="reviewImg"/>
-                <!-- 파일 인풋 어떻게 하더라 -->
+                <input type="text" name="reviewDate" id="reviewDate"><br />
             </div>
             <div>
                 <label for="reviewTitle">제목</label>
-                <input type="text" name="reviewTitle"><br/>
+                <input type="text" name="reviewTitle" id="reviewTitle"><br />
                 <label for="reviewContent">내용</label>
-                <input type="textarea" name="reviewContent">
+                <input type="textarea" name="reviewContent" id="reviewContent">
             </div>
-            <input type="submit" value="작성완료">
+            <button type="button" class="btn" @click="submit">작성완료</button>
         </form>
-        <button @click="move">취소</button>
+        <button type="button" class="btn" @click="move">취소</button>
     </div>
 </template>
 
 <script setup>
-import {useRouter, useRoute} from 'vue-router';
+import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { useLoginUserStore } from '../stores/loginUser';
 
 const router = useRouter();
-const route = useRoute();
+const store = useLoginUserStore();
 
-const move = function() {
+const move = function () {
     router.go(-1);
 }
+
+const reviewTitle = ref("");
+const reviewContent = ref("");
+
+const submit = ref(function () {
+    axios({
+        method: "POST",
+        url: "http://localhost:8080/api/review",
+        data: {
+            "userKey": store.userKey,
+            "reviewTitle": reviewTitle.value,
+            "reviewContent": reviewContent.value,
+        }
+    })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+});
+
+
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

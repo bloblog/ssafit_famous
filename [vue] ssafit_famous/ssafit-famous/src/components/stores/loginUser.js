@@ -50,6 +50,7 @@ export const useLoginUserStore = defineStore('loginUser',()=>{
 					userId.value = id.value;
 					userKey.value = response.data;
 					status.value = true;
+					this.$session.set('저장할 key', '저장할 value');
 					alert("로그인이 성공했습니다.");
 				}
 			})
