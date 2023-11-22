@@ -1,6 +1,7 @@
 package com.ssafit.pjt.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +109,12 @@ public class StudyServiceImpl implements StudyService {
 
 	public Study getStudyByName(String studyName) {
 		return studyDao.selectOneByName(studyName);
+	}
+
+	@Override
+	public List<Integer> getTodoList(int studyKey) {
+//		System.out.println(studyDao.getTodoKeys(studyKey));
+		return studyDao.getTodoKeys(studyKey);
 	}
 
 

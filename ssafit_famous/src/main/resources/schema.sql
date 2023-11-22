@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   `studyKey` INT NOT NULL,
   `reviewTitle` VARCHAR(255),
   `reviewContent` TEXT,
-  `reviewDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reviewDate` TIMESTAMP NOT NULL,
   `reviewImgPath` VARCHAR(255) UNIQUE,
   `viewCnt` INT DEFAULT 0,
   PRIMARY KEY (`reviewKey`),
@@ -92,3 +92,4 @@ CREATE TABLE IF NOT EXISTS `study_todo` (
   FOREIGN KEY (`studyKey`) REFERENCES study(`studyKey`) ON DELETE CASCADE,
   FOREIGN KEY (`todoKey`) REFERENCES todo(`todoKey`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ssafit.pjt.model.dto.Study;
+import com.ssafit.pjt.model.dto.key;
 
 public interface StudyDao {
 	// 스터디 생성
@@ -13,6 +14,8 @@ public interface StudyDao {
 	int insertRelation(Map<String, Object> map);
 
 	// study 의 todo 리스트 가져오기
+	List<key> getTodo(int StudyKey);
+	
 	List<Integer> getTodoKeys(int StudyKey);
 	
 	// 스터디 수정

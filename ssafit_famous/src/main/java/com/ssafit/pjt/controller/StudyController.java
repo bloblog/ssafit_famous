@@ -24,7 +24,7 @@ public class StudyController {
 	@Autowired
 	private StudyService studyService;
 
-	// new -> 스터디 이름으로 스터디 키 찾기 (새로 생성시 필요)
+	// 스터디 이름으로 스터디 키 찾기 (새로 생성시 필요)
 	@GetMapping("/study/key/{studyName}")
 	public ResponseEntity<?> key(@PathVariable String studyName) {
 		Study result = studyService.getStudyByName(studyName);
@@ -32,6 +32,17 @@ public class StudyController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Study>(result, HttpStatus.OK);
+		}
+	}
+	
+	// new -> 스터디 키로 todokey 리스트 찾기
+	@GetMapping("/study/todo/{studyKey}")
+	public ResponseEntity<?> getTodo(@PathVariable int studyKey) {
+		List<Integer> result = studyService.getTodoList(studyKey);
+		if (result == null || result.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Integer>>(result, HttpStatus.OK);
 		}
 	}
 

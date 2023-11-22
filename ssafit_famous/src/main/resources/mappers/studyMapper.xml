@@ -13,8 +13,13 @@
 		INSERT INTO study_user_review (studyKey, userKey)
 		VALUES (#{studyKey}, #{userKey})
 	</insert>
-
-	<select id="getTodoKeys" parameterType="int" resultType="list">
+	<select id="getTodoKeys" parameterType="int" resultType="int">
+		SELECT todoKey
+		FROM study_todo
+		WHERE studyKey = #{studyKey}
+	</select>
+	
+	<select id="getTodo" parameterType="int" resultType="key">
 		SELECT todoKey
 		FROM study_todo
 		WHERE studyKey = #{studyKey}
