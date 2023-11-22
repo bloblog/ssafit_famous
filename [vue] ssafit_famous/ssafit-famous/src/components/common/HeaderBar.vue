@@ -32,9 +32,12 @@ const store = useLoginUserStore();
 
 <style scoped>
 header {
+    margin: 0;
+    background: url('../../assets/imges/header/header_background.png') no-repeat center;
+    background-size: 100% 20vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 img{

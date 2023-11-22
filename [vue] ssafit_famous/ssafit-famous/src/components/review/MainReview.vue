@@ -33,7 +33,7 @@ const store = useReviewStore();
 .board {
     background-color: rgba(255, 255, 255, 0.6);
     padding: 10vw;
-    margin: 10px;
+    margin: 5vw;
     border-radius: 10vw;
     display: flex;
     justify-content: space-between;

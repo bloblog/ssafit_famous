@@ -42,12 +42,13 @@
 <style scoped>
 #carouselExampleCaptions {
     text-align: center;
-    margin: 10px;
+    margin: 10vw;
 }
 
 .carousel {
     height: 30vh;
     overflow: hidden;
+    border-radius: 5vw;
 }
 
 img{
