@@ -1,5 +1,7 @@
 package com.ssafit.pjt.controller;
 
+import java.time.Clock;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -97,5 +99,18 @@ public class StudyController {
 		}
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
+
+	// 멤버 추가하기
+	@RequestMapping(value = "/study/{studyKey}", method = RequestMethod.POST)
+	public ResponseEntity<?> addMember(@RequestBody Study study, int[] in, @PathVariable int studyKey) {
+		System.out.println(study.toString());
+		System.out.println(Arrays.toString(in));
+		int result = studyService.addMember(study, in);
+		if (result == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Integer>(result, HttpStatus.OK);
+	}
+
 	
 }

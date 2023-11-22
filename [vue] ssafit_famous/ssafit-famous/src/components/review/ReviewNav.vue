@@ -1,7 +1,7 @@
 <template>
 
     <div class="cat-nav">
-        <div style="text-align: center;">카테고리</div>
+        <div class="tag" style="text-align: center;">카테고리</div>
         
         <div v-for="cat in cats" style="margin: 10px; text-align: center;">
             <router-link to="/reviewDetailView" @click="select(cat)" class="highlight">
@@ -47,14 +47,18 @@ const cats = ref([
 
 <style scoped>
 .cat-nav {
-    padding:30px;
-    color: #7e725c;
+    /* padding:30px; */
+    background-color: #66d267;
+    border-radius: 100px;
+    padding: 40px;
+    color: #54200c;
+    font: bold;
     width: 30%;
 }
 
 .highlight{
     text-decoration: none;
-    color: #7e725c;
+    color: #7c6839;
     display: inline;
     box-shadow: inset 0 -10px 0 #ffcc007d;
 }

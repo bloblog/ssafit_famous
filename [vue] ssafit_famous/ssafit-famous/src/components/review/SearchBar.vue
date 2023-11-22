@@ -1,12 +1,12 @@
 <template>
     <div class="search-bar">
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">{{ ob }}</button>
+        <div>
+            <button class="btn dropdown-toggle input" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">{{ ob }}</button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li @click="orderBy">작성날짜</li>
                 <li @click="orderBy">조회수</li>
             </ul>
-            <input v-model="word" placeholder="제목을 검색해보세요">
+            <input class="input" v-model="word" placeholder="제목을 검색해보세요">
             <button class="searchBtn" @click="search">조회</button>
         </div>
     </div>
@@ -64,5 +64,14 @@ const search = function() {
     background-color: #1ac8b9;
     color: #ffffff;
 }
+.input {
+    background-color: white;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 8px;
+    border: none;
+    margin: 2px;
+}
+
 
 </style>
