@@ -27,6 +27,33 @@ export const useLoginUserStore = defineStore(
       }
     });
 
+	const signin = ref(function(){
+		axios
+			.post('http://localhost:8080/api/login', {
+				"id": id.value,
+				"password": pw.value,
+			})
+			.then(function(response) {
+				console.log(response);
+				// 204 : id 혹은 pw가 틀렸습니다.
+				if(response.status === 204){
+					alert("아이디 혹은 비밀번호가 틀렸습니다.");
+					id.value = null;
+					pw.value = null;
+				}
+				// 200 : 로그인!
+				if(response.status === 200){
+					userId.value = id.value;
+					userKey.value = response.data;
+					status.value = true;
+					alert("로그인이 성공했습니다.");
+				}
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+	});
+
     const signout = ref(function () {
       id.value = null;
       pw.value = null;
