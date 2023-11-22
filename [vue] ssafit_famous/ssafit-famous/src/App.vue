@@ -29,22 +29,4 @@ import WelcomeView from './views/WelcomeView.vue';
 * {
   font-family: 'NanumSquareNeo-Variable';
 }
-
-#background{
-    max-width: 1000px;
-    margin: auto;
-    height: 100vh;
-}
-
-@media (max-width: 480px) {
-    
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    
-}
 </style>
