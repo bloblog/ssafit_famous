@@ -7,6 +7,7 @@
             <li v-for="todo in todos">
                 <a href="#">{{ todo.todoContent }}</a>
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
+                <label>완료여부</label>
                 <input type="checkbox">
             </li>
         </ol>
@@ -54,7 +55,6 @@ const msg = ref(null);
 // }
 
 const getTodo = function(todoKey) {
-    console.log("도착 = " + todoKey);
     const API_URL2 = `http://localhost:8080/api/todo/` + todoKey;
     axios
       .get(API_URL2)
@@ -80,7 +80,6 @@ onMounted(() => {
       .then((res) => {
         if (res.status === 200) {
             for (let i = 0; i < res.data.length; i++) {
-                console.log("todoKey = " + res.data[i]);
                 getTodo(res.data[i]);
             }
             
@@ -93,7 +92,7 @@ onMounted(() => {
         console.log(err);
         alert("todo를 불러오는 중 오류가 발생하였습니다.");
       });
-      console.log(todos);
+      console.log(todos.value);
 
 });
 
