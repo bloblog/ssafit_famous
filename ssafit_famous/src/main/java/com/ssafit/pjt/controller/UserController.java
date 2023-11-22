@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafit.pjt.model.dto.Review;
+import com.ssafit.pjt.model.dto.Study;
 import com.ssafit.pjt.model.dto.User;
 import com.ssafit.pjt.model.service.UserService;
 
@@ -80,6 +80,17 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<User>(result, HttpStatus.OK);
+		}
+	}
+	
+	// 회원의 스터디 목록 가져오기
+	@GetMapping("/user/study/{userKey}")
+	public ResponseEntity<?> list(@PathVariable int userKey) {
+		List<Study> result = userService.getStudyList(userKey);
+		if (result == null || result.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Study>>(result, HttpStatus.OK);
 		}
 	}
 	

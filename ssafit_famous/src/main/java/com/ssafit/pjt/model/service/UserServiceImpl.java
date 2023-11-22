@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafit.pjt.model.dao.UserDao;
+import com.ssafit.pjt.model.dto.Study;
 import com.ssafit.pjt.model.dto.User;
 
 @Service
@@ -63,6 +64,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUserList(String id) {
 		return userDao.selectUserList(id);
+	}
+
+	@Override
+	public List<Study> getStudyList(int userKey) {
+		return userDao.selectStudyList(userKey);
 	}
 	
 }
