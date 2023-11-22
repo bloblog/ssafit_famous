@@ -44,8 +44,8 @@ public class ReviewController {
 	
 	// 회고 수정
 	@PutMapping("/review/{reviewKey}")
-	public ResponseEntity<Integer> update(@RequestBody Review review, @PathVariable int reviewKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
+	public ResponseEntity<Integer> update(@RequestBody Review review, @PathVariable int reviewKey) {
+		String loginUserId = String.valueOf(review.getUserKey());
 		
 		review.setReviewKey(reviewKey);
 		int result = reviewService.modifyReview(review, loginUserId);
@@ -60,8 +60,8 @@ public class ReviewController {
 	
 	// 회고 삭제
 	@DeleteMapping("/review/{reviewKey}")
-	public ResponseEntity<Integer> delete(@PathVariable int reviewKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
+	public ResponseEntity<Integer> delete(@RequestBody Review review, @PathVariable int reviewKey) {
+		String loginUserId = String.valueOf(review.getUserKey()); // userKey만 들어있는 review 보내면 됨
 		
 		int result = reviewService.removeReview(reviewKey, loginUserId);
 		if (result == -1) {
