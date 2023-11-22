@@ -1,32 +1,69 @@
-<!-- 현재 진행중인 스터디 리스트 -->
 <template>
     <div>
-        <h3>현재 진행중인 스터디</h3>
-        <p>스터디명 클릭 시 상세페이지로 이동합니다.</p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">스터디명</th>
-                    <th scope="col">카테고리</th>
-                    <th scope="col">시작일</th>
-                    <th scope="col">종료일</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">1</td>
-                    <td><RouterLink to="studyDetail">빛나는 코드 마법사들</RouterLink></td>
-                    <td>코딩</td>
-                    <td>2023.09.30</td>
-                    <td>2023.12.31</td>
-                </tr>
-            </tbody>
-        </table>
+        <h4>스터디명 클릭 시 상세페이지로 이동합니다</h4>
+        <div v-if="msg">{{ msg }}</div>
+        <div v-else>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">스터디명</th>
+                        <th scope="col">카테고리</th>
+                        <th scope="col">시작일</th>
+                        <th scope="col">종료일</th>
+                    </tr>
+                </thead>
+                <tbody v-for="(study, index) in studys">
+                    <tr>
+                        <td scope="row">{{ index+1 }}</td>
+                        <td><RouterLink to="/studyDetail">{{ study.studyName }}</RouterLink></td>
+                        <td>{{ study.category }}</td>
+                        <td>{{ dayjs(study.studyStart).format('YYYY/MM/DD') }}</td>
+                        <td>{{ dayjs(study.studyEnd).format('YYYY/MM/DD') }}</td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
 <script setup>
+
+import {ref, onMounted} from 'vue';
+import { useStudyStore } from '../stores/study'
+import { useLoginUserStore } from '../stores/loginUser'
+
+import axios from "axios";
+import dayjs from 'dayjs';
+
+const store = useStudyStore();
+const uStore = useLoginUserStore();
+
+const studys = ref([]);
+
+const msg = ref(null);
+
+onMounted(() => {
+    const API_URL = `http://localhost:8080/api/user/study/` + uStore.userKey;
+    axios
+      .get(API_URL)
+      .then((res) => {
+        if (res.status === 200) {
+            studys.value = res.data.filter((study) => study.studyEnd < Date.now());
+            
+        }
+        if (res.status === 204) {
+          const msg = "진행중인 스터디가 없습니다.";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("목록을 불러오는 중 오류가 발생하였습니다.");
+      });
+
+});
+
 
 </script>
 
