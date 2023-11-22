@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="result">
         <h4 v-if="store.word">"{{ store.word }}" 검색 결과</h4>
         <h4 v-else-if="!store.ob">전체 게시글입니다.</h4>
         <h4 v-else>{{ (store.ob=='viewCnt' ? '조회수' : '작성날짜') }}로 정렬한 결과</h4>
@@ -31,5 +31,7 @@ const select = function(key) {
 </script>
 
 <style scoped>
-
+.result {
+    padding: 10px;
+}
 </style>
