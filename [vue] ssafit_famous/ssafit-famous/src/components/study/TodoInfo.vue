@@ -4,24 +4,14 @@
         <h3>Todo</h3>
         
         <ol>
-            <li>
-                <p>2023.11.18</p>
-                <a href="#">알고리즘 1문제 풀기</a>
-                <input type="checkbox">
-            </li>
-            <li>
-                <p>2023.11.20</p>
-                <a href="#">코드 리뷰</a>
-                <input type="checkbox">
-            </li>
-            <li>
-                <p>2023.12.01</p>
-                <a href="#">푼 문제 깃에 올리기</a>
+            <li v-for="todo in todos">
+                <a href="#">{{ todo.todoContent }}</a>
+                <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
                 <input type="checkbox">
             </li>
         </ol>
-        <!-- 
         <button @click="addForm">추가</button>
+        <!-- 
         <div v-if="add">
             <h4>todo 추가 모달</h4>
             <form>
@@ -41,13 +31,71 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref,onMounted } from 'vue';
+import { useStudyStore } from '../stores/study'
+import { useLoginUserStore } from '../stores/loginUser'
+import axios from "axios";
+import dayjs from 'dayjs';
 
 const add = ref(false);
 const addForm = ref(function(){
     add.value = !add.value;
 })
 
+const store = useStudyStore();
+const uStore = useLoginUserStore();
+
+const todos = ref([]);
+
+const msg = ref(null);
+
+// const select = function(study) {
+//     store.studyDetail = study;
+// }
+
+const getTodo = function(todoKey) {
+    console.log("도착 = " + todoKey);
+    const API_URL2 = `http://localhost:8080/api/todo/` + todoKey;
+    axios
+      .get(API_URL2)
+      .then((res) => {
+        if (res.status === 200) {
+            todos.value.push(res.data);
+            
+        }
+        if (res.status === 204) {
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("todo를 불러오는 중 오류가 발생하였습니다.");
+      });
+
+}
+
+onMounted(() => {
+    const API_URL = `http://localhost:8080/api/study/todo/` + store.studyDetail.studyKey;
+    axios
+      .get(API_URL)
+      .then((res) => {
+        if (res.status === 200) {
+            for (let i = 0; i < res.data.length; i++) {
+                console.log("todoKey = " + res.data[i]);
+                getTodo(res.data[i]);
+            }
+            
+        }
+        if (res.status === 204) {
+          const msg = "지금은 할 일이 없습니다.";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("todo를 불러오는 중 오류가 발생하였습니다.");
+      });
+      console.log(todos);
+
+});
 
 </script>
 
