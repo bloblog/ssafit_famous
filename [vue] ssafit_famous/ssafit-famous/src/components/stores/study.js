@@ -1,16 +1,9 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 
 export const useStudyStore = defineStore("study", () => {
-
-  const cats = ref([
-    '코딩',
-    '운동',
-    '취미',
-    '독서',
-    '기타',
-  ]);
+  const cats = ref(["코딩", "운동", "취미", "독서", "기타"]);
 
   const studyName = ref(null);
   const category = ref("선택하세요");

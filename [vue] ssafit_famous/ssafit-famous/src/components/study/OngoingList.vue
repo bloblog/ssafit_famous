@@ -16,7 +16,7 @@
                 <tbody v-for="(study, index) in studys">
                     <tr>
                         <td scope="row">{{ index+1 }}</td>
-                        <td><RouterLink to="/studyDetail">{{ study.studyName }}</RouterLink></td>
+                        <td><RouterLink to="/studyDetail" @click="select(study)">{{ study.studyName }}</RouterLink></td>
                         <td>{{ study.category }}</td>
                         <td>{{ dayjs(study.studyStart).format('YYYY/MM/DD') }}</td>
                         <td>{{ dayjs(study.studyEnd).format('YYYY/MM/DD') }}</td>
@@ -44,13 +44,17 @@ const studys = ref([]);
 
 const msg = ref(null);
 
+const select = function(study) {
+    store.studyDetail = study;
+}
+
 onMounted(() => {
     const API_URL = `http://localhost:8080/api/user/study/` + uStore.userKey;
     axios
       .get(API_URL)
       .then((res) => {
         if (res.status === 200) {
-            studys.value = res.data.filter((study) => study.studyEnd < Date.now());
+            studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('yyyyMMdd') >= dayjs(Date.now()).format('yyyyMMdd'));
             
         }
         if (res.status === 204) {

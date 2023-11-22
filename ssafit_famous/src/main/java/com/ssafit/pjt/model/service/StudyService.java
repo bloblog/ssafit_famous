@@ -1,5 +1,7 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.List;
+
 import com.ssafit.pjt.model.dto.Study;
 
 public interface StudyService {
@@ -15,5 +17,7 @@ public interface StudyService {
 	Study getStudy(int studyKey);
 
     Study getStudyByName(String studyName);
+    
+    List<Integer> getTodoList(int studyKey);
 
 }

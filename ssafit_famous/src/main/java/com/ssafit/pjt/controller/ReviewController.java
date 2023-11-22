@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafit.pjt.model.dto.Review;
@@ -35,9 +34,9 @@ public class ReviewController {
 	
 	// 회고 등록
 	@PostMapping("/review")
-	public ResponseEntity<Integer> write(@RequestBody Review review) {
+	public ResponseEntity<Integer> write(@RequestBody Review review, HttpSession session) {
 		System.out.println(review);
-		String loginUserId = review.getUserKey();
+		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 		int result = reviewService.writeReview(review, loginUserId);
 		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
 	}

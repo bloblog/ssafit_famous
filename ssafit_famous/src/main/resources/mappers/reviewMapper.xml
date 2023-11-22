@@ -5,8 +5,8 @@
 <mapper namespace="com.ssafit.pjt.model.dao.ReviewDao">
 
 	<insert id="insertReview" parameterType="Review">
-		INSERT INTO review (studyKey, reviewTitle, reviewContent)
-		VALUES (#{studyKey}, #{reviewTitle}, #{reviewContent});
+		INSERT INTO review (studyKey, reviewTitle, reviewContent, reviewDate, reviewImgPath)
+		VALUES (#{studyKey}, #{reviewTitle}, #{reviewContent}, #{reviewDate}, #{reviewImgPath});
 	</insert>
 	
 	<update id="updateRelation" parameterType="hashMap">
