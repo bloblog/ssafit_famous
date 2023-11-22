@@ -24,10 +24,10 @@
                     <td>{{ dayjs(study.studyStart).format('YYYY/MM/DD') }}</td>
                     <td>{{ dayjs(study.studyEnd).format('YYYY/MM/DD') }}</td>
                     <td v-if="study.studyKey in doneList">
-                        <RouterLink to="/reviewDetail">내가 작성한 회고 보기</RouterLink>
+                        <RouterLink to="/reviewDetail" @click="detail(study)">내가 작성한 회고 보기</RouterLink>
                     </td>
                     <td v-else>
-                        <RouterLink to="/createReview">회고 작성하러 가기</RouterLink>
+                        <RouterLink to="/createReview" @click="select(study)">회고 작성하러 가기</RouterLink>
                        
                     </td>
                 </tr>
