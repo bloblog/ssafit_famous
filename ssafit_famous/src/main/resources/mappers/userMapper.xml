@@ -39,6 +39,17 @@
 		FROM user
 		WHERE id LIKE concat("%", #{id}, "%")
 	</select>
+	
+	<select id="selectStudyList" parameterType="int" resultType="Study">
+		SELECT *
+		FROM study s
+		WHERE s.studyKey IN (SELECT studyKey
+							FROM user u
+								INNER JOIN study_user_review sur
+								ON u.userKey = sur.userKey
+							WHERE u.userKey = #{userKey})
+		
+	</select>
 
 
 </mapper>
