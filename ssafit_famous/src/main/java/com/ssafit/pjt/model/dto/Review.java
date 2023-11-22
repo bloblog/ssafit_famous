@@ -5,6 +5,17 @@ import java.sql.Date;
 public class Review {
 	private int reviewKey;
 	private int studyKey;
+	private int userKey;
+	public int getUserKey() {
+		return userKey;
+	}
+
+
+	public void setUserKey(int userKey) {
+		this.userKey = userKey;
+	}
+
+
 	private String reviewTitle;
     private String reviewContent;
 	private int viewCnt;
@@ -15,10 +26,10 @@ public class Review {
 	public Review() {}
 
 
-	public Review(int reviewKey, int studyKey, String reviewTitle, String reviewContent, int viewCnt, Date reviewDate,
-			String reviewImgPath) {
-		this.reviewKey = reviewKey;
+	public Review(int studyKey, int userKey, String reviewTitle, String reviewContent) {
+		super();
 		this.studyKey = studyKey;
+		this.userKey = userKey;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.viewCnt = viewCnt;
