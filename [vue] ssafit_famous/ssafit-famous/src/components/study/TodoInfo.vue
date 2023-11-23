@@ -196,7 +196,7 @@ const addTodo = function() {
     });
 }
 
-const modifyTodo = function(todo){
+const modifyTodo = function(item){
   axios
     .put('http://localhost:8080/api/todo/' + todo.todoKey, {
       "studyKey" : store.studyDetail.studyKey,
@@ -208,8 +208,12 @@ const modifyTodo = function(todo){
     })
     .then(function(response){
       console.log(todo);
-      // 콘텐츠 + 날짜 다 수정하면 이전 todo가 사라지지 않는다...
-      todos.value.splice(todo, 1);
+      for(let i = 0; i < todos.value.length; i++) {
+          if(todos.value[i] === item)  {
+              todos.value.splice(i, 1);
+              break;
+          }
+      }
       todos.value.push(response.data);
     })
     .catch(function(error){

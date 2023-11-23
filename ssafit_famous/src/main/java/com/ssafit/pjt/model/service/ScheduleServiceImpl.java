@@ -33,6 +33,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		int result = scheduleDao.insertSchedule(schedule);
 		
 		Schedule tmp = scheduleDao.selectOneBySchedule(schedule);
+
 		// study-schedule 생성
 		Map<String, Integer> map = new HashMap<>();
 		map.put("studyKey", tmp.getStudyKey());
@@ -72,4 +73,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return scheduleDao.selectOne(scheduleKey);
 	}
 
+	public int getScheduleKey(Schedule schedule) {
+		return scheduleDao.selectOneBySchedule(schedule).getScheduleKey();
+	}
 }
