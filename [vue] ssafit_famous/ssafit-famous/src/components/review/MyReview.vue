@@ -1,30 +1,41 @@
-<!-- 내가 작성한 리뷰 -->
 <template>
-    <div>
-        <h3>내가 작성한 리뷰</h3>
+    <div class="container">
+        <div>
+            <h3>내가 작성한 리뷰</h3>
 
-    </div>
-    <div v-if="Empty">
-        <p>작성한 리뷰가 없습니다.</p>
-    </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4" v-else>
-        <RouterLink to="reviewDetail" class="col">
-            <div class="card" v-for="review in reviewList">
-                <img :src="review.reviewImgPath" class="card-img-top">
-                <h5 class="card-body">{{ review.reviewTitle }}</h5>
+        </div>
+        <div v-if="Empty">
+            <p>작성한 리뷰가 없습니다.</p>
+        </div>
+        <div class="col-sm-5" v-else>
+            <div class="card text-center" v-for="(review, index) in reviewList">
+                <RouterLink to="reviewDetail" @click='select(index)' class="col">
+                    <img src="@/assets/imges/review-thumbnail.png" class="card-img-top">
+                    <p class="card-subtitle">{{ review.reviewTitle }}</p>
+                    <p>조회수 {{ review.viewCnt }}</p>
+                </RouterLink>
             </div>
-        </RouterLink>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useLoginUserStore } from '../stores/loginUser';
+import { useReviewStore } from '../stores/review';
+
 import axios from 'axios';
+
 const store = useLoginUserStore();
+const rStore = useReviewStore();
+
 
 const Empty = ref(false);
 const reviewList = ref();
+
+const select = (index) => {
+    rStore.reviewKey = reviewList.value[index].reviewKey;
+}
 
 axios
     .get('http://localhost:8080/api/review', {

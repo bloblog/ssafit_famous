@@ -19,6 +19,8 @@ export const useLoginUserStore = defineStore(
     const ongoingStudy = ref([]);
     const completeStudy = ref([]);
 
+    const myReview = ref({});
+
     watch(pwcheck, () => {
       if (pw.value === pwcheck.value) {
         signinConfirm.value = true;
@@ -119,6 +121,7 @@ export const useLoginUserStore = defineStore(
       signin,
       signup,
       idCheck,
+      myReview,
     };
   },
   { persist: true }

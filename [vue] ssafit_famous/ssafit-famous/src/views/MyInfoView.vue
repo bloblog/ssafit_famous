@@ -1,7 +1,6 @@
 <!-- 회원정보 페이지 -->
 <template>
     <div>
-        <h2>회원정보 페이지 입니다.</h2>
         <MenuNav/>
         <router-view/>
     </div>
