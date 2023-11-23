@@ -2,8 +2,7 @@
 <template>
     <div>
         <h3>지난 스터디</h3>
-        
-        <div v-if="msg">{{ msg }}</div>
+        <div v-if="!isExist">지난 스터디가 없습니다.</div>
         <div v-else>
         <table class="table">
             <thead>
@@ -52,7 +51,7 @@ const uStore = useLoginUserStore();
 
 const studys = ref([]); // 완료된 스터디
 
-const msg = ref(null);
+const isExist = ref(false);
 
 const doneList = ref([]); // 회고 작성 완료
 
@@ -93,6 +92,7 @@ onMounted(() => {
                     if (res.data || res.data.size() == 0) {
                         for (let i = 0; i < res.data.size(); i++) {
                             doneList.value.push(res.data[i].studyKey);
+                            isExist.value = true;
                         }
                     } else {
                         reviewList = [];

@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h4>스터디명 클릭 시 상세페이지로 이동합니다</h4>
-        <div v-if="msg">{{ msg }}</div>
+        <h3>진행중인 스터디</h3>
+        <div v-if="!isExist">진행중인 스터디가 없습니다.</div>
         <div v-else>
+            <h4>스터디명 클릭 시 상세페이지로 이동합니다</h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -43,6 +44,7 @@ const uStore = useLoginUserStore();
 const studys = ref([]);
 
 const msg = ref(null);
+const isExist = ref(false);
 
 const select = function(study) {
     store.studyDetail = study;
@@ -53,12 +55,13 @@ onMounted(() => {
     axios
       .get(API_URL)
       .then((res) => {
+        console.log(res.status);
         if (res.status === 200) {
             studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') >= dayjs(new Date()).format('YYYYMMDD'));
-        
+            isExist.value = true;
         }
         if (res.status === 204) {
-          const msg = "진행중인 스터디가 없습니다.";
+            
         }
       })
       .catch((err) => {
