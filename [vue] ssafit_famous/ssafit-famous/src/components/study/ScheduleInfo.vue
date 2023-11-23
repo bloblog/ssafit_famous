@@ -1,11 +1,10 @@
 <!-- 캘린더 + 클릭시 수정 가능 (스터디장) -->
-<!-- 삭제 가능 하지만 참고용~ -->
 <template>
     <div>
         <h3>일정</h3>
         <ol>
-            <li v-for="schedule in schedules">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyScheduleModal">{{ schedule.scheduleContent }}</button>
+            <li v-for="schedule in schedules" :key="schedule.scheduleKey">
+                <button @click=select(schedule) class="btn" data-bs-toggle="modal" data-bs-target="#modifyScheduleModal">{{ schedule.scheduleContent }}</button>
                 <!-- 일정 수정 모달 -->
                 <div class="modal fade" id="modifyScheduleModal" tabindex="-1" aria-labelledby="modifyScheduleModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -17,16 +16,16 @@
                             <div class="modal-body">
                                 <form>
                                     <label for="scheduleDate">날짜</label>
-                                    <VueDatePicker v-model="schedulelDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
+                                    <VueDatePicker v-model="scheduleDate"></VueDatePicker>
                                     <label for="scheduleContent">내용</label>
-                                    <input type="text" v-model="scheduleContent"><br/>
+                                    <input type="text" v-model="modifyContent" :placeholder="schedule.todoContent"><br/>
                                     <label for="schedulePlace">장소</label>
                                     <input type="text" v-model="schedulePlace"><br/>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifySchedule">수정</button>
+                                <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifySchedule(schedule)">수정</button>
                             </div>
                         </div>
                     </div>
@@ -48,7 +47,7 @@
                             <label for="scheduleDate">날짜</label>
                             <VueDatePicker v-model="schedulelDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
                             <label for="scheduleContent">내용</label>
-                            <input type="text" v-model="scheduleContent"><br/>
+                            <input type="text" v-model="addContent"><br/>
                             <label for="schedulePlace">장소</label>
                             <input type="text" v-model="schedulePlace"><br/>
                         </form>
@@ -73,9 +72,24 @@ import dayjs from 'dayjs';
 
 const store = useStudyStore();
 
-const schedulelDate = ref();
-const scheduleContent = ref();
-const schedulePlace = ref();
+const scheduleDate = ref('');
+const addContent = ref('');
+const modifyContent = ref('');
+const schedulePlace = ref('');
+
+
+const selected = ref({});
+
+const select = (schedule) => {
+  selected.value = schedule;
+  scheduleDate.value = schedule.scheduleDate;
+  schedulePlace.value = schedule.schedulePlace;
+
+  // 수정 폼 관련 초기화
+  modifyContent.value = schedule.scheduleContent
+  scheduleDate.value = schedule.scheduleDate
+  schedulePlace.value = schedule.schedulePlace
+}
 
 const schedules = ref([]);
 
@@ -84,32 +98,41 @@ const addSchedule = ref(function(){
         .post('http://localhost:8080/api/schedule', {
             "studyKey": store.studyDetail.studyKey,
             "scheduleDate": dayjs(schedulelDate.value).format('YYYY-MM-DD'),
-            "scheduleContent": scheduleContent.value,
+            "scheduleContent": addContent.value,
             "schedulePlace": schedulePlace.value,
         })
         .then(function(response){
-            console.log(response);
+            schedules.value.push(response.data);
+            console.log(response.data);
+            
         })
         .catch(function(error){
             console.log(error);
         })
 });
 
-const modifySchedule = ref(function(){
-    // axios
-    //     .post('http://localhost:8080/api/schedule', {
-    //         "studyKey": store.studyDetail.studyKey,
-    //         "scheduleDate": dayjs(schedulelDate.value).format('YYYY-MM-DD'),
-    //         "scheduleContent": scheduleContent.value,
-    //         "schedulePlace": schedulePlace.value,
-    //     })
-    //     .then(function(response){
-    //         console.log(response);
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    //     })
-});
+const modifySchedule = function(item){
+    axios
+        .post('http://localhost:8080/api/schedule', {
+            "studyKey": store.studyDetail.studyKey,
+            "scheduleDate": dayjs(scheduleDate.value).format('YYYY-MM-DD'),
+            "scheduleContent": modifyContent.value,
+            "schedulePlace": schedulePlace.value,
+        })
+        .then(function(response){
+            console.log(response.data)
+            for(let i = 0; i < schedules.value.length; i++) {
+                if(schedules.value[i] === item)  {
+                    schedules.value.splice(i, 1);
+                    break;
+                }
+            }
+            schedules.value.push(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+};
 
 const getSchedule = function(scheduleKey){
     axios
