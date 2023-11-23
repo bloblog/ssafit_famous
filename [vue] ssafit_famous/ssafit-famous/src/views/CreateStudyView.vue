@@ -121,6 +121,7 @@ const createDone = function() {
 .create-form {
     display: flex;
     justify-content: space-around;
+    padding: 2rem 0;
 }
 
 .board {

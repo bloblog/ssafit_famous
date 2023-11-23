@@ -31,6 +31,13 @@ const store = useLoginUserStore();
 </script>
 
 <style scoped>
+
+a{
+    text-decoration: none;
+    color: #54200c;
+    padding-top: 2%;
+}
+
 header {
     margin: 0;
     background: url('../../assets/imges/header/header_background.png') no-repeat center;

@@ -46,14 +46,6 @@ a{
     padding-top: 10px;
 }
 
-#welcome{
-    font-size: 100%;
-    widows: 100vw;
-    height: 100vh;
-    background: url("../assets/imges/welcomeView/welcomePage_og.png") no-repeat center;
-    background-size: cover;
-}
-
 #top{
     width: 100vw;
     height: 20vh;
@@ -107,6 +99,13 @@ a{
 }
 
 @media (max-width: 480px) {
+    #welcome{
+        font-size: 100%;
+        widows: 100vw;
+        height: 100vh;
+        background: url("../assets/imges/welcomeView/welcomePage_background_s.png") no-repeat center;
+        background-size: cover;
+    }
     
     #ask::before{
         display: none;
@@ -122,7 +121,14 @@ a{
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    
+    #welcome{
+        font-size: 100%;
+        widows: 100vw;
+        height: 100vh;
+        background: url("../assets/imges/welcomeView/welcomePage_background_s.png") no-repeat center;
+        background-size: cover;
+    }
+
     #ask::before{
         display: none;
     }
@@ -137,7 +143,14 @@ a{
 }
 
 @media (min-width: 769px) and (max-width: 1280px) {
-    
+    #welcome{
+        font-size: 100%;
+        widows: 100vw;
+        height: 100vh;
+        background: url("../assets/imges/welcomeView/welcomePage_og.png") no-repeat center;
+        background-size: cover;
+    }
+
     #ask::before{
         position:absolute;
         top: 10%;
@@ -154,7 +167,14 @@ a{
 }
 
 @media (min-width: 1281px) {
-    
+    #welcome{
+        font-size: 100%;
+        widows: 100vw;
+        height: 100vh;
+        background: url("../assets/imges/welcomeView/welcomePage_og.png") no-repeat center;
+        background-size: cover;
+    }
+
     #ask::before{
         position:absolute;
         top: 10%;

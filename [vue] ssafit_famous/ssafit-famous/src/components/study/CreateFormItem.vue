@@ -66,6 +66,7 @@ const formatDate = (date) => {
     background-color: white;
     width: fit-content;
     border-radius: 10px;
+    margin-right: 1rem;
 }
 
 .basicInfo {
@@ -74,5 +75,15 @@ const formatDate = (date) => {
 
 #studyName {
     display: flex;
+}
+
+label {
+    margin: 10px;
+}
+
+#cat-alarm{
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
 }
 </style>

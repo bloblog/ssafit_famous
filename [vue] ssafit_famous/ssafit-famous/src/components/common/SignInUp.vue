@@ -22,8 +22,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
-					<button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.signin">로그인</button>
+					<button type="button" class="b btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
+					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signin">로그인</button>
 				</div>
 				</div>
 			</div>
@@ -42,8 +42,8 @@
 						<div class="mb-3">
 							<label for="newid" class="form-label">아이디</label>
 							<input type="text" class="form-control" id="newid" v-model.lazy="store.id">
-							<button type="button" @click="store.idCheck">중복확인</button>
-							<div v-if="store.validIdCheck">
+							<button type="button" class="btn" @click="store.idCheck">중복확인</button>
+							<div v-if="store.id != null">
 								<p v-if="!store.validId">이미 존재하는 아이디입니다.</p>
 								<p v-else>사용할 수 있는 아이디입니다.</p>
 							</div>
@@ -63,8 +63,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
-					<button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.signinConfirm">회원가입</button>
+					<button type="button" class="b btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
+					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.signinConfirm">회원가입</button>
 				</div>
 				</div>
 			</div>

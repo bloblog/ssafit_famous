@@ -90,5 +90,7 @@ const search = function() {
 </script>
 
 <style scoped>
-
+table{
+    margin-top: 10px;
+}
 </style>
