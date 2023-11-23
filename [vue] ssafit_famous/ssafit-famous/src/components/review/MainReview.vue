@@ -1,8 +1,6 @@
 <template>
-    <div class="mainReview">
-        <div>
-            <SearchBar/>
-        </div>
+    <div class="main-review">
+        <SearchBar/>
         <div class="board text-center">
             <ReviewNav/>
             <TopReview/>
@@ -30,13 +28,16 @@ const store = useReviewStore();
 </script>
 
 <style scoped>
-.board {
+.main-review {
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 10vw;
+    padding: 5vw;
     margin: 5vw;
-    border-radius: 10vw;
+    /* border-radius: 10vw; */
+}
+
+.board {
     display: flex;
-    justify-content: space-between;
+    padding: 5vw;
 }
 
 </style>

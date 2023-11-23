@@ -1,9 +1,9 @@
 <template>
-
     <div class="cat-nav">
-        <div class="tag" style="text-align: center;">카테고리</div>
-        
-        <div v-for="cat in cats" style="margin: 10px; text-align: center;">
+        <div class="tag" style="text-align: center;">
+            <h4>category</h4>
+        </div>
+        <div v-for="cat in cats" style="margin: 3px; text-align: center;">
             <router-link to="/reviewDetailView" @click="select(cat)" class="highlight">
             {{ cat }}</router-link>
         </div>
@@ -24,7 +24,7 @@ const selectedCat = ref(null);
 const store = useReviewStore();
 
 const select = function(category) {
-    if (category == '전체 글 보기') {
+    if (category == '전체보기') {
         store.key = store.word = store.ob = null;
         store.searchReview();
     } else {
@@ -40,20 +40,30 @@ const cats = ref([
     '#운동',
     '#취미',
     '#독서',
-    '전체 글 보기',
+    '전체보기',
 ])
 
 </script>
 
 <style scoped>
-.cat-nav {
-    /* padding:30px; */
+/* .cat-nav {
+    padding:30px;
     background-color: #66d267;
     border-radius: 100px;
     padding: 40px;
     color: #54200c;
     font: bold;
     width: 30%;
+} */
+
+.cat-nav{
+    padding: 3rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: url("@/assets/imges/categoryNav.png") no-repeat center;
+    background-size: contain;
 }
 
 .highlight{
