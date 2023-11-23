@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="dashBoardView">
         <h2>대시보드</h2>
         
         <div class="items">
@@ -23,6 +23,12 @@ import ExpRank from '../components/user/ExpRank.vue';
 </script>
 
 <style scoped>
+#dashBoardView{
+    width: 80vw;
+    margin: auto;
+    padding: 5vh;
+}
+
 .items {
     display: flex;
 }

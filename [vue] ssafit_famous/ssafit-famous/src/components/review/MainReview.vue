@@ -32,7 +32,6 @@ const store = useReviewStore();
     background-color: rgba(255, 255, 255, 0.6);
     padding: 5vw;
     margin: 5vw;
-    /* border-radius: 10vw; */
 }
 
 .board {

@@ -11,7 +11,7 @@
                             <li><router-link to="/infoView" class="dropdown-item">정보수정</router-link></li>
                         </ul>
                     </div>
-                    <router-link to="/createStudy">스터디 만들기</router-link> <br/>
+                    <router-link to="/createStudy" class="makeStudy">스터디 만들기</router-link> <br/>
                     <button type="button" class="btn" @click="store.signout">로그아웃</button>
                 </div>
                 <div class="c" v-else>
@@ -32,10 +32,14 @@ const store = useLoginUserStore();
 
 <style scoped>
 
-a{
+.makeStudy{
     text-decoration: none;
     color: #54200c;
     padding-top: 2%;
+}
+
+.makeStudy:hover{
+    animation: wiggle 2000ms infinite;
 }
 
 header {

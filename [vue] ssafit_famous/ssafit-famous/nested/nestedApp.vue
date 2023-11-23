@@ -33,6 +33,11 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
     font-style: normal;
 }
 
+*{
+    color: #54200c;
+    font-family: 'NanumSquareNeo-Variable';
+}
+
 #background{
   font-family: 'NanumSquareNeo-Variable';
   background-image: url('@/assets/imges/background/bg_1.jpeg');
@@ -44,10 +49,6 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
     max-width: 1000px;
     margin: auto;
     min-height: 100vh;
-}
-
-#background{
-    /* background-color: #6990e4; */
 }
 
 header{

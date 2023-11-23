@@ -1,6 +1,6 @@
 <!-- 회원정보 페이지 -->
 <template>
-    <div>
+    <div id="myInfoView">
         <MenuNav/>
         <router-view/>
     </div>
@@ -11,5 +11,8 @@ import MenuNav from '../components/user/MenuNav.vue';
 </script>
 
 <style scoped>
-
+#myInfoView{
+    width: 60vw;
+    margin: auto;
+}
 </style>
