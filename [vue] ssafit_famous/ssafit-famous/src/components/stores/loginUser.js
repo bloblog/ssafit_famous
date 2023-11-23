@@ -16,6 +16,7 @@ export const useLoginUserStore = defineStore(
     const id = ref("");
     const pw = ref("");
     const pwcheck = ref("");
+    const validPw = ref(false);
     const validId = ref(false);
     const validIdCheck = ref(false);
     const signinConfirm = ref(false);
@@ -28,8 +29,10 @@ export const useLoginUserStore = defineStore(
     watch(pwcheck, () => {
       if (pw.value === pwcheck.value) {
         signinConfirm.value = true;
+        validPw.value = true;
       } else {
         signinConfirm.value = false;
+        validPw.value = false;
       }
     });
 
@@ -89,6 +92,7 @@ export const useLoginUserStore = defineStore(
     };
 
     const idCheck = ref(function () {
+
       axios
         .get("http://localhost:8080/api/search/" + id.value)
         .then(function (response) {

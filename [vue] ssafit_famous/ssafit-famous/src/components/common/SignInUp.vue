@@ -41,20 +41,20 @@
 					<form>
 						<div class="mb-3">
 							<label for="newid" class="form-label">아이디</label>
-							<input type="text" class="form-control" id="newid" v-model.lazy="store.id">
+							<input type="text" class="form-control" id="newid" v-model="store.id">
 							<button type="button" class="btn" @click="store.idCheck">중복확인</button>
-							<div v-if="store.id != null">
+							<div v-if="store.validIdCheck">
 								<p v-if="!store.validId">이미 존재하는 아이디입니다.</p>
 								<p v-else>사용할 수 있는 아이디입니다.</p>
 							</div>
 						</div>
 						<div class="mb-3">
 							<label for="newpw" class="form-label">비밀번호</label>
-							<input type="password" class="form-control" id="newpw" v-model="store.pw" v-bind:disabled="store.validIdCheck && !store.validId">
+							<input type="password" class="form-control" id="newpw" v-model="store.pw" v-bind:disabled="!store.validIdCheck || !store.validId">
 						</div>
 						<div class="mb-3">
 							<label for="newpwcheck" class="form-label">비밀번호 확인</label>
-							<input type="password" class="form-control" id="newpwcheck" v-model="store.pwcheck" v-bind:disabled="store.validIdCheck && !store.validId">
+							<input type="password" class="form-control" id="newpwcheck" v-model="store.pwcheck" v-bind:disabled="!store.validIdCheck || !store.validId">
 						</div>
 						<div v-if="store.pwcheck!=null">
 							<p v-if="store.signinConfirm">비밀번호가 일치합니다.</p>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="b btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
-					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.signinConfirm">회원가입</button>
+					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.validPw">회원가입</button>
 				</div>
 				</div>
 			</div>
