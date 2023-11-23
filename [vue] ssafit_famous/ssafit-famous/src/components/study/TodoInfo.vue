@@ -100,6 +100,11 @@ const select = (todo) => {
   selected.value = todo;
   todoStart.value = todo.todoStart;
   todoEnd.value = todo.todoEnd;
+
+  // 수정 폼 관련 초기화
+  modifyTodoContent.value = todo.todoContent
+  todoStart.value = todo.todoStart
+  todoEnd.value = todo.todoEnd
 }
 
 const todoOne = ref({});
@@ -198,8 +203,10 @@ const modifyTodo = function(todo){
       "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
     })
     .then(function(response){
-      console.log("변경완료")
-      console.log(response);
+      console.log(todo);
+      // 콘텐츠 + 날짜 다 수정하면 이전 todo가 사라지지 않는다...
+      todos.value.splice(todo, 1);
+      todos.value.push(response.data);
     })
     .catch(function(error){
       console.log(error);
