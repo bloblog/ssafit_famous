@@ -64,7 +64,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="b btn btn-secondary" data-bs-dismiss="modal" @click="store.signout">취소</button>
-					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.validPw">회원가입</button>
+					<button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="store.signup" v-bind:disabled="!store.validId || !store.signinConfirm">회원가입</button>
 				</div>
 				</div>
 			</div>
