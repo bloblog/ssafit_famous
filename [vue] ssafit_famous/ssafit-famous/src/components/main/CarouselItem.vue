@@ -42,20 +42,21 @@
 <style scoped>
 #carouselExampleCaptions {
     text-align: center;
-    margin: 5vw;
+    margin: 3vw;
+
     
 }
 
 .carousel {
-    height: 50vh;
+    height: 30vh;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgb(91, 88, 88);
-    /* border-radius: 5vw; */
+    border-radius: 5vw;
 }
 
 img{
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
     object-fit: cover;
     object-position: top;
 }

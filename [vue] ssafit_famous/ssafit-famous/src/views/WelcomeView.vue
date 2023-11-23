@@ -4,8 +4,8 @@
         <div id="bottom">
             <div id="ask">
                 <div v-if="store.status">
-                    <p>{{ store.userId }}님 안녕하세요!</p>
-                    <p>로그아웃하시겠어요?</p>
+                    <p>{{ store.userId }}님 환영합니다!</p>
+                    <p>"스터디 관리 패키지"를 둘러보시겠어요?</p>
                 </div>
                 <div v-else>
                     <p>전에 방문하신 적이 있나요?</p>
@@ -14,13 +14,13 @@
             </div>
             <div id = "logIn">
                 <div class="c" v-if="store.status">
-                    <button type="button" class="btn" @click="store.signout">로그아웃할래</button>
-                    <a href="/nested/index.html">그냥 둘러볼래~</a>
+                    <button type="button" class="btn" @click="store.signout">이제 나갈래</button>
+                    <a href="/nested/index.html">좋아 둘러볼래~</a>
                 </div>
                 <div class="c" v-else>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">로그인할래</button>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">회원가입하려고~</button>
-                    <a href="/nested/index.html">그냥 둘러볼게!</a>
+                    <a href="/nested/index.html">그냥 구경할게!</a>
                 </div>
             </div>
         </div>

@@ -68,7 +68,7 @@ const search = function() {
     background-color: white;
     width: fit-content;
     border-radius: 10px;
-    padding: 8px;
+    padding: 10px;
     border: none;
     margin: 2px;
 }
