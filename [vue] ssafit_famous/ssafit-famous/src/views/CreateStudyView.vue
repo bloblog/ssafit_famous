@@ -44,10 +44,10 @@ const route = useRoute();
 
 const exit = function() {
     router.go(-1);
-
 }
 
 const create = () => {
+  console.log(tStore.members);
   const API_URL = `http://localhost:8080/api/study`;
   axios.post(API_URL, {
     alarm: store.alarm,

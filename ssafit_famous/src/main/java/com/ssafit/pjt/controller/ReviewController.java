@@ -34,12 +34,16 @@ public class ReviewController {
 	
 	// 회고 등록
 	@PostMapping("/review")
-	public ResponseEntity<Integer> write(@RequestBody Review review) {
-		
+	public ResponseEntity<?> write(@RequestBody Review review) {
 		String loginUserId = String.valueOf(review.getUserKey());
-		int result = reviewService.writeReview(review, loginUserId);
-		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+		Review result = reviewService.writeReview(review, loginUserId);
+		if (result == null) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Review>(result, HttpStatus.CREATED);
+		}
 	}
+	
 	
 	
 	// 회고 수정
