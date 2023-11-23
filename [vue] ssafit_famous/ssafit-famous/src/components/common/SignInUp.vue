@@ -73,8 +73,16 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useLoginUserStore } from '../stores/loginUser';
 const store = useLoginUserStore();
+
+onMounted(() => {
+	store.id = null;
+    store.pw = null;
+	store.validIdCheck = false;
+	store.pwcheck = null;
+});
 </script>
 
 <style scoped>

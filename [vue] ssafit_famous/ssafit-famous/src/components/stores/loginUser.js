@@ -2,16 +2,20 @@ import { ref, watch } from "vue";
 import axios from "axios";
 import { defineStore } from "pinia";
 
+import { useRouter } from "vue-router";
+
 export const useLoginUserStore = defineStore(
   "loginUser",
   () => {
+    const router = useRouter();
+
     const status = ref(true);
     const userKey = ref("");
     const userId = ref("");
 
-    const id = ref();
-    const pw = ref();
-    const pwcheck = ref();
+    const id = ref("");
+    const pw = ref("");
+    const pwcheck = ref("");
     const validId = ref(false);
     const validIdCheck = ref(false);
     const signinConfirm = ref(false);
@@ -29,15 +33,16 @@ export const useLoginUserStore = defineStore(
       }
     });
 
-    const signout = ref(function () {
+    const signout = function () {
       id.value = null;
       pw.value = null;
       userId.value = undefined;
       userKey.value = undefined;
       status.value = false;
-    });
+      window.location.href = "http://localhost:5173/mainHome";
+    };
 
-    const signin = ref(function () {
+    const signin = function () {
       axios
         .post("http://localhost:8080/api/login", {
           id: id.value,
@@ -62,27 +67,26 @@ export const useLoginUserStore = defineStore(
         .catch(function (error) {
           console.log(error);
         });
-    });
+    };
 
-    const signup = ref(function () {
+    const signup = () => {
       axios
         .post("http://localhost:8080/api/signup", {
           id: id.value,
           password: pw.value,
         })
-        .then(function (response) {
-          console.log(response.status);
+        .then((response) => {
           // 200 : 회원가입 성공!
+          console.log(id.value);
+          userId.value = id.value;
+          userKey.value = response.data;
+          status.value = true;
           alert("회원가입에 성공했습니다.");
         })
         .catch(function (error) {
           console.log(error);
         });
-      id.value = null;
-      pw.value = null;
-      validIdCheck.value = fasle;
-      pwcheck.value = null;
-    });
+    };
 
     const idCheck = ref(function () {
       axios
