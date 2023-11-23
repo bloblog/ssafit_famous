@@ -5,7 +5,32 @@
         <h3>일정</h3>
         <ol>
             <li v-for="schedule in schedules">
-                <a href="#">{{ schedule.scheduleContent }}</a>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyScheduleModal">{{ schedule.scheduleContent }}</button>
+                <!-- 일정 수정 모달 -->
+                <div class="modal fade" id="modifyScheduleModal" tabindex="-1" aria-labelledby="modifyScheduleModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modifyScheduleModal">일정 수정하기</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <label for="scheduleDate">날짜</label>
+                                    <VueDatePicker v-model="schedulelDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
+                                    <label for="scheduleContent">내용</label>
+                                    <input type="text" v-model="scheduleContent"><br/>
+                                    <label for="schedulePlace">장소</label>
+                                    <input type="text" v-model="schedulePlace"><br/>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifySchedule">수정</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <span>날짜 : {{ dayjs(schedule.scheduleDate).format('YYYY-MM-DD') }}</span>
             </li>
         </ol>
@@ -15,13 +40,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addScheduleModal">Todo 추가하기</h1>
+                        <h1 class="modal-title fs-5" id="addScheduleModal">일정 추가하기</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form>
                             <label for="scheduleDate">날짜</label>
-                            <VueDatePicker v-model="schedulelDate" :format="date => formatDate(date)"></VueDatePicker>
+                            <VueDatePicker v-model="schedulelDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
                             <label for="scheduleContent">내용</label>
                             <input type="text" v-model="scheduleContent"><br/>
                             <label for="schedulePlace">장소</label>
@@ -70,6 +95,22 @@ const addSchedule = ref(function(){
         })
 });
 
+const modifySchedule = ref(function(){
+    // axios
+    //     .post('http://localhost:8080/api/schedule', {
+    //         "studyKey": store.studyDetail.studyKey,
+    //         "scheduleDate": dayjs(schedulelDate.value).format('YYYY-MM-DD'),
+    //         "scheduleContent": scheduleContent.value,
+    //         "schedulePlace": schedulePlace.value,
+    //     })
+    //     .then(function(response){
+    //         console.log(response);
+    //     })
+    //     .catch(function(error){
+    //         console.log(error);
+    //     })
+});
+
 const getSchedule = function(scheduleKey){
     axios
         .get('http://localhost:8080/api/schedule/' + scheduleKey)
@@ -108,12 +149,6 @@ onMounted(() => {
 
 });
 
-const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
 </script>
 
 <style scoped>

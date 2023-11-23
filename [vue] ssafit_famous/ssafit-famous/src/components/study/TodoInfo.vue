@@ -5,10 +5,34 @@
         
         <ol>
             <li v-for="todo in todos">
-                <a href="#">{{ todo.todoContent }}</a>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
+                <!-- Todo 수정 모달 -->
+                <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modifyTodoModal">Todo 수정하기</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <label for="todoContent">내용</label>
+                            <input type="text" id="todoContent" v-model="todoContent"><br/>
+                            <label for="todoStart">시작일</label>
+                            <VueDatePicker v-model="todoStart" :format="date => formatDate(date)"></VueDatePicker>
+                            <label for="todoEnd">마감일</label>
+                            <VueDatePicker v-model="todoEnd" :format="date => formatDate(date)"></VueDatePicker>
+                        </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifyTodo">수정</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
-                <label>완료여부</label>
-                <input type="checkbox">
+                <input type="checkbox" v-model="todo.success">
             </li>
         </ol>
         
@@ -46,7 +70,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
-import { ref,onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useStudyStore } from '../stores/study';
 import { useLoginUserStore } from '../stores/loginUser';
 import axios from "axios";
@@ -126,6 +150,23 @@ const addTodo = ref(function(){
     .catch(function(error){
       console.log(error);
     })
+})
+
+const modifyTodo = ref(function(){
+  axios
+    // .post('http://localhost:8080/api/todo',{
+    //   "studyKey" : store.studyDetail.studyKey,
+    //   "todoStart" : todoStart.value,
+    //   "todoEnd" : todoEnd.value,
+    //   "todoContent" : todoContent.value,
+    //   "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
+    // })
+    // .then(function(response){
+    //   console.log(response);
+    // })
+    // .catch(function(error){
+    //   console.log(error);
+    // })
 })
 
 </script>

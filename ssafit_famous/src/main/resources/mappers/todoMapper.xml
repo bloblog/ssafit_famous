@@ -30,6 +30,12 @@
 		WHERE todoKey = #{todoKey}
 	</update>
 	
+	<update id="updateUserTodo" parameterType="Todo">
+		UPDATE user_todo 
+		SET success = #{success}
+		WHERE todoKey = #{todoKey}
+	</update>
+	
 	<delete id="deleteTodo" parameterType="int">
 		DELETE FROM todo
 		WHERE todoKey = #{todoKey}

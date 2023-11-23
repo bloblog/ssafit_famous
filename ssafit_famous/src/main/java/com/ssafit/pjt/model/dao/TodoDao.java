@@ -21,6 +21,8 @@ public interface TodoDao {
 	// 목표 수정
 	int updateTodo(Todo todo);
 	
+	int updateUserTodo(Todo todo);
+	
 	// 목표 삭제
 	int deleteTodo(int todoKey);
 	
