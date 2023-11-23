@@ -23,7 +23,7 @@
                     <td>{{ study.category }}</td>
                     <td>{{ dayjs(study.studyStart).format('YYYY/MM/DD') }}</td>
                     <td>{{ dayjs(study.studyEnd).format('YYYY/MM/DD') }}</td>
-                    <td v-if="study.studyKey in doneList">
+                    <td v-if="doneList.includes(study.studyKey)">
                         <RouterLink to="/reviewDetail" @click="detail(study)">내가 작성한 회고 보기</RouterLink>
                     </td>
                     <td v-else>
@@ -47,27 +47,27 @@ import { useLoginUserStore } from '../stores/loginUser'
 import axios from "axios";
 import dayjs from 'dayjs';
 
-const store = useStudyStore();
+const sStore = useStudyStore();
 const uStore = useLoginUserStore();
 
-const studys = ref([]);
+const studys = ref([]); // 완료된 스터디
 
 const msg = ref(null);
 
-const doneList = ref([]); // 회고 작성 완료한 스터디 키들
+const doneList = ref([]); // 회고 작성 완료
 
 const select = function(study) {
-    store.studyDetail = study;
+    sStore.studyDetail = study;
+    console.log(sStore.studyDetail)
 }
 
 onMounted(() => {
     const API_URL = `http://localhost:8080/api/user/study/` + uStore.userKey;
     axios
-      .get(API_URL)
-      .then((res) => {
+    .get(API_URL)
+    .then((res) => {
         if (res.status === 200) {
-            studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('yyyyMMdd') < dayjs(Date.now()).format('yyyyMMdd'));
-            
+            studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') < dayjs(new Date()).format('YYYYMMDD'));
         }
         if (res.status === 204) {
           const msg = "완료된 스터디가 없습니다.";

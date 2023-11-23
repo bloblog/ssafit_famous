@@ -6,12 +6,12 @@
         <hr/>
         <div>
             <div class="study-info">
-              <span class="item">스터디명 : {{ studyInfo.studyName }}</span>
-              <span class="item">카테고리 : {{ studyInfo.category }}</span>
+              <span class="item">스터디명 : {{ sStore.studyDetail.studyName }}</span>
+              <span class="item">카테고리 : {{ sStore.studyDetail.category }}</span>
             </div>
             <div class="user-info">
 
-              <div class="item">작성자 : {{ reviewWriter }}</div>
+              <div class="item">작성자 : {{ store.reviewWriter }}</div>
               <div class="item">작성일 : {{ dayjs(reviewInfo.reviewDate).format("YYYY/MM/DD") }} </div>
               <div class="item">조회수 : {{ reviewInfo.viewCnt }}</div>
             </div>
@@ -27,11 +27,14 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useReviewStore } from '../stores/review'
+import { useStudyStore } from '../stores/study'
+
 
 import axios from "axios";
 import dayjs from 'dayjs';
 
 const store = useReviewStore();
+const sStore = useStudyStore();
 
 
 const router = useRouter();
@@ -45,6 +48,10 @@ const move = function() {
 const reviewInfo = ref({});
 const reviewWriter = ref(null);
 const studyInfo = ref({});
+
+if (store.myReview) {
+  reviewInfo.value = store.myReview;
+}
 
 
 onMounted(() => {

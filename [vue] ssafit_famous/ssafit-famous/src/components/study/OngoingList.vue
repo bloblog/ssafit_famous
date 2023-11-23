@@ -54,8 +54,8 @@ onMounted(() => {
       .get(API_URL)
       .then((res) => {
         if (res.status === 200) {
-            studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('yyyyMMdd') >= dayjs(Date.now()).format('yyyyMMdd'));
-            
+            studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') >= dayjs(new Date()).format('YYYYMMDD'));
+        
         }
         if (res.status === 204) {
           const msg = "진행중인 스터디가 없습니다.";

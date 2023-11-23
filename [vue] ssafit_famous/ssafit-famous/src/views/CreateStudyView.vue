@@ -82,7 +82,7 @@ const addMember = () => {
     })
       .then((res) => {
         if (res.status == 200) {
-          router.push("/studyDetail");
+          router.replace("/studyDetail");
 
         } else {
           alert('팀원이 없어도 괜찮으신가요?');
