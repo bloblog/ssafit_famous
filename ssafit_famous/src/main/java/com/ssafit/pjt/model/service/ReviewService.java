@@ -8,7 +8,7 @@ import com.ssafit.pjt.model.dto.Study;
 
 public interface ReviewService {
 	
-	public int writeReview(Review review, String loginUserId);
+	public Review writeReview(Review review, String loginUserId);
 	
 	public int modifyReview(Review review, String loginUserId);
 	

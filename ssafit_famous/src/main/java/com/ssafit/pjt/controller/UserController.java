@@ -53,8 +53,10 @@ public class UserController {
 	@PostMapping("/signup")
 	private ResponseEntity<?> registerUser(@RequestBody User user) {
 		int result = userService.signup(user);
-		if (result != 0)
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		if (result != 0) {
+			User loginUser = userService.login(user);
+			return new ResponseEntity<Integer>(loginUser.getUserKey(), HttpStatus.OK);
+		}
 		else
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}

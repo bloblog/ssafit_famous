@@ -29,7 +29,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private StudyDao studyDao;
 	
 	@Override
-	public int writeReview(Review review, String loginUser) {
+	public Review writeReview(Review review, String loginUser) {
 		int result = reviewDao.insertReview(review);
 		
 		Map<String, Integer> map3 = new HashMap<>();
@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 		Review tmp = reviewDao.selectReviewKeys(map3);
 		
 		if (result == 0) {
-			return 0;
+			return null;
 		} else {
 			// 사용자랑 경험치 map 형태로 넣어
 			Map<String, Integer> map = new HashMap<>();
@@ -54,10 +54,10 @@ public class ReviewServiceImpl implements ReviewService {
 			map2.put("reviewKey", tmp.getReviewKey());
 			reviewDao.updateRelation(map2);
 			
-			return result;
+			return getReview(tmp.getReviewKey());
 		}
 	}
-
+	
 	@Override
 	public int modifyReview(Review review, String loginUserId) {
 		// 권한 확인
