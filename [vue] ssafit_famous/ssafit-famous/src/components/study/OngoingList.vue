@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div id="ongoingList">
         <h3>진행중인 스터디</h3>
         <div v-if="!isExist">진행중인 스터디가 없습니다.</div>
         <div v-else>
-            <h4>스터디명 클릭 시 상세페이지로 이동합니다</h4>
+            <p>스터디명 클릭 시 상세페이지로 이동합니다</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -75,7 +75,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 a{
     text-decoration: none;
 }
+
 </style>

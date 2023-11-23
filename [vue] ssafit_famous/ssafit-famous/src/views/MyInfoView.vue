@@ -11,8 +11,4 @@ import MenuNav from '../components/user/MenuNav.vue';
 </script>
 
 <style scoped>
-#myInfoView{
-    width: 60vw;
-    margin: auto;
-}
 </style>

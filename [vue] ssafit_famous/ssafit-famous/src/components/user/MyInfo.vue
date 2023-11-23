@@ -1,6 +1,6 @@
 <!-- 사용자 정보 수정 -->
 <template>
-    <div>
+    <div id = "myInfo">
         <h3>사용자정보수정</h3>
         <form>
             <!-- 아이디(변경 불가), 현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 -->
@@ -33,9 +33,9 @@
                 </div>
                 </div>
             </div>
-            <button type="button" class="btn" v-bind:disabled="!approved || same || !success" @click="modify">회원정보 수정</button>
-            <!-- <button type="button" class="btn" @click="deleteUser" v-bind:disabled="!approved">회원 탈퇴</button> -->
         </form>
+        <button type="button" class="btn" v-bind:disabled="!approved || same || !success" @click="modify">회원정보 수정</button>
+        <!-- <button type="button" class="btn" @click="deleteUser" v-bind:disabled="!approved">회원 탈퇴</button> -->
     </div>
 </template>
 
@@ -125,5 +125,21 @@ const deleteUser = function(){
 </script>
 
 <style scoped>
-    
+#myInfo{
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 3rem;
+    /* width: 60vw; */
+    margin: 3rem;
+}
+    form{
+        margin: auto;
+        /* text-align: center; */
+        width: 90%;
+    }
+
+    form input {
+        width: 50%;
+    }
 </style>
