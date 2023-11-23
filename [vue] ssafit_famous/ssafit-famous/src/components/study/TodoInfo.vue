@@ -24,17 +24,17 @@
                 <div class="modal-body">
                   <form>
                     <label for="todoContent">내용</label>
-                    <input type="text"><br/>
+                    <input type="text" id="todoContent" v-model="todoContent"><br/>
                     <label for="todoStart">시작일</label>
-                    <input type="text"><br/>
+                    <VueDatePicker v-model="todoStart" :format="date => formatDate(date)"></VueDatePicker>
                     
                     <label for="todoEnd">마감일</label>
-                    <input type="text"><br/>
+                    <VueDatePicker v-model="todoEnd" :format="date => formatDate(date)"></VueDatePicker>
                 </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="g btn btn-primary" data-bs-dismiss="modal">추가</button>
+                    <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="addTodo">추가</button>
                 </div>
                 </div>
             </div>
@@ -43,27 +43,22 @@
 </template>
 
 <script setup>
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import { ref,onMounted } from 'vue';
-import { useStudyStore } from '../stores/study'
-import { useLoginUserStore } from '../stores/loginUser'
+import { useStudyStore } from '../stores/study';
+import { useLoginUserStore } from '../stores/loginUser';
 import axios from "axios";
 import dayjs from 'dayjs';
 
-const add = ref(false);
-const addForm = ref(function(){
-    add.value = !add.value;
-})
-
 const store = useStudyStore();
-const uStore = useLoginUserStore();
+const loginUserStore = useLoginUserStore();
+
+const todoStart = ref();
+const todoEnd = ref();
+const todoContent = ref();
 
 const todos = ref([]);
-
-const msg = ref(null);
-
-// const select = function(study) {
-//     store.studyDetail = study;
-// }
 
 const getTodo = function(todoKey) {
     const API_URL2 = `http://localhost:8080/api/todo/` + todoKey;
@@ -106,6 +101,30 @@ onMounted(() => {
       console.log(todos.value);
 
 });
+
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const addTodo = ref(function(){
+  axios
+    .post('http://localhost:8080/api/todo',{
+      "studyKey" : store.studyDetail.studyKey,
+      "todoStart" : todoStart.value,
+      "todoEnd" : todoEnd.value,
+      "todoContent" : todoContent.value,
+      "users" : loginUserStore.userKey,
+    })
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+})
 
 </script>
 
