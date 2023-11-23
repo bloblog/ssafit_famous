@@ -1,38 +1,39 @@
 <!-- 스터디 디테일 들어가면 상단에 보이는 기본 정보들 -->
 <template>
-    <div>
-        <div style="display: flex;">
-
+    <div id="basicInfo">
+        <div>
             <h3 class="highlight">스터디명 : {{ store.studyDetail.studyName }}</h3>
-        </div>
-        <h5 class="tag"># {{ store.studyDetail.category }}</h5>
-        <div style="display: flex;">
-            <div>
-                <h5>팀장</h5>
-                <img src="@/assets/imges/user_leader.jpeg">
-                <span>{{ store.studyDetail.leaderId }}</span>
-            </div>
-            <div>
-                <div v-if="tStore.members">
-                <h5>팀원</h5>
-                    <div v-for="member in tStore.members">
-                        <div v-if="member.userKey % 2 == 0">
-                            <img src="@/assets/imges/user_0.jpeg">
+            <h5 class="tag"># {{ store.studyDetail.category }}</h5>
+            <div class="member" style="display: flex;">
+                <div>
+                    <h5>팀장</h5>
+                    <img src="@/assets/imges/user_leader.jpeg">
+                    <span>{{ store.studyDetail.leaderId }}</span>
+                </div>
+                <div>
+                    <div v-if="tStore.members">
+                        <h5>팀원</h5>
+                        <div v-for="member in tStore.members">
+                            <div v-if="member.userKey % 2 == 0">
+                                <img src="@/assets/imges/user_0.jpeg">
+                            </div>
+                            <div v-else>
+                                <img src="@/assets/imges/user_1.jpeg">
+                            </div>
+                            <div>{{ member.id }}</div>
                         </div>
-                        <div v-else>
-                            <img src="@/assets/imges/user_1.jpeg">
-                        </div>
-                        <div>{{ member.id }}</div>
+                    </div>
+                    <div v-else>
+                        <p>아직 팀원이 없어요!</p>
                     </div>
                 </div>
-                <div v-else>
-                    <p>아직 팀원이 없어요!</p>
-                </div>
             </div>
-
         </div>
-        <p>시작일 {{ dayjs(store.studyDetail.studyStart).format("YYYY-MM-DD") }}</p>
-        <p>종료일 {{ dayjs(store.studyDetail.studyEnd).format("YYYY-MM-DD") }}</p>
+        <div class="date">
+            <p>시작일 {{ dayjs(store.studyDetail.studyStart).format("YYYY-MM-DD") }}</p>
+            <p>종료일 {{ dayjs(store.studyDetail.studyEnd).format("YYYY-MM-DD") }}</p>
+        </div>
+        
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyStudyInfoModal">수정하기</button>
         <!-- 스터디 정보 수정 모달 -->
         <div class="modal fade" id="modifyStudyInfoModal" tabindex="-1" aria-labelledby="modifyStudyInfoModal" aria-hidden="true">
@@ -85,6 +86,20 @@ console.log(tStore.members);
 </script>
 
 <style scoped>
+#basicInfo{
+    margin: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date{
+    position: relative;
+    top: 2rem;
+}
+.member img{
+    width: 5rem;
+    height: 5rem;
+}
 .tag {
     background-image: url("@/assets/imges/welcomeView/welcomePage_nameTag.png");
     background-size: contain;

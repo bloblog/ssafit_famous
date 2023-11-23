@@ -1,7 +1,7 @@
 <!-- 캘린더 + 클릭시 수정 가능 (스터디장) -->
 <!-- 삭제 가능 하지만 참고용~ -->
 <template>
-    <div>
+    <div id="scheduleInfo">
         <h3>일정</h3>
         <ol>
             <li v-for="schedule in schedules">
@@ -152,5 +152,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
+#scheduleInfo{
+    width: 50%;
+}
 
+ol > li {
+    list-style: none;
+}
 </style>

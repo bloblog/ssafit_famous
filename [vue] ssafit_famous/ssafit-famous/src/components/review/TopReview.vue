@@ -2,24 +2,18 @@
     <div class = "topReview">
         <h3 class="text-center">인기 게시글</h3>
         <div v-if="topReviews.length == 0">아직 게시글이 없어요!</div>
-        <div class="col-sm-6">
-            <div class="card" v-for="review in topReviews.slice(0, 3)" style="width: fit-content;">
-            <img src="@/assets/imges/review-thumbnail.png" class="card-img-top" alt="...">
-            
-            <div class="card-body">
-                <router-link to="/reviewDetail" @click="select(review.reviewKey)">
-                    <p class="card-subtitle">{{ review.reviewTitle }}</p>
-                </router-link>
-                <p>조회수 {{ review.viewCnt }}</p>
-        
-            </div>
-            </div>
-        
-        <br/>
-        <div>
-        </div>
-        
-            <button class="moreBtn" @click="more">더보기</button>
+            <div class="col-sm-6">
+                <div class="card" v-for="review in topReviews.slice(0, 3)" style="width: fit-content;">
+                    <img src="@/assets/imges/review-thumbnail.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <router-link to="/reviewDetail" @click="select(review.reviewKey)">
+                            <p class="card-subtitle">{{ review.reviewTitle }}</p>
+                        </router-link>
+                        <p>조회수 {{ review.viewCnt }}</p>
+                    </div>
+                </div>
+                <br/>
+                <div class="buttonSpace"><button class="moreBtn" @click="more">더보기</button></div>
         </div>
 
     </div>

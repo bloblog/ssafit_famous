@@ -49,6 +49,8 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
     max-width: 1000px;
     margin: auto;
     min-height: 100vh;
+    box-sizing:content-box;
+    overflow: hidden;
 }
 
 header{

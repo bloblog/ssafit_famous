@@ -1,10 +1,14 @@
 <!-- 할일 쭈르륵 + 체크박스 + 스터디장 클릭스 수정가능 -->
 <template>
-    <div>
+    <div id="todoInfo">
         <h3>Todo</h3>
         
         <ol>
             <li v-for="todo in todos" :key="todo.todoKey">
+              <label class="checkbox">
+                <input type="checkbox">
+                <span class="icon"></span>
+              </label>
                 <button @click=select(todo) class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
                 <!-- Todo 수정 모달 -->
                 <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
@@ -33,7 +37,7 @@
                 </div>
 
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
-                <input type="checkbox" @click="success(todo)">
+                
             </li>
         </ol>
         
@@ -216,7 +220,70 @@ const modifyTodo = function(todo){
 </script>
 
 <style scoped>
+#todoInfo{
+  width: 50%;
+}
+
+ol > li{
+  list-style: none;
+}
 .done {
   text-decoration: line-through;
+}
+
+.checkbox{
+  margin: 1%;
+}
+.checkbox input{
+  display:none;
+}
+.checkbox span{
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.checkbox .icon{
+  position: relative;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #c8ccd4;
+  border-radius: 3px;
+  transition: background 0.1s ease;
+}
+
+.checkbox .icon::after{
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 5px;
+  height: 11px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45def) scale(0);
+  transform: all 0.3s ease;
+  transition-delay: 0.15s;
+  opacity: 0;
+}
+
+.checkbox input:checked ~ .icon {
+  background-color: transparent;
+  background: #54200c;
+  animation: jelly 0.6s ease;
+}
+
+.checkbox input:checked ~ .icon::after{
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+@keyframes jelly{
+  from{transform: scale(1,1);}
+  30%{transform: scale(1.25,0.75);}
+  40%{transform: scale(0.75,1.25);}
+  50%{transform: scale(1.15,0.85);}
+  65%{transform: scale(0.95,1.05);}
+  75%{transform: scale(1.05,0.95);}
+  to{transform: scale(1,1);}
 }
 </style>
