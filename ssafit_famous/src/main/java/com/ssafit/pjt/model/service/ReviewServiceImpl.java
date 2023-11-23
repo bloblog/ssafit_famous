@@ -62,6 +62,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public int modifyReview(Review review, String loginUserId) {
 		// 권한 확인
 		Review r = reviewDao.selectReview(review.getReviewKey());
+		
+		System.out.println("로그인 유저 => " + loginUserId);
+		System.out.println("후기 주인 => " + reviewDao.selectWriter(r.getReviewKey()));
 		if (r == null)
 			return 0; // 해당 리뷰가 없으면 0 반환
 		else if (reviewDao.selectWriter(r.getReviewKey()) == Integer.parseInt(loginUserId))

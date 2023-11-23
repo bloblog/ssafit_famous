@@ -28,12 +28,14 @@ public class Review {
 
 
 	public Review(int studyKey, int userKey, String reviewTitle, String reviewContent) {
-		super();
 		this.studyKey = studyKey;
 		this.userKey = userKey;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
-		this.viewCnt = viewCnt;
+	}
+	
+	public Review(int userKey) {
+		this.userKey = userKey;
 	}
 
 
