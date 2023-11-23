@@ -25,8 +25,7 @@
 	</delete>
 
 	<update id="updateTodo" parameterType="Todo">
-		UPDATE todo 
-		
+		UPDATE todo
 		SET todoStart = #{todoStart}, todoEnd = #{todoEnd}, todoContent = #{todoContent}
 		WHERE todoKey = #{todoKey}
 	</update>

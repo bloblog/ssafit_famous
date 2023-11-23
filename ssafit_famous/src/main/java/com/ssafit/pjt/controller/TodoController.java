@@ -44,17 +44,15 @@ public class TodoController {
 	
 	// 목표 수정하기
 	@PutMapping("/todo/{todoKey}")
-	public ResponseEntity<Integer> update(@RequestBody Todo todo, @PathVariable int todoKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
+	public ResponseEntity<?> update(@RequestBody Todo todo, @PathVariable int todoKey) {
+//		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
 
 		todo.setTodoKey(todoKey);
-		int result = todoService.modifyTodo(todo, loginUserId);
-		if (result == -1) {
-			return new ResponseEntity<Integer>(result, HttpStatus.UNAUTHORIZED);
-		} else if (result == 0) {
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		int result = todoService.modifyTodo(todo);
+		if (result > 0) {
+			return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 		}
-		return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
 	// 목표 달성 여부 수정하기
