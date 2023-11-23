@@ -3,6 +3,7 @@ package com.ssafit.pjt.model.service;
 import java.util.List;
 
 import com.ssafit.pjt.model.dto.Study;
+import com.ssafit.pjt.model.dto.User;
 
 public interface StudyService {
 	
@@ -21,5 +22,7 @@ public interface StudyService {
     List<Integer> getTodoList(int studyKey);
     
     List<Integer> getScheduleList(int studyKey);
+
+	List<User> getMemberList(int studyKey);
 
 }

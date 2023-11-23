@@ -82,6 +82,7 @@ const createDone = function() {
         if (res.data !== null) {
           console.log(res.data);
           store.studyDetail = res.data;
+          store.studyDetail.leaderId =  uStore.userId;
           // 팀원 추가
           addMember();
         } else {

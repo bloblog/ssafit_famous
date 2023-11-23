@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ssafit.pjt.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -125,5 +126,9 @@ public class StudyServiceImpl implements StudyService {
 		return studyDao.getScheduleKeys(studyKey);
 	}
 
+//	List<User> getMemberList(int studyKey);
+	public List<User> getMemberList(int studyKey) {
+		return studyDao.selectMembers(studyKey);
+	}
 
 }
