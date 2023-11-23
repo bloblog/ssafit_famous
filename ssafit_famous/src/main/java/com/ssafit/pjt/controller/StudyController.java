@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ssafit.pjt.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -123,5 +124,15 @@ public class StudyController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	
+	// 스터디 키로 멤버 리스트 찾기
+	@GetMapping("/study/user/{studyKey}")
+	public ResponseEntity<?> getMember(@PathVariable int studyKey) {
+		List<User> result = studyService.getMemberList(studyKey);
+		if (result == null) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<User>>(result, HttpStatus.OK);
+		}
+	}
+
 }

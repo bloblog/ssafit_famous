@@ -77,6 +77,7 @@ const addUser = function(user) {
         inUser.value.push(user);
         outUser.value.splice(user,1);
         store.members.push(user);
+        console.log(store.members);
     }
 }
 

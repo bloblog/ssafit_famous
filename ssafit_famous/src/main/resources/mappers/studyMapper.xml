@@ -32,6 +32,12 @@
 		WHERE studyKey = #{studyKey}
 	</select>
 
+	<select id="selectMembers" parameterType="int" resultType="User">
+		SELECT userKey
+		FROM study_user_review
+		WHERE studyKey = #{studyKey}
+	</select>
+
 	<update id="updateStudy" parameterType="Study">
 		UPDATE study 
 		SET studyName = #{studyName}, category = #{category}, studyEnd = #{studyEnd}, alarm = #{alarm}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafit.pjt.model.dto.Study;
 import com.ssafit.pjt.model.dto.key;
+import com.ssafit.pjt.model.dto.User;
 
 public interface StudyDao {
 	// 스터디 생성
@@ -32,4 +33,7 @@ public interface StudyDao {
 	Study selectOne(int studyKey);
 	
 	Study selectOneByName(String name);
+
+	// 스터디 멤버 조회
+	List<User> selectMembers(int StudyKey);
 }

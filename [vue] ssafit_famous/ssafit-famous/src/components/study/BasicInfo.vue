@@ -6,9 +6,31 @@
             <h3 class="highlight">스터디명 : {{ store.studyDetail.studyName }}</h3>
         </div>
         <h5 class="tag"># {{ store.studyDetail.category }}</h5>
-        <p>
-            팀원 : <span>팀원이름</span>
-        </p>
+        <div style="display: flex;">
+            <div>
+                <h5>팀장</h5>
+                <img src="@/assets/imges/user_leader.jpeg">
+                <span>{{ store.studyDetail.leaderId }}</span>
+            </div>
+            <div>
+                <div v-if="tStore.members">
+                <h5>팀원</h5>
+                    <div v-for="member in tStore.members">
+                        <div v-if="member.userKey % 2 == 0">
+                            <img src="@/assets/imges/user_0.jpeg">
+                        </div>
+                        <div v-else>
+                            <img src="@/assets/imges/user_1.jpeg">
+                        </div>
+                        <div>{{ member.id }}</div>
+                    </div>
+                </div>
+                <div v-else>
+                    <p>아직 팀원이 없어요!</p>
+                </div>
+            </div>
+
+        </div>
         <p>시작일 {{ dayjs(store.studyDetail.studyStart).format("YYYY-MM-DD") }}</p>
         <p>종료일 {{ dayjs(store.studyDetail.studyEnd).format("YYYY-MM-DD") }}</p>
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyStudyInfoModal">수정하기</button>
@@ -40,6 +62,8 @@ import ModifyFormItem from './ModifyFormItem.vue';
 
 import { useStudyStore } from '@/components/stores/study';
 import { useLoginUserStore } from '@/components/stores/loginUser';
+import { useUserStore } from '@/components/stores/user';
+
 import axios from "axios";
 import dayjs from 'dayjs';
 import { ref } from 'vue';
@@ -47,12 +71,17 @@ import { ref } from 'vue';
 
 const store = useStudyStore();
 const uStore = useLoginUserStore();
-
+const tStore = useUserStore(); // 팀원 관련해서 사용할 거라 tStore 함
 
 const clicked = ref(false);
+
+
 const modifyForm = ref(function(){
     clicked.value = !clicked.value;
 })
+
+console.log(tStore.members);
+
 </script>
 
 <style scoped>
@@ -69,5 +98,11 @@ const modifyForm = ref(function(){
     color: #7e725c;
     display: inline;
     box-shadow: inset 0 -10px 0 #ffcc007d;
+}
+
+img {
+    width: 15vw;
+    border-radius: 10vw;
+    border: 3px solid #7e725c;
 }
 </style>
