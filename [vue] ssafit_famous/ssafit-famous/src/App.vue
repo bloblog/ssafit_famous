@@ -12,6 +12,8 @@ import WelcomeView from './views/WelcomeView.vue';
 </script>
 
 <style scoped>
+
+
 @font-face {
     font-family: 'intelone-mono-font-family-regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');

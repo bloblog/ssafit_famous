@@ -10,22 +10,25 @@
                     </li>
                 </ul>
             </div>
-            <input v-model="store.studyDetail.studyName" placeholder="스터디명" style="border-radius: 10px; border: none; padding:7px"><br/>
+            <input v-model="store.studyName" placeholder="스터디명" style="border-radius: 10px; border: none; padding:7px"><br/>
         </div>
         
         
         <div class="basicInfo">
             <label>시작일</label>
-            <VueDatePicker v-model="store.studyDetail.startDate" :format="date => formatDate(date)"></VueDatePicker>
+            <!-- <VueDatePicker v-model="store.studyDetail.startDate" :format="date => formatDate(date)"></VueDatePicker> -->
+            <VueDatePicker v-model="store.startDate"></VueDatePicker>
+            
             <label>종료일</label>
-            <VueDatePicker v-model="store.studyDetail.endDate" :format="date => formatDate(date)"></VueDatePicker>
+            <!-- <VueDatePicker v-model="store.studyDetail.endDate" :format="date => formatDate(date)"></VueDatePicker> -->
+            <VueDatePicker v-model="store.endDate"></VueDatePicker>
 
         </div>
         
         <div class="basicInfo" id = "cat-alarm">
             
             <label>알림주기</label>
-            <input v-model="store.studyDetail.alarm" type="number" placeholder="몇 일 전에 알림을 드릴까요?" style="border-radius: 10px; border: none; padding:7px; ">
+            <input v-model="store.alarm" type="number" placeholder="몇 일 전에 알림을 드릴까요?" style="border-radius: 10px; border: none; padding:7px; ">
 
         </div>
     </div>
@@ -35,7 +38,8 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
+import dayjs from 'dayjs';
 import { useStudyStore } from '@/components/stores/study'
 
 const store = useStudyStore();
@@ -51,12 +55,14 @@ const select = (item) => {
 }
 
 
-const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+// const formatDate = (date) => {
+//   const year = date.getFullYear();
+//   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+//   const day = date.getDate().toString().padStart(2, '0');
+//   return `${year}-${month}-${day}`;
+// };
+
+
 
 </script>
 

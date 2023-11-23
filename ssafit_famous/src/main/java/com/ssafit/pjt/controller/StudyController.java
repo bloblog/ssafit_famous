@@ -113,7 +113,7 @@ public class StudyController {
 
 	// 멤버 추가하기
 	@RequestMapping(value = "/study/{studyKey}", method = RequestMethod.POST)
-	public ResponseEntity<?> addMember(@RequestBody Study study, int[] in, @PathVariable int studyKey) {
+	public ResponseEntity<?> addMember(@RequestBody Study study, @RequestParam(name = "in") int[] in, @PathVariable int studyKey) {
 		System.out.println("study = " + study.toString());
 		System.out.println(Arrays.toString(in));
 		int result = studyService.addMember(study, in);

@@ -33,10 +33,13 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
     font-style: normal;
 }
 
-* {
+#background{
   font-family: 'NanumSquareNeo-Variable';
+  background-image: url('@/assets/imges/background/bg_1.jpeg');
+  
+  /* background-repeat: no-repeat; */
+  background-size: contain;
 }
-
 .main{
     max-width: 1000px;
     margin: auto;
