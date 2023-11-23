@@ -12,6 +12,9 @@ export const useReviewStore = defineStore("review", () => {
   const reviewKey = ref(0);
   const msg = ref(null);
 
+  const myReview = ref({});
+  const reviewWriter = ref(null);
+
   const searchReview = () => {
     searchResult.value = [];
     const API_URL = `http://localhost:8080/api/review`;
@@ -49,5 +52,7 @@ export const useReviewStore = defineStore("review", () => {
     key,
     word,
     ob,
+    myReview,
+    reviewWriter,
   };
 });
