@@ -5,7 +5,7 @@
         
         <ol>
             <li v-for="todo in todos">
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
+                <button @click=select(todo) class="btn {done: todo.success==1}" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
                 <!-- Todo 수정 모달 -->
                 <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -17,7 +17,7 @@
                         <div class="modal-body">
                           <form>
                             <label for="todoContent">내용</label>
-                            <input type="text" id="todoContent" v-model="todoContent"><br/>
+                            <input type="text" id="todoContent" v-model="todoContent" :placeholder="selected.todoContent"><br/>
                             <label for="todoStart">시작일</label>
                             <VueDatePicker v-model="todoStart" :format="date => formatDate(date)"></VueDatePicker>
                             <label for="todoEnd">마감일</label>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
-                <input type="checkbox" v-model="todo.success">
+                <input type="checkbox" @click="success(todo)">
             </li>
         </ol>
         
@@ -79,12 +79,42 @@ import dayjs from 'dayjs';
 const store = useStudyStore();
 const loginUserStore = useLoginUserStore();
 
-const todoStart = ref(new Date());
-const todoEnd = ref(new Date());
+const todoStart = ref('2023-11-23');
+const todoEnd = ref('2023-11-23');
 const todoContent = ref();
 
 const todos = ref([]);
+const selected = ref({});
 
+const select = (todo) => {
+  selected.value = todo;
+  todoStart.value = todo.todoStart;
+  todoEnd.value = todo.todoEnd;
+}
+
+const todoOne = ref({});
+const success = (todo) => {
+  todoOne.value = todo;
+  const API_URL = `http://localhost:8080/api/todo/` + loginUserStore.userKey + `/` + todo.todoKey;
+    axios
+      .put(API_URL, {
+        ...todoOne.value,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          todoOne.value.success = (todoOne.value.success==1 ? 0 : 1);
+          console.log(todoOne.value);
+        }
+        if (res.status === 204) {
+
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("todo를 불러오는 중 오류가 발생하였습니다.");
+      });
+}
 
 const getTodo = function(todoKey) {
     const API_URL2 = `http://localhost:8080/api/todo/` + todoKey;
@@ -172,5 +202,7 @@ const modifyTodo = ref(function(){
 </script>
 
 <style scoped>
-
+.done {
+  text-decoration: line-through;
+}
 </style>

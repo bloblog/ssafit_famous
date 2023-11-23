@@ -11,4 +11,6 @@ public interface TodoService {
 	int removeTodo(int todoKey, String loginUserId);
 	// 일정 상세
 	Todo getTodo(int todoKey);
+	// 유저의 todo 상태 변경
+	int modifyUserTodo(Todo todo);
 }

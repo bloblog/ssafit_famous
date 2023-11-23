@@ -49,15 +49,15 @@ public class StudyController {
 	}
 	
 	// new -> 스터디 키로 schedulekey 리스트 찾기
-		@GetMapping("/study/schedule/{studyKey}")
-		public ResponseEntity<?> getSchedule(@PathVariable int studyKey) {
-			List<Integer> result = studyService.getScheduleList(studyKey);
-			if (result == null || result.size() == 0) {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			} else {
-				return new ResponseEntity<List<Integer>>(result, HttpStatus.OK);
-			}
+	@GetMapping("/study/schedule/{studyKey}")
+	public ResponseEntity<?> getSchedule(@PathVariable int studyKey) {
+		List<Integer> result = studyService.getScheduleList(studyKey);
+		if (result == null || result.size() == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Integer>>(result, HttpStatus.OK);
 		}
+	}
 
 	// 스터디 삭제하기
 	@DeleteMapping("/study/{studyKey}")

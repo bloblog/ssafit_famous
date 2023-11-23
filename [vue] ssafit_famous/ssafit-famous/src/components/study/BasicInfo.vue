@@ -1,8 +1,11 @@
 <!-- 스터디 디테일 들어가면 상단에 보이는 기본 정보들 -->
 <template>
     <div>
-        <h3>스터디명 : {{ store.studyDetail.studyName }}</h3>
-        <p># {{ store.studyDetail.category }}</p>
+        <div style="display: flex;">
+
+            <h3 class="highlight">스터디명 : {{ store.studyDetail.studyName }}</h3>
+        </div>
+        <h5 class="tag"># {{ store.studyDetail.category }}</h5>
         <p>
             팀원 : <span>팀원이름</span>
         </p>
@@ -53,5 +56,18 @@ const modifyForm = ref(function(){
 </script>
 
 <style scoped>
+.tag {
+    background-image: url("@/assets/imges/welcomeView/welcomePage_nameTag.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 1vw;
+    margin: 1vw;
+}
 
+.highlight{
+    text-decoration: none;
+    color: #7e725c;
+    display: inline;
+    box-shadow: inset 0 -10px 0 #ffcc007d;
+}
 </style>
