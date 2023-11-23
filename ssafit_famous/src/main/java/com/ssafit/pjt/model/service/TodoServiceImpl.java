@@ -82,4 +82,9 @@ public class TodoServiceImpl implements TodoService {
 		return todoDao.selectOne(todoKey);
 	}
 
+	@Override
+	public int getTodoKey(Todo todo) {
+		return todoDao.selectOneByTodo(todo).getTodoKey();
+	}
+
 }

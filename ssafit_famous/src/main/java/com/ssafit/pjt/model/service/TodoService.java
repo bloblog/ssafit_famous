@@ -13,4 +13,6 @@ public interface TodoService {
 	Todo getTodo(int todoKey);
 	// 유저의 todo 상태 변경
 	int modifyUserTodo(Todo todo);
+
+	int getTodoKey(Todo todo);
 }

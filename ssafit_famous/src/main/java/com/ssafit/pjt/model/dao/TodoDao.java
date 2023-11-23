@@ -32,4 +32,8 @@ public interface TodoDao {
 	Todo selectOne(int todoKey);
 	
 	Todo selectOneByTodo(Todo todo);
+
+
+
+
 }
