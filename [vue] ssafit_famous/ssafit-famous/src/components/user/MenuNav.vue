@@ -1,6 +1,6 @@
-<!-- 마이페이지 이동 바 -->
+
 <template>
-    <div>
+    <div class="text-center">
         <router-link to="myinfo">회원정보</router-link> | 
         <router-link to="ongoing">진행중인 스터디</router-link> | 
         <router-link to="done">지난 스터디</router-link> | 

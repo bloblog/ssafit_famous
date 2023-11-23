@@ -13,7 +13,7 @@
 
               <div class="item">작성자 : {{ reviewWriter }}</div>
               <div class="item">작성일 : {{ dayjs(reviewInfo.reviewDate).format("YYYY/MM/DD") }} </div>
-              <div class="item">조회수 : {{  }}</div>
+              <div class="item">조회수 : {{ reviewInfo.viewCnt }}</div>
             </div>
             
             <hr/>
@@ -27,10 +27,12 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useReviewStore } from '../stores/review'
+
 import axios from "axios";
 import dayjs from 'dayjs';
 
 const store = useReviewStore();
+
 
 const router = useRouter();
 const route = useRoute();
@@ -43,6 +45,8 @@ const move = function() {
 const reviewInfo = ref({});
 const reviewWriter = ref(null);
 const studyInfo = ref({});
+
+
 onMounted(() => {
     const API_URL = `http://localhost:8080/api/review/` + store.reviewKey;
     const API_URL2 = `http://localhost:8080/api/review/user/` + store.reviewKey;
