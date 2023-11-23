@@ -1,5 +1,6 @@
 package com.ssafit.pjt.model.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class StudyServiceImpl implements StudyService {
 	public int addMember(Study study, int[] list) {
 		// study-user-review테이블에  review null로 생성 (팀원)
 		int result = 0;
+		System.out.println(Arrays.toString(list));
 		for(int key : list) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("studyKey", study.getStudyKey());

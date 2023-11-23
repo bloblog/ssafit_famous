@@ -60,8 +60,7 @@ const create = () => {
     .then((res) => {
       if (res.data !== null) {
         createDone();
-        // 팀원 추가
-        addMember();
+        
       } else {
         
       }
@@ -73,13 +72,45 @@ const create = () => {
     });
 };
 
-const addMember = () => {
-  const API_URL = `http://localhost:8080/api/study/` + store.studyDetail.studyKey;
-    axios.post(API_URL, {
-      study : store.studyDetail,
-      in : tStore.members,
-      studyKey : store.studyDetail.studyKey,
-    })
+
+
+const createDone = function() {
+    // 스터디 만들어진 후, 스터디 이름으로 스터디 정보(key 포함) 찾아서 상세 페이지 가자
+    const API_URL = `http://localhost:8080/api/study/key/` + store.studyName;
+    axios.get(API_URL)
+      .then((res) => {
+        if (res.data !== null) {
+          console.log(res.data);
+          store.studyDetail = res.data;
+          // 팀원 추가
+          addMember();
+        } else {
+
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("스터디 생성 중 오류가 발생했습니다");
+      });
+    
+  }
+
+  const addMember = () => {
+    const inList = tStore.members.map(key=>key.userKey)
+    console.log(inList);
+    const API_URL = `http://localhost:8080/api/study/${store.studyDetail.studyKey}?in=${inList.join('&')}`;
+      axios.post(API_URL, {
+        alarm: store.studyDetail.alarm,
+        category: store.studyDetail.category,
+        leaderKey: uStore.userKey,
+        studyEnd: dayjs(store.studyDetail.endDate).format("YYYY-MM-DD"),
+        studyKey : store.studyDetail.studyKey,
+        studyName: store.studyDetail.studyName,
+        studyStart: dayjs(store.studyDetail.startDate).format("YYYY-MM-DD"),
+        // in : JSON.stringify(inList.value),
+        // in : inList.value,
+
+      })
       .then((res) => {
         if (res.status == 200) {
           router.replace("/studyDetail");
@@ -93,27 +124,6 @@ const addMember = () => {
         console.error(err);
         alert("팀원 추가 중 오류가 발생했습니다");
       });
-}
-
-const createDone = function() {
-    // 스터디 만들어진 후, 스터디 이름으로 스터디 정보(key 포함) 찾아서 상세 페이지 가자
-    const API_URL = `http://localhost:8080/api/study/key/` + store.studyDetail.studyName;
-    axios.get(API_URL)
-      .then((res) => {
-        if (res.data !== null) {
-          console.log(res.data);
-          store.studyDetail = res.data;
-          
-        } else {
-
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("스터디 생성 중 오류가 발생했습니다");
-      });
-
-    
 }
 
 </script>
