@@ -8,15 +8,24 @@ public class Todo {
 	private Date todoStart;
 	private Date todoEnd;
 	private String todoContent;
+	private int[] users;
 	
 	public Todo() {}
 
-	public Todo(int todoKey, int studyKey, Date todoStart, Date todoEnd, String todoContent) {
-		this.todoKey = todoKey;
+	public Todo(int studyKey, Date todoStart, Date todoEnd, String todoContent, int[] users) {
 		this.studyKey = studyKey;
 		this.todoStart = todoStart;
 		this.todoEnd = todoEnd;
 		this.todoContent = todoContent;
+		this.users = users;
+	}
+
+	public int[] getUsers() {
+		return users;
+	}
+
+	public void setUsers(int[] users) {
+		this.users = users;
 	}
 
 	public int getTodoKey() {

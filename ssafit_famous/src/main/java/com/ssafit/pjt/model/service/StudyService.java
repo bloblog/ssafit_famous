@@ -19,5 +19,7 @@ public interface StudyService {
     Study getStudyByName(String studyName);
     
     List<Integer> getTodoList(int studyKey);
+    
+    List<Integer> getScheduleList(int studyKey);
 
 }

@@ -20,6 +20,12 @@
 		WHERE studyKey = #{studyKey}
 	</select>
 	
+	<select id="getScheduleKeys" parameterType="int" resultType="int">
+		SELECT scheduleKey
+		FROM study_schedule
+		WHERE studyKey = #{studyKey}
+	</select>
+	
 	<select id="getTodo" parameterType="int" resultType="key">
 		SELECT todoKey
 		FROM study_todo

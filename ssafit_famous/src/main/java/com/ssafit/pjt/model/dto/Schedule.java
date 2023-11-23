@@ -11,8 +11,7 @@ public class Schedule {
 	
 	public Schedule() {}
 
-	public Schedule(int scheduleKey, int studyKey, Date scheduleDate, String scheduleContent, String schedulePlace) {
-		this.scheduleKey = scheduleKey;
+	public Schedule(int studyKey, Date scheduleDate, String scheduleContent, String schedulePlace) {
 		this.studyKey = studyKey;
 		this.scheduleDate = scheduleDate;
 		this.scheduleContent = scheduleContent;

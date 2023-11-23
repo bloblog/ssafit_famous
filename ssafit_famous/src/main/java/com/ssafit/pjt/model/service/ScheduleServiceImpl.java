@@ -29,6 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public int addSchedule(Schedule schedule) {
+		System.out.println(schedule.toString());
 		int result = scheduleDao.insertSchedule(schedule);
 		
 		Schedule tmp = scheduleDao.selectOneBySchedule(schedule);

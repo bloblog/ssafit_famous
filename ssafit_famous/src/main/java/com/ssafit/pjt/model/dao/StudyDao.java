@@ -18,6 +18,8 @@ public interface StudyDao {
 	
 	List<Integer> getTodoKeys(int StudyKey);
 	
+	List<Integer> getScheduleKeys(int StudyKey);
+	
 	// 스터디 수정
 	int updateStudy(Study study);
 	

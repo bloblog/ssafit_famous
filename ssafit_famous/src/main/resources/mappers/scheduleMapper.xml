@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafit.pjt.model.dao.ScheduleDao">
 
 	<insert id="insertSchedule" parameterType="Schedule" >
-		INSERT INTO schedule (studyKey,scheduleDate, scheduleContent, schedulePlace)
+		INSERT INTO schedule (studyKey, scheduleDate, scheduleContent, schedulePlace)
 		VALUES (#{studyKey}, #{scheduleDate}, #{scheduleContent}, #{schedulePlace})
 	</insert>
 	

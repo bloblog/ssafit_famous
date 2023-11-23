@@ -117,5 +117,11 @@ public class StudyServiceImpl implements StudyService {
 		return studyDao.getTodoKeys(studyKey);
 	}
 
+	@Override
+	public List<Integer> getScheduleList(int studyKey) {
+		// TODO Auto-generated method stub
+		return studyDao.getScheduleKeys(studyKey);
+	}
+
 
 }
