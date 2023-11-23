@@ -32,9 +32,13 @@ public class TodoController {
 	
 	// 목표 등록하기
 	@PostMapping("/todo")
-	public ResponseEntity<Integer> add(@RequestBody Todo todo) {
+	public ResponseEntity<?> add(@RequestBody Todo todo) {
 		int result = todoService.addTodo(todo, todo.getUsers());
-		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+		if (result > 0) {
+			todo.setTodoKey(todoService.getTodoKey(todo));
+			return new ResponseEntity<Todo>(todo, HttpStatus.CREATED);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
 	

@@ -4,8 +4,8 @@
         <h3>Todo</h3>
         
         <ol>
-            <li v-for="todo in todos">
-                <button @click=select(todo) class="btn {done: todo.success==1}" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
+            <li v-for="todo in todos" :key="todo.todoKey">
+                <button @click=select(todo) class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
                 <!-- Todo 수정 모달 -->
                 <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -17,20 +17,21 @@
                         <div class="modal-body">
                           <form>
                             <label for="todoContent">내용</label>
-                            <input type="text" id="todoContent" v-model="todoContent" :placeholder="selected.todoContent"><br/>
+                            <input type="text" id="modifyTodoContent" v-model="modifyTodoContent" :placeholder="selected.todoContent"><br/>
                             <label for="todoStart">시작일</label>
-                            <VueDatePicker v-model="todoStart" :format="date => formatDate(date)"></VueDatePicker>
+                            <VueDatePicker v-model="todoStart"></VueDatePicker>
                             <label for="todoEnd">마감일</label>
-                            <VueDatePicker v-model="todoEnd" :format="date => formatDate(date)"></VueDatePicker>
+                            <VueDatePicker v-model="todoEnd"></VueDatePicker>
                         </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifyTodo">수정</button>
+                            <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifyTodo(todo)">수정</button>
                         </div>
                         </div>
                     </div>
                 </div>
+
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
                 <input type="checkbox" @click="success(todo)">
             </li>
@@ -48,12 +49,12 @@
                 <div class="modal-body">
                   <form>
                     <label for="todoContent">내용</label>
-                    <input type="text" id="todoContent" v-model="todoContent"><br/>
+                    <input type="text" id="addTodoContent" v-model="addTodoContent"><br/>
                     <label for="todoStart">시작일</label>
-                    <VueDatePicker v-model="todoStart" :format="date => formatDate(date)"></VueDatePicker>
+                    <VueDatePicker v-model="todoStart"></VueDatePicker>
                     
                     <label for="todoEnd">마감일</label>
-                    <VueDatePicker v-model="todoEnd" :format="date => formatDate(date)"></VueDatePicker>
+                    <VueDatePicker v-model="todoEnd"></VueDatePicker>
                 </form>
                 </div>
                 <div class="modal-footer">
@@ -73,15 +74,24 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { ref, onMounted } from 'vue';
 import { useStudyStore } from '../stores/study';
 import { useLoginUserStore } from '../stores/loginUser';
+import {useRouter, useRoute} from 'vue-router';
+
 import axios from "axios";
 import dayjs from 'dayjs';
+
+const router = useRouter();
+const route = useRoute();
 
 const store = useStudyStore();
 const loginUserStore = useLoginUserStore();
 
-const todoStart = ref('2023-11-23');
-const todoEnd = ref('2023-11-23');
-const todoContent = ref();
+// const todoStart = ref('2023-11-24');
+// const todoEnd = ref('2023-11-24');
+const todoStart = ref('');
+const todoEnd = ref('');
+// const todoContent = ref("");
+const addTodoContent = ref('');
+const modifyTodoContent = ref('');
 
 const todos = ref([]);
 const selected = ref({});
@@ -135,6 +145,8 @@ const getTodo = function(todoKey) {
 
 }
 
+
+
 onMounted(() => {
     const API_URL = `http://localhost:8080/api/study/todo/` + store.studyDetail.studyKey;
     axios
@@ -144,7 +156,6 @@ onMounted(() => {
             for (let i = 0; i < res.data.length; i++) {
                 getTodo(res.data[i]);
             }
-            
         }
         if (res.status === 204) {
           const msg = "지금은 할 일이 없습니다.";
@@ -158,46 +169,42 @@ onMounted(() => {
 
 });
 
-const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
-
-const addTodo = ref(function(){
+const addTodo = function() {
   axios
     .post('http://localhost:8080/api/todo',{
       "studyKey" : store.studyDetail.studyKey,
       "todoStart" : todoStart.value,
       "todoEnd" : todoEnd.value,
-      "todoContent" : todoContent.value,
+      "todoContent" : addTodoContent.value,
       "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
     })
     .then(function(response){
+      console.log(response.data);
+      todos.value.push(response.data);
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+}
+
+const modifyTodo = function(todo){
+  axios
+    .put('http://localhost:8080/api/todo/' + todo.todoKey, {
+      "studyKey" : store.studyDetail.studyKey,
+      "todoStart" : todoStart.value,
+      "todoEnd" : todoEnd.value,
+      "todoContent" : modifyTodoContent.value,
+      "todoKey" : todo.todoKey,
+      "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
+    })
+    .then(function(response){
+      console.log("변경완료")
       console.log(response);
     })
     .catch(function(error){
       console.log(error);
     })
-})
-
-const modifyTodo = ref(function(){
-  axios
-    // .post('http://localhost:8080/api/todo',{
-    //   "studyKey" : store.studyDetail.studyKey,
-    //   "todoStart" : todoStart.value,
-    //   "todoEnd" : todoEnd.value,
-    //   "todoContent" : todoContent.value,
-    //   "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
-    // })
-    // .then(function(response){
-    //   console.log(response);
-    // })
-    // .catch(function(error){
-    //   console.log(error);
-    // })
-})
+}
 
 </script>
 
