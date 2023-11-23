@@ -11,23 +11,34 @@
                 <input type="checkbox">
             </li>
         </ol>
-        <button @click="addForm">추가</button>
-        <!-- 
-        <div v-if="add">
-            <h4>todo 추가 모달</h4>
-            <form>
-                <label for="todoContent">내용</label>
-                <input type="text"><br/>
-                <label for="todoStart">시작일</label>
-                <input type="text"><br/>
-                
-                <label for="todoEnd">마감일</label>
-                <input type="text"><br/>
-            </form>
-            <button @click="addForm">취소</button>
-            \<\!-- 추가 반영 처리 필요 --\>
-            <button @click="addForm">추가</button> 
-        </div> -->
+        
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTodoModal">추가하기</button>
+        <!-- Todo 추가 모달 -->
+        <div class="modal fade" id="addTodoModal" tabindex="-1" aria-labelledby="addTodoModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addTodoModal">Todo 추가하기</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <label for="todoContent">내용</label>
+                    <input type="text"><br/>
+                    <label for="todoStart">시작일</label>
+                    <input type="text"><br/>
+                    
+                    <label for="todoEnd">마감일</label>
+                    <input type="text"><br/>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="g btn btn-primary" data-bs-dismiss="modal">추가</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

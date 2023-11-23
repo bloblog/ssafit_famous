@@ -44,7 +44,7 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
 }
 
 #background{
-    background-color: #6990e4;
+    /* background-color: #6990e4; */
 }
 
 header{

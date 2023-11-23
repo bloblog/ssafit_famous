@@ -5,8 +5,8 @@
             <div>
                 <div class="c" v-if="store.status">
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">마이페이지</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">마이페이지</button>
+                        <ul class="dropdown-menu">
                             <li><router-link to="/dashboard" class="dropdown-item">대시보드 </router-link></li>
                             <li><router-link to="/infoView" class="dropdown-item">정보수정</router-link></li>
                         </ul>
