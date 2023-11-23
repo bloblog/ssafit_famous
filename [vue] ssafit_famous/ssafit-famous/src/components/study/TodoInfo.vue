@@ -45,6 +45,7 @@
 <script setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
 import { ref,onMounted } from 'vue';
 import { useStudyStore } from '../stores/study';
 import { useLoginUserStore } from '../stores/loginUser';
@@ -54,11 +55,12 @@ import dayjs from 'dayjs';
 const store = useStudyStore();
 const loginUserStore = useLoginUserStore();
 
-const todoStart = ref();
-const todoEnd = ref();
+const todoStart = ref(new Date());
+const todoEnd = ref(new Date());
 const todoContent = ref();
 
 const todos = ref([]);
+
 
 const getTodo = function(todoKey) {
     const API_URL2 = `http://localhost:8080/api/todo/` + todoKey;
@@ -67,7 +69,7 @@ const getTodo = function(todoKey) {
       .then((res) => {
         if (res.status === 200) {
             todos.value.push(res.data);
-            
+            console.log(todos);
         }
         if (res.status === 204) {
         }
@@ -116,7 +118,7 @@ const addTodo = ref(function(){
       "todoStart" : todoStart.value,
       "todoEnd" : todoEnd.value,
       "todoContent" : todoContent.value,
-      "users" : loginUserStore.userKey,
+      "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
     })
     .then(function(response){
       console.log(response);
