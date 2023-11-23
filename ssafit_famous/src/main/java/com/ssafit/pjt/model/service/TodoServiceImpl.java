@@ -58,6 +58,12 @@ public class TodoServiceImpl implements TodoService {
 		}
 		return -1;
 	}
+	
+	@Override
+	public int modifyUserTodo(Todo todo) {
+		return todoDao.updateUserTodo(todo);
+	}
+	
 
 	@Override
 	public int removeTodo(int todoKey, String loginUserKey) {

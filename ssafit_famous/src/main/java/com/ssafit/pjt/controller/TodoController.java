@@ -53,6 +53,19 @@ public class TodoController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 	
+	// 목표 달성 여부 수정하기
+	@PutMapping("/todo/{userKey}/{todoKey}")
+	public ResponseEntity<Integer> updateState(@RequestBody Todo todo, @PathVariable int todoKey, @PathVariable int userKey) {
+		System.out.println(todo.toString());
+		int[] userOne = new int[] {userKey};
+		todo.setUsers(userOne);
+		int result = todoService.modifyUserTodo(todo);
+		if (result > 0) {
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		}
+		return new ResponseEntity<Integer>(result, HttpStatus.NO_CONTENT);
+	}
+	
 	
 	// 목표 삭제하기
 	@DeleteMapping("/todo/{todoKey}")

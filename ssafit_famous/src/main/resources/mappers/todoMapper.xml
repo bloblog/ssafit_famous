@@ -26,13 +26,14 @@
 
 	<update id="updateTodo" parameterType="Todo">
 		UPDATE todo 
+		
 		SET todoStart = #{todoStart}, todoEnd = #{todoEnd}, todoContent = #{todoContent}
 		WHERE todoKey = #{todoKey}
 	</update>
 	
 	<update id="updateUserTodo" parameterType="Todo">
-		UPDATE user_todo 
-		SET success = #{success}
+		UPDATE user_todo
+		SET success = if (success=0, 1, 0)
 		WHERE todoKey = #{todoKey}
 	</update>
 	

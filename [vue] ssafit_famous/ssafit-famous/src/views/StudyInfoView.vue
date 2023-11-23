@@ -1,6 +1,6 @@
 <!-- 스터디 디테일 페이지 -->
 <template>
-    <div id="studyDetail">
+    <div id="studyDetail" class="container">
         <!-- <h2>스터디 디테일</h2> -->
         <BasicInfo/>
         <TodoInfo/>
