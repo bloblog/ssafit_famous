@@ -86,6 +86,7 @@ const addMember = () => {
 
         } else {
           alert('팀원이 없어도 괜찮으신가요?');
+          router.replace("/studyDetail");
         }
       })
       .catch((err) => {
@@ -96,7 +97,7 @@ const addMember = () => {
 
 const createDone = function() {
     // 스터디 만들어진 후, 스터디 이름으로 스터디 정보(key 포함) 찾아서 상세 페이지 가자
-    const API_URL = `http://localhost:8080/api/study/key/` + store.studyName;
+    const API_URL = `http://localhost:8080/api/study/key/` + store.studyDetail.studyName;
     axios.get(API_URL)
       .then((res) => {
         if (res.data !== null) {
@@ -104,6 +105,7 @@ const createDone = function() {
           store.studyDetail = res.data;
           
         } else {
+
         }
       })
       .catch((err) => {

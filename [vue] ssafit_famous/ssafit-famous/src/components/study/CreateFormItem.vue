@@ -10,22 +10,22 @@
                     </li>
                 </ul>
             </div>
-            <input v-model="store.studyName" placeholder="스터디명" style="border-radius: 10px; border: none; padding:7px"><br/>
+            <input v-model="store.studyDetail.studyName" placeholder="스터디명" style="border-radius: 10px; border: none; padding:7px"><br/>
         </div>
         
         
         <div class="basicInfo">
             <label>시작일</label>
-            <VueDatePicker v-model="store.startDate" :format="date => formatDate(date)"></VueDatePicker>
+            <VueDatePicker v-model="store.studyDetail.startDate" :format="date => formatDate(date)"></VueDatePicker>
             <label>종료일</label>
-            <VueDatePicker v-model="store.endDate" :format="date => formatDate(date)"></VueDatePicker>
+            <VueDatePicker v-model="store.studyDetail.endDate" :format="date => formatDate(date)"></VueDatePicker>
 
         </div>
         
         <div class="basicInfo" id = "cat-alarm">
             
             <label>알림주기</label>
-            <input v-model="store.alarm" type="number" placeholder="몇 일 전에 알림을 드릴까요?" style="border-radius: 10px; border: none; padding:7px; ">
+            <input v-model="store.studyDetail.alarm" type="number" placeholder="몇 일 전에 알림을 드릴까요?" style="border-radius: 10px; border: none; padding:7px; ">
 
         </div>
     </div>
