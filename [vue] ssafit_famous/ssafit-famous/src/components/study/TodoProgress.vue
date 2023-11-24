@@ -3,9 +3,9 @@
     <div id="todoProgress">
         <h3> 전체 {{ todoAll.length }}개의 할 일 중 {{ todoDone.length }}개를 완료했어요!</h3>
         <h4> 해야할 일을 확인해보세요</h4>
-        <div v-for="todo in todoYet">
-            <p>{{ todo.todoContent }}</p>
-        </div>
+        <ul v-for="todo in todoYet">
+            <li>{{ todo.todoContent }}</li>
+        </ul>
     </div>
 </template>
 
@@ -40,5 +40,9 @@ onMounted(()=>{
 <style scoped>
 #todoProgress{
     height: 50%;
+}
+
+#todoProgress h3{
+    box-shadow: inset 0 -10px 0 #ffcc007d;
 }
 </style>

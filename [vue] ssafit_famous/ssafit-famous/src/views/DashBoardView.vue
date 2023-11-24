@@ -6,9 +6,9 @@
             <div>
                 <CalendarItem/>
             </div>
-            <div>
+            <div style="display: flex; align-items: center;">
                 <TodoProgress/>
-                <ExpRank/>
+                <!-- <ExpRank/> -->
     
             </div>
 
