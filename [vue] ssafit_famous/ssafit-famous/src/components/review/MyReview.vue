@@ -7,7 +7,7 @@
         <div v-if="Empty">
             <p>작성한 리뷰가 없습니다.</p>
         </div>
-        <div class="col-sm-5" v-else>
+        <div class="col-sm-3 container text-start" v-else>
             <div class="card text-center" v-for="(review, index) in reviewList">
                 <RouterLink to="reviewDetail" @click='select(index)' class="col">
                     <img src="@/assets/imges/review-thumbnail.png" class="card-img-top">

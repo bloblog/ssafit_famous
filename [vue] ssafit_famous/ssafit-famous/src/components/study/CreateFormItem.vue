@@ -16,12 +16,12 @@
         
         <div class="basicInfo">
             <label>시작일</label>
-            <!-- <VueDatePicker v-model="store.studyDetail.startDate" :format="date => formatDate(date)"></VueDatePicker> -->
-            <VueDatePicker v-model="store.startDate"></VueDatePicker>
+            <!-- <VueDatePicker v-model="store.studyDetail.studyStart" :format="date => formatDate(date)"></VueDatePicker> -->
+            <VueDatePicker v-model="store.studyStart"></VueDatePicker>
             
             <label>종료일</label>
-            <!-- <VueDatePicker v-model="store.studyDetail.endDate" :format="date => formatDate(date)"></VueDatePicker> -->
-            <VueDatePicker v-model="store.endDate"></VueDatePicker>
+            <!-- <VueDatePicker v-model="store.studyDetail.studyEnd" :format="date => formatDate(date)"></VueDatePicker> -->
+            <VueDatePicker v-model="store.studyEnd"></VueDatePicker>
 
         </div>
         
@@ -46,8 +46,8 @@ const store = useStudyStore();
 
 // const studyName = ref(null);
 // const category = ref("선택하세요");
-// const startDate = ref(new Date());
-// const endDate = ref(new Date());
+// const studyStart = ref(new Date());
+// const studyEnd = ref(new Date());
 // const alarm = ref(0);
 
 const select = (item) => {

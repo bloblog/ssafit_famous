@@ -19,7 +19,7 @@ export const useStudyStore = defineStore("study", () => {
     studyName,
     category,
     leaderKey,
-    startDate,
+    studyStart,
     studyEnd,
     alarm,
     studyDetail,

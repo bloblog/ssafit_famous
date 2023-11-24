@@ -7,10 +7,21 @@
             <div class="member" style="display: flex;">
                 <div style="padding: 1rem;">
                     <h5>멤버</h5>
-                    <img src="@/assets/imges/user_leader.jpeg">
+                    <div v-if="tStore.members">
+                        <div v-for="member in tStore.members" >
+                            <img src="@/assets/imges/user_0.jpeg" class="m-2">
+                            <img src="@/assets/imges/user_1.jpeg">
+                            <!-- <div v-if="member.userKey % 2 == 0">
+                            </div>
+                            <div v-else>
+                            </div> -->
+                            <!-- <div>{{ member.id }}</div> -->
+                        </div>
+                    </div>
+
                     <!-- <span>{{ store.studyDetail.leaderId }}</span> -->
                 </div>
-                <div>
+                <!-- <div>
                     <div v-if="tStore.members">
                         <div v-for="member in tStore.members">
                             <div v-if="member.userKey % 2 == 0">
@@ -25,7 +36,7 @@
                     <div v-else>
                         <p>아직 팀원이 없어요!</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div>
