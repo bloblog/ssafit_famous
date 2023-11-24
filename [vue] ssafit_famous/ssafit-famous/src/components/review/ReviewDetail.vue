@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" id = "reviewDetail">
         <div>
             <h3>제목 : {{ reviewInfo.reviewTitle }}</h3>
         </div>
@@ -176,6 +176,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+#reviewDetail{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 2rem;
+    margin: 2rem auto;
+}
 .content {
   padding: 30px;
 }

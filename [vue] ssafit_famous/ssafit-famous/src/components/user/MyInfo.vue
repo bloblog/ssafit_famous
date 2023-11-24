@@ -2,7 +2,7 @@
 <template>
     <div id = "myInfo">
         <h3>사용자정보수정</h3>
-        <form>
+        <form id="myInfoForm">
             <!-- 아이디(변경 불가), 현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 -->
             <div class="mb-3 row">
                 <label for="id" class="col-sm-2 col-form-label">아이디</label>
@@ -125,12 +125,27 @@ const deleteUser = function(){
 </script>
 
 <style scoped>
-#myInfo{
+/* #myInfo{
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.6);
     width: 100%;
     padding: 3rem;
-    /* width: 60vw; */
+    width: 60vw;
+    margin: 3rem;
+} */
+
+#myInfo{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 2rem;
+    margin: 2rem auto;
+}
+
+#myInfoView{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 3rem;
+    width: 60vw;
     margin: 3rem;
 }
     form{

@@ -30,7 +30,7 @@ const backToMenu = ref(function(){
     background-color: rgba(255, 255, 255, 0.6);
     width: 100%;
     padding: 2rem;
-    margin: 1rem;
+    margin: 2rem auto;
 }
 
 #studyDetail > div{

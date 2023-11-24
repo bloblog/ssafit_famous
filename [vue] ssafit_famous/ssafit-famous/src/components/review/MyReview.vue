@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" id="myReview">
         <div>
             <h3>내가 작성한 리뷰</h3>
 
@@ -61,6 +61,12 @@ axios
 </script>
 
 <style scoped>
+#myReview{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 2rem;
+    margin: 2rem auto;
+}
 a {
     text-decoration: none;
 }

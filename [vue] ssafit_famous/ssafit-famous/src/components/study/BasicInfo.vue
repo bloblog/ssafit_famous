@@ -3,7 +3,7 @@
     <div id="basicInfo">
         <div>
             <h3 class="highlight">스터디명 : {{ store.studyDetail.studyName }}</h3>
-            <h5 class="tag"># {{ store.studyDetail.category }}</h5>
+            
             <div class="member" style="display: flex;">
                 <div>
                     <h5>팀장</h5>
@@ -30,6 +30,7 @@
             </div>
         </div>
         <div class="date">
+            <h5 class="tag"># {{ store.studyDetail.category }}</h5>
             <p>시작일 {{ dayjs(store.studyDetail.studyStart).format("YYYY-MM-DD") }}</p>
             <p>종료일 {{ dayjs(store.studyDetail.studyEnd).format("YYYY-MM-DD") }}</p>
         </div>
@@ -90,6 +91,7 @@ console.log(tStore.members);
     margin: 3rem;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 .date{
