@@ -58,8 +58,11 @@ onMounted(() => {
         console.log(res.status);
         if (res.status === 200) {
             studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') >= dayjs(new Date()).format('YYYYMMDD'));
-            isExist.value = true;
+            if (studys.value.length > 0) {
+                isExist.value = true;
+            }
         }
+        
         if (res.status === 204) {
             
         }
