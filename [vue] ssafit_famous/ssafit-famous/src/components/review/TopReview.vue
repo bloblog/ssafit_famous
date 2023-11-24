@@ -1,5 +1,5 @@
 <template>
-    <div class = "topReview">
+    <div id = "topReview">
         <h3 class="text-center">인기 게시글</h3>
         <div v-if="topReviews.length == 0">아직 게시글이 없어요!</div>
             <div class="col-sm-6">
@@ -79,7 +79,4 @@ onMounted(() => {
     color: #ffffff;
 }
 
-.topReview{
-    width: 70%;
-}
 </style>

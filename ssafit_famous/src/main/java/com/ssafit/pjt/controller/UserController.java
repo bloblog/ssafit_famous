@@ -96,6 +96,17 @@ public class UserController {
 		}
 	}
 	
+	// 회원의 todo 목록 가져오기
+		@GetMapping("/user/todo/{userKey}")
+		public ResponseEntity<?> todoList(@PathVariable int userKey) {
+			List<Study> result = userService.getTodoList(userKey);
+			if (result == null || result.size() == 0) {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<List<Study>>(result, HttpStatus.OK);
+			}
+		}
+	
 	// 회원정보 업데이트
 	@PutMapping("/user/{userKey}")
 	public ResponseEntity<Integer> update(@RequestBody User user, @PathVariable int userKey) {

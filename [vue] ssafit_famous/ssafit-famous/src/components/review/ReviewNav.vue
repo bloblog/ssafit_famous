@@ -58,6 +58,7 @@ const cats = ref([
 
 .cat-nav{
     padding: 3rem;
+    margin-right: 10%;
     width: fit-content;
     display: flex;
     flex-direction: column;

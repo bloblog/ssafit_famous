@@ -20,4 +20,6 @@ public interface UserDao {
 	List<User> selectUserList(String id);
 	
 	List<Study> selectStudyList(int userKey);
+	
+	List<Study> selectTodoList(int userKey);
 }
