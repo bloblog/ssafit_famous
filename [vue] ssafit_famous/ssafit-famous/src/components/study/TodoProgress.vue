@@ -1,8 +1,9 @@
 <!-- todo 달성률 그래프 -->
 <template>
-    <div id="todoProgress">
-        <h3> 전체 {{ todoAll.length }}개의 할 일 중 {{ todoDone.length }}개를 완료했어요!</h3>
-        <h4> 해야할 일을 확인해보세요</h4>
+    <div id="todoProgress" class="text-center">
+        <h3> 전체 {{ todoAll.length }}개의 할 일 중</h3>
+        <h3>{{ todoDone.length }}개를 완료했어요!</h3>
+        <h5> 해야할 일을 확인해보세요</h5>
         <ul v-for="todo in todoYet">
             <li>{{ todo.todoContent }}</li>
         </ul>

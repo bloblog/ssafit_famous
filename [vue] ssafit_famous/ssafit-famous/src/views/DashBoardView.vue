@@ -6,7 +6,10 @@
             <div>
                 <CalendarItem/>
             </div>
-            <div style="display: flex; align-items: center;">
+            <div class="v-line">
+
+            </div>
+            <div class="m-3" style="display: flex; align-items: center;">
                 <TodoProgress/>
                 <!-- <ExpRank/> -->
     
@@ -31,5 +34,12 @@ import ExpRank from '../components/user/ExpRank.vue';
 }
 .items {
     display: flex;
+}
+
+.v-line {
+  border-left : 1px solid rgb(0, 0, 0);
+  margin-right: 5vw;
+  margin-left: 5vw;
+  height : 30vw;
 }
 </style>

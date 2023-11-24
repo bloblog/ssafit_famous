@@ -1,7 +1,8 @@
 <!-- 일정 표시할 캘린더 -->
 <template>
-    <div>
-        <div class='demo-app'>
+    <div class="text-center">
+      <img src = "@/assets/imges/calendar.png">
+        <!-- <div class='demo-app'>
     
             <div class='demo-app-main'>
             <FullCalendar
@@ -13,8 +14,9 @@
                 <i>{{ arg.event.title }}</i>
                 </template>
             </FullCalendar>
+          -->
             
-            <div class="btn-group">
+            <div class="btn btn-group m-2">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyModal">수정하기</button>
                 <modifyModal/>
     
@@ -22,7 +24,7 @@
                 <addModal/>
             </div>
             
-            
+            <!--
             <div class='demo-app-schedule'>
                 <h2>Schedule ({{ currentEvents.length }})</h2>
                 <ul>
@@ -33,7 +35,7 @@
                 </ul>
             </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -157,6 +159,11 @@ b { /* used for event dates/times */
     display: flex;
 }
 
+img {
+  width: 25vw;
+  
+  box-shadow: 5px 5px 5px rgb(91, 88, 88);
+}
 
 
 </style>
