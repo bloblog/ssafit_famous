@@ -67,6 +67,9 @@ onMounted(() => {
     .then((res) => {
         if (res.status === 200) {
             studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') < dayjs(new Date()).format('YYYYMMDD'));
+            if (studys.value.length > 0) {
+                isExist.value = true;
+            }
         }
         if (res.status === 204) {
           const msg = "완료된 스터디가 없습니다.";
@@ -89,10 +92,10 @@ onMounted(() => {
                 },
                 })
                 .then((res) => {
-                    if (res.data || res.data.size() == 0) {
+                    if (res.data || res.data.size() !== 0) {
+                        // isExist.value = true;
                         for (let i = 0; i < res.data.size(); i++) {
                             doneList.value.push(res.data[i].studyKey);
-                            isExist.value = true;
                         }
                     } else {
                         reviewList = [];
