@@ -6,10 +6,11 @@
         <ol>
             <li v-for="todo in todos" :key="todo.todoKey">
               <label class="checkbox">
-                <input type="checkbox">
+                <input type="checkbox" @click="success(todo)">
                 <span class="icon"></span>
               </label>
-                <button @click=select(todo) class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
+              <div>
+                <button @click=select(todo) :class="todo.success==1? 'btn line' : 'btn'" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
                 <!-- Todo 수정 모달 -->
                 <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -37,6 +38,8 @@
                 </div>
 
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
+                
+              </div>
                 
             </li>
         </ol>
@@ -112,6 +115,8 @@ const select = (todo) => {
 }
 
 const todoOne = ref({});
+const isDone = ref([]);
+
 const success = (todo) => {
   todoOne.value = todo;
   const API_URL = `http://localhost:8080/api/todo/` + loginUserStore.userKey + `/` + todo.todoKey;
@@ -230,10 +235,13 @@ const modifyTodo = function(item){
 
 ol > li{
   list-style: none;
+
 }
-.done {
+
+.line {
   text-decoration: line-through;
 }
+
 
 .checkbox{
   margin: 1%;
