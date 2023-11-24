@@ -42,15 +42,13 @@ const store = useStudyStore();
 
 // const studyName = ref(null);
 // const category = ref("선택하세요");
-// const startDate = ref(new Date());
-// const endDate = ref(new Date());
+// const studyStart = ref(new Date());
+// const studyEnd = ref(new Date());
 // const alarm = ref(0);
 
 const select = (item) => {
     store.category = item;
 }
-
-
 
 </script>
 

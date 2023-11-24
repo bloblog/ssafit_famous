@@ -99,17 +99,15 @@ public class StudyController {
 	
 	// 스터디 수정하기
 	@PutMapping("/study/{studyKey}")
-	public ResponseEntity<Integer> update(@RequestBody Study study, int[] out, int[] in, @PathVariable int studyKey, HttpSession session) {
-		String loginUserId = String.valueOf(session.getAttribute("loginUser"));
+	public ResponseEntity<?> update(@RequestBody Study study, int[] out, int[] in, @PathVariable int studyKey) {
 		
+		int result = studyService.modifyStudy(study, out, in);
 		study.setStudyKey(studyKey);
-		int result = studyService.modifyStudy(study, loginUserId, out, in);
-		if (result == -1) {
-			return new ResponseEntity<Integer>(result, HttpStatus.UNAUTHORIZED);
-		} else if (result == 0){
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
-		}
-		return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		if (result == 0) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} 
+		return new ResponseEntity<Study>(study, HttpStatus.OK);
+		
 	}
 
 	// 멤버 추가하기

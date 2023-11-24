@@ -40,7 +40,7 @@
         </div>
         
         <div style="display: flex;" >
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modifyStudyInfoModal">수정하기</button>
+            <button type="button" @click="select(store.studyDetail)" class="btn" data-bs-toggle="modal" data-bs-target="#modifyStudyInfoModal">수정하기</button>
             <!-- 스터디 정보 수정 모달 -->
             <div class="modal fade" id="modifyStudyInfoModal" tabindex="-1" aria-labelledby="modifyStudyInfoModal" aria-hidden="true">
                 <div class="modal-dialog">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="g btn btn-primary" data-bs-dismiss="modal">수정</button>
+                        <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modify">수정</button>
                     </div>
                     </div>
                 </div>
@@ -84,6 +84,24 @@ const tStore = useUserStore(); // 팀원 관련해서 사용할 거라 tStore �
 
 const clicked = ref(false);
 
+const modify = () => {
+    axios
+    .put('http://localhost:8080/api/study/' + store.studyDetail.studyKey, {
+      "alarm" : store.studyDetail.alarm,
+      "category" : store.studyDetail.category,
+      "studyEnd" : (!store.studyEnd? store.studyDetail.studyEnd : store.studyEnd),
+      "studyKey" : store.studyDetail.studyKey,
+      "studyName" : (!store.studyName? store.studyDetail.studyName : store.studyName),
+      "studyStart" : (!store.studyStart? store.studyDetail.studyStart : store.studyStart),
+    })
+    .then(function(res){
+        console.log(res.data);
+      store.studyDetail = res.data;
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+};
 
 const modifyForm = ref(function(){
     clicked.value = !clicked.value;

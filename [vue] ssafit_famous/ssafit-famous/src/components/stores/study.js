@@ -8,19 +8,19 @@ export const useStudyStore = defineStore("study", () => {
   const studyName = ref(null);
   const category = ref("카테고리");
   const leaderKey = ref(0);
-  const startDate = ref(new Date());
-  const endDate = ref(new Date());
+  const studyStart = ref(new Date());
+  const studyEnd = ref(new Date());
   const alarm = ref(0);
 
   const studyDetail = ref({});
-  
+
   return {
     cats,
     studyName,
     category,
     leaderKey,
     startDate,
-    endDate,
+    studyEnd,
     alarm,
     studyDetail,
   };

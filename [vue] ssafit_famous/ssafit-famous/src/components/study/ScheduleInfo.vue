@@ -18,7 +18,7 @@
                                     <label for="scheduleDate">날짜</label>
                                     <VueDatePicker v-model="scheduleDate"></VueDatePicker>
                                     <label for="scheduleContent">내용</label>
-                                    <input type="text" v-model="modifyContent" :placeholder="schedule.todoContent"><br/>
+                                    <input type="text" v-model="modifyContent" style="border-radius: 10px;" :placeholder="schedule.todoContent"><br/>
                                     <label for="schedulePlace">장소</label>
                                     <input type="text" v-model="schedulePlace"><br/>
                                 </form>
@@ -45,11 +45,11 @@
                     <div class="modal-body">
                         <form>
                             <label for="scheduleDate">날짜</label>
-                            <VueDatePicker v-model="schedulelDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
+                            <VueDatePicker v-model="scheduleDate" :format="(date) => dayjs(date).format('YYYY-MM-DD')"></VueDatePicker>
                             <label for="scheduleContent">내용</label>
-                            <input type="text" v-model="addContent"><br/>
+                            <input type="text" v-model="addContent" style="margin:3px; border-radius: 10px; border: 1px solid;"><br/>
                             <label for="schedulePlace">장소</label>
-                            <input type="text" v-model="schedulePlace"><br/>
+                            <input type="text" v-model="schedulePlace"  style="margin:3px; border-radius: 10px; border: 1px solid;"><br/>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -97,7 +97,7 @@ const addSchedule = ref(function(){
     axios
         .post('http://localhost:8080/api/schedule', {
             "studyKey": store.studyDetail.studyKey,
-            "scheduleDate": dayjs(schedulelDate.value).format('YYYY-MM-DD'),
+            "scheduleDate": dayjs(scheduleDate.value).format('YYYY-MM-DD'),
             "scheduleContent": addContent.value,
             "schedulePlace": schedulePlace.value,
         })

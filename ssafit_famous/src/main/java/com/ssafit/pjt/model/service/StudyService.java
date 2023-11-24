@@ -11,7 +11,8 @@ public interface StudyService {
 	
 	int addMember(Study study, int[] list);
 	
-	int modifyStudy(Study study, String loginUser, int[] out, int[] in);
+	
+	int modifyStudy(Study study, int[] out, int[] in);
 	
 	int removeStudy(int studyKey, String loginUserId);
 	
