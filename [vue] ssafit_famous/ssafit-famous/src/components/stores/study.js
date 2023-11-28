@@ -10,7 +10,7 @@ export const useStudyStore = defineStore("study", () => {
   const leaderKey = ref(0);
   const studyStart = ref(new Date());
   const studyEnd = ref(new Date());
-  const alarm = ref(0);
+  const alarm = ref(null);
 
   const studyDetail = ref({});
 
