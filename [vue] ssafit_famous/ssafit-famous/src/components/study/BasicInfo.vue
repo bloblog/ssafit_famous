@@ -5,38 +5,32 @@
             <h3 class="highlight">스터디명 : {{ store.studyDetail.studyName }}</h3>
             
             <div class="member" style="display: flex;">
-                <div style="padding: 1rem;">
-                    <h5>멤버</h5>
-                    <div v-if="tStore.members">
-                        <div v-for="member in tStore.members" >
-                            <img src="@/assets/imges/user_0.jpeg" class="m-2">
-                            <img src="@/assets/imges/user_1.jpeg">
-                            <!-- <div v-if="member.userKey % 2 == 0">
+                <div style="padding: 1rem; display: flex; flex-direction: column;">
+                    <div>
+                        <h5>스터디장</h5>
+                        <img src="@/assets/imges/user_leader.jpeg" class="m-2">
+                        <div class="text-center">{{ store.studyDetail.leaderId }}</div>
+
+                    </div>
+                    <div>
+                        <h5>멤버</h5>
+                        <div>
+                            <div v-if="tStore.members.length > 0">
+                                <div v-for="member in tStore.members" >
+                                    <img src="@/assets/imges/user_0.jpeg" class="m-2">
+                                    <div class="text-center">{{ member.id }}</div>
+                                </div>
                             </div>
                             <div v-else>
-                            </div> -->
-                            <!-- <div>{{ member.id }}</div> -->
+                                <p>아직 멤버가 없어요!</p>
+                            </div>
+    
                         </div>
+
                     </div>
 
-                    <!-- <span>{{ store.studyDetail.leaderId }}</span> -->
+
                 </div>
-                <!-- <div>
-                    <div v-if="tStore.members">
-                        <div v-for="member in tStore.members">
-                            <div v-if="member.userKey % 2 == 0">
-                                <img src="@/assets/imges/user_0.jpeg">
-                            </div>
-                            <div v-else>
-                                <img src="@/assets/imges/user_1.jpeg">
-                            </div>
-                            <div>{{ member.id }}</div>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <p>아직 팀원이 없어요!</p>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div>
@@ -124,7 +118,7 @@ console.log(tStore.members);
 
 <style scoped>
 #basicInfo{
-    margin: 3rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
