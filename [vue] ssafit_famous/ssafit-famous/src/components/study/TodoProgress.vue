@@ -41,6 +41,7 @@ onMounted(()=>{
 <style scoped>
 #todoProgress{
     height: 50%;
+    width:fit-content
 }
 
 #todoProgress h3{
