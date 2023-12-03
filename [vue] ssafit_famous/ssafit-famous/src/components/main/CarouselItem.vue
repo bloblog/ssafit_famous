@@ -7,17 +7,17 @@
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="@/assets/imges/carousel/image1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-item active" data-bs-interval="2000">
+                <img src="@/assets/imges/carousel/image1.jpeg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" data-bs-interval="2000">
                 <img src="@/assets/imges/carousel/image2.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" data-bs-interval="2000">
                 <img src="@/assets/imges/carousel/image3.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
@@ -48,7 +48,7 @@
 }
 
 .carousel {
-    height: 30vh;
+    height: 40vh;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgb(91, 88, 88);
     border-radius: 5vw;
@@ -56,8 +56,8 @@
 
 img{
     width: 100vw;
-    height: 30vh;
+    height: 40vh;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
 }
 </style>

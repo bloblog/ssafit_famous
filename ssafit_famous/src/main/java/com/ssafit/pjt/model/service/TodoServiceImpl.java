@@ -50,13 +50,8 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public int modifyTodo(Todo todo, String loginUserKey) {
-		if(todo == null) {
-			return 0;
-		}else if(studyDao.selectOne(todo.getStudyKey()).getLeaderKey() == Integer.parseInt(loginUserKey)) {
-			return todoDao.updateTodo(todo);
-		}
-		return -1;
+	public int modifyTodo(Todo todo) {
+		return todoDao.updateTodo(todo);
 	}
 	
 	@Override

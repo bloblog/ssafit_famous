@@ -16,20 +16,18 @@
         
         <div class="basicInfo">
             <label>시작일</label>
-            <!-- <VueDatePicker v-model="store.studyDetail.startDate" :format="date => formatDate(date)"></VueDatePicker> -->
-            <VueDatePicker v-model="store.startDate"></VueDatePicker>
+            <VueDatePicker class="calendar" :enable-time-picker="false" auto-apply v-model="store.studyStart"></VueDatePicker>
             
             <label>종료일</label>
-            <!-- <VueDatePicker v-model="store.studyDetail.endDate" :format="date => formatDate(date)"></VueDatePicker> -->
-            <VueDatePicker v-model="store.endDate"></VueDatePicker>
+            <VueDatePicker class="calendar" :enable-time-picker="false" auto-apply v-model="store.studyEnd"></VueDatePicker>
 
         </div>
         
         <div class="basicInfo" id = "cat-alarm">
             
-            <label>알림주기</label>
-            <input v-model="store.alarm" type="number" placeholder="몇 일 전에 알림을 드릴까요?" style="border-radius: 10px; border: none; padding:7px; ">
-
+            <p>스터디 만남 </p>
+            <input v-model="store.alarm" type="number" min="1" placeholder="N" style="background-color: #0000; border: none;">
+            <p>일 전에 알림을 드릴게요.</p>
         </div>
     </div>
 </template>
@@ -44,24 +42,18 @@ import { useStudyStore } from '@/components/stores/study'
 
 const store = useStudyStore();
 
-// const studyName = ref(null);
-// const category = ref("선택하세요");
-// const startDate = ref(new Date());
-// const endDate = ref(new Date());
-// const alarm = ref(0);
-
 const select = (item) => {
     store.category = item;
 }
 
-
-// const formatDate = (date) => {
-//   const year = date.getFullYear();
-//   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-//   const day = date.getDate().toString().padStart(2, '0');
-//   return `${year}-${month}-${day}`;
-// };
-
+// 폼 비우기
+onMounted(() => {
+    const studyName = ref(null);
+    const category = ref("선택하세요");
+    const studyStart = ref(new Date());
+    const studyEnd = ref(new Date());
+    const alarm = ref(null);
+});
 
 
 </script>
@@ -87,9 +79,19 @@ label {
     margin: 10px;
 }
 
-#cat-alarm{
+#cat-alarm {
     margin: 20px;
     display: flex;
     justify-content: space-around;
+}
+#cat-alarm input {
+    width: 2.5rem;
+    /* margin-right: 1rem; */
+    margin-left: 1rem;
+    
+}
+
+.calendar {
+    width: fit-content;
 }
 </style>

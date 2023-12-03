@@ -18,6 +18,8 @@ public interface UserService {
 	
 	public List<Study> getStudyList(int userKey);
 	
+	public List<Study> getTodoList(int userKey);
+	
 	public int modifyUser(User user);
 	
 	public int removeUser(int userKey);

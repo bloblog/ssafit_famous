@@ -51,5 +51,14 @@
 		
 	</select>
 
-
+	<select id="selectTodoList" parameterType="int" resultType="Todo">
+		SELECT *
+		FROM todo t
+		WHERE t.todoKey IN (SELECT todoKey
+							FROM user u
+								INNER JOIN user_todo ut
+								ON u.userKey = ut.userKey
+							WHERE u.userKey = #{userKey})
+		
+	</select>
 </mapper>

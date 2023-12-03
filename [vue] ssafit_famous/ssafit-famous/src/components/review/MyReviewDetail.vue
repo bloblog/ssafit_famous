@@ -62,6 +62,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useReviewStore } from '../stores/review';
 import { useStudyStore } from '../stores/study';
+
 import { useLoginUserStore } from '../stores/loginUser';
 
 
@@ -71,7 +72,6 @@ import dayjs from 'dayjs';
 const store = useReviewStore();
 const sStore = useStudyStore();
 const lStore = useLoginUserStore();
-
 
 const router = useRouter();
 const route = useRoute();
@@ -130,6 +130,7 @@ onMounted(() => {
       .then((res) => {
         if (res.status === 200) {
           reviewInfo.value = res.data;
+          
         }
         if (res.status === 204) {
           const msg = "해당 게시글은 존재하지 않습니다.";
@@ -139,6 +140,10 @@ onMounted(() => {
         console.log(err);
         alert("게시글을 불러오는 중 오류가 발생하였습니다.");
       });
+
+      // if (Store.myReivew) {
+      //     reviewInfo.value = Store.myReivew;
+      //   }
 
       axios
       .get(API_URL2)

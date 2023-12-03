@@ -29,9 +29,13 @@ public class ScheduleController {
 	
 	// 일정 등록하기
 	@PostMapping("/schedule")
-	public ResponseEntity<Integer> add(@RequestBody Schedule schedule){
+	public ResponseEntity<?> add(@RequestBody Schedule schedule){
 		int result = scheduleService.addSchedule(schedule);
-		return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+		if (result > 0) {
+			schedule.setScheduleKey(scheduleService.getScheduleKey(schedule));
+			return new ResponseEntity<Schedule>(schedule, HttpStatus.CREATED);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
 	// 일정 수정하기

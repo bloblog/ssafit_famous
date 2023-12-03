@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div id="ongoingList">
         <h3>진행중인 스터디</h3>
         <div v-if="!isExist">진행중인 스터디가 없습니다.</div>
         <div v-else>
-            <h4>스터디명 클릭 시 상세페이지로 이동합니다</h4>
+            <p>스터디명 클릭 시 상세페이지로 이동합니다</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -58,8 +58,11 @@ onMounted(() => {
         console.log(res.status);
         if (res.status === 200) {
             studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') >= dayjs(new Date()).format('YYYYMMDD'));
-            isExist.value = true;
+            if (studys.value.length > 0) {
+                isExist.value = true;
+            }
         }
+        
         if (res.status === 204) {
             
         }
@@ -75,7 +78,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+#ongoingList{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 2rem;
+    margin: 2rem auto;
+}
+
 a{
     text-decoration: none;
 }
+
 </style>

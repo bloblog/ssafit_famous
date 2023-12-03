@@ -13,6 +13,7 @@
     "@fullcalendar/interaction": "^6.1.9",
     "@fullcalendar/timegrid": "^6.1.9",
     "@fullcalendar/vue3": "^6.1.9",
+    "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^7.2.2",
     "apexcharts": "^3.37.0",
     "axios": "^1.6.2",
@@ -23,6 +24,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "primevue": "^3.41.0",
+    "v-calendar": "^3.1.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
     "vue-session": "^1.0.0"

@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectStudyList(userKey);
 	}
 	
+	@Override
+	public List<Study> getTodoList(int userKey) {
+		return userDao.selectTodoList(userKey);
+	}
+	
 }

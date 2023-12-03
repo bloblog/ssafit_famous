@@ -1,39 +1,44 @@
 <!-- 할일 쭈르륵 + 체크박스 + 스터디장 클릭스 수정가능 -->
 <template>
-    <div>
+    <div id="todoInfo">
         <h3>Todo</h3>
         
         <ol>
             <li v-for="todo in todos" :key="todo.todoKey">
-                <button @click=select(todo) class="btn" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
-                <!-- Todo 수정 모달 -->
-                <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modifyTodoModal">Todo 수정하기</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form>
-                            <label for="todoContent">내용</label>
-                            <input type="text" id="modifyTodoContent" v-model="modifyTodoContent" :placeholder="selected.todoContent"><br/>
-                            <label for="todoStart">시작일</label>
-                            <VueDatePicker v-model="todoStart"></VueDatePicker>
-                            <label for="todoEnd">마감일</label>
-                            <VueDatePicker v-model="todoEnd"></VueDatePicker>
-                        </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifyTodo(todo)">수정</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+              <label class="checkbox">
+                <input type="checkbox" @click="success(todo)">
+                <span class="icon"></span>
+              </label>
+              <button @click=select(todo) :class="todo.success==1? 'btn line' : 'btn'" data-bs-toggle="modal" data-bs-target="#modifyTodoModal">{{ todo.todoContent }}</button>
+              <!-- Todo 수정 모달 -->
+              <div class="modal fade" id="modifyTodoModal" tabindex="-1" aria-labelledby="modifyTodoModal" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                      <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="modifyTodoModal">Todo 수정하기</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <label for="todoContent">내용</label>
+                          <input type="text" id="modifyTodoContent" v-model="modifyTodoContent" :placeholder="selected.todoContent"><br/>
+                          <label for="todoStart">시작일</label>
+                          <VueDatePicker v-model="todoStart"></VueDatePicker>
+                          <label for="todoEnd">마감일</label>
+                          <VueDatePicker v-model="todoEnd"></VueDatePicker>
+                      </form>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="b btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                          <button type="button" class="g btn btn-primary" data-bs-dismiss="modal" @click="modifyTodo(todo)">수정</button>
+                      </div>
+                      </div>
+                  </div>
 
                 <span>마감일 : {{ dayjs(todo.todoEnd).format('YYYY-MM-DD') }}</span>
-                <input type="checkbox" @click="success(todo)">
+                
+              </div>
+                
             </li>
         </ol>
         
@@ -100,9 +105,16 @@ const select = (todo) => {
   selected.value = todo;
   todoStart.value = todo.todoStart;
   todoEnd.value = todo.todoEnd;
+
+  // 수정 폼 관련 초기화
+  modifyTodoContent.value = todo.todoContent
+  todoStart.value = todo.todoStart
+  todoEnd.value = todo.todoEnd
 }
 
 const todoOne = ref({});
+const isDone = ref([]);
+
 const success = (todo) => {
   todoOne.value = todo;
   const API_URL = `http://localhost:8080/api/todo/` + loginUserStore.userKey + `/` + todo.todoKey;
@@ -187,7 +199,7 @@ const addTodo = function() {
     });
 }
 
-const modifyTodo = function(todo){
+const modifyTodo = function(item){
   axios
     .put('http://localhost:8080/api/todo/' + todo.todoKey, {
       "studyKey" : store.studyDetail.studyKey,
@@ -198,8 +210,14 @@ const modifyTodo = function(todo){
       "users" : [loginUserStore.userKey], // 다른 팀원도 추가해야 함!
     })
     .then(function(response){
-      console.log("변경완료")
-      console.log(response);
+      console.log(todo);
+      for(let i = 0; i < todos.value.length; i++) {
+          if(todos.value[i] === item)  {
+              todos.value.splice(i, 1);
+              break;
+          }
+      }
+      todos.value.push(response.data);
     })
     .catch(function(error){
       console.log(error);
@@ -209,7 +227,73 @@ const modifyTodo = function(todo){
 </script>
 
 <style scoped>
-.done {
+#todoInfo{
+  width: 50%;
+}
+
+ol > li{
+  list-style: none;
+
+}
+
+.line {
   text-decoration: line-through;
+}
+
+
+.checkbox{
+  margin: 1%;
+}
+.checkbox input{
+  display:none;
+}
+.checkbox span{
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.checkbox .icon{
+  position: relative;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #c8ccd4;
+  border-radius: 3px;
+  transition: background 0.1s ease;
+}
+
+.checkbox .icon::after{
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 5px;
+  height: 11px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45def) scale(0);
+  transform: all 0.3s ease;
+  transition-delay: 0.15s;
+  opacity: 0;
+}
+
+.checkbox input:checked ~ .icon {
+  background-color: transparent;
+  background: #54200c;
+  animation: jelly 0.6s ease;
+}
+
+.checkbox input:checked ~ .icon::after{
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+@keyframes jelly{
+  from{transform: scale(1,1);}
+  30%{transform: scale(1.25,0.75);}
+  40%{transform: scale(0.75,1.25);}
+  50%{transform: scale(1.15,0.85);}
+  65%{transform: scale(0.95,1.05);}
+  75%{transform: scale(1.05,0.95);}
+  to{transform: scale(1,1);}
 }
 </style>

@@ -11,4 +11,7 @@ public interface ScheduleService {
 	int removeSchedule(int scheduleKey, String loginUser);
 	// 일정 상세
 	Schedule getSchedule(int scheduleKey);
+
+	// 일정 키 얻기
+	int getScheduleKey(Schedule schedule);
 }

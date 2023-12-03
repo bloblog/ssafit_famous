@@ -1,6 +1,6 @@
 <template>
+	<!-- schedule info랑 겹쳐서 지워도 될듯 -->
     <div>
-        <!-- 스케줄 수정(일단 로그인 모달 넣어둠) -->
         <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">

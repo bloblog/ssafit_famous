@@ -6,9 +6,10 @@
             <div>
                 <CalendarItem/>
             </div>
-            <div>
+
+            <div style="display: flex; align-items: center;">
                 <TodoProgress/>
-                <ExpRank/>
+                <!-- <ExpRank/> -->
     
             </div>
 
@@ -25,11 +26,20 @@ import ExpRank from '../components/user/ExpRank.vue';
 <style scoped>
 #dashBoardView{
     width: 80vw;
-    margin: auto;
+    height: fit-content;
     padding: 5vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 2rem auto;
 }
-
 .items {
     display: flex;
+    justify-content: space-evenly;
+}
+
+.v-line {
+  border-left : 1px solid rgb(0, 0, 0);
+  margin-right: 5vw;
+  margin-left: 5vw;
+  height : 30vw;
 }
 </style>

@@ -1,6 +1,6 @@
 <!-- 완료된 스터디 리스트 -->
 <template>
-    <div>
+    <div id="completeList">
         <h3>지난 스터디</h3>
         <div v-if="!isExist">지난 스터디가 없습니다.</div>
         <div v-else>
@@ -67,6 +67,9 @@ onMounted(() => {
     .then((res) => {
         if (res.status === 200) {
             studys.value = res.data.filter((study) => dayjs(study.studyEnd).format('YYYYMMDD') < dayjs(new Date()).format('YYYYMMDD'));
+            if (studys.value.length > 0) {
+                isExist.value = true;
+            }
         }
         if (res.status === 204) {
           const msg = "완료된 스터디가 없습니다.";
@@ -89,10 +92,10 @@ onMounted(() => {
                 },
                 })
                 .then((res) => {
-                    if (res.data || res.data.size() == 0) {
+                    if (res.data || res.data.size() !== 0) {
+                        // isExist.value = true;
                         for (let i = 0; i < res.data.size(); i++) {
                             doneList.value.push(res.data[i].studyKey);
-                            isExist.value = true;
                         }
                     } else {
                         reviewList = [];
@@ -109,6 +112,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+#completeList{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 2rem;
+    margin: 2rem auto;
+}
 a {
     text-decoration: none;
 }

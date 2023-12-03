@@ -53,9 +53,9 @@ const create = () => {
     alarm: store.alarm,
     category: store.category,
     leaderKey: uStore.userKey,
-    studyEnd: dayjs(store.endDate).format("YYYY-MM-DD"),
+    studyEnd: dayjs(store.studyEnd).format("YYYY-MM-DD"),
     studyName: store.studyName,
-    studyStart: dayjs(store.startDate).format("YYYY-MM-DD"),
+    studyStart: dayjs(store.studyStart).format("YYYY-MM-DD"),
   })
     .then((res) => {
       if (res.data !== null) {
@@ -104,10 +104,10 @@ const createDone = function() {
         alarm: store.studyDetail.alarm,
         category: store.studyDetail.category,
         leaderKey: uStore.userKey,
-        studyEnd: dayjs(store.studyDetail.endDate).format("YYYY-MM-DD"),
+        studyEnd: dayjs(store.studyDetail.studyEnd).format("YYYY-MM-DD"),
         studyKey : store.studyDetail.studyKey,
         studyName: store.studyDetail.studyName,
-        studyStart: dayjs(store.studyDetail.startDate).format("YYYY-MM-DD"),
+        studyStart: dayjs(store.studyDetail.studyStart).format("YYYY-MM-DD"),
         // in : JSON.stringify(inList.value),
         // in : inList.value,
 
@@ -139,7 +139,7 @@ const createDone = function() {
 
 .board {
   background-color: rgba(255, 255, 255, 0.6);
-  padding: 10vw;
+  padding: 5vw;
   margin: 10px;
   border-radius: 10vw;
 

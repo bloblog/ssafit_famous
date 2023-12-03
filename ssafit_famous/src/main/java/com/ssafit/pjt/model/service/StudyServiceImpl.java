@@ -65,10 +65,10 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public int modifyStudy(Study study, String loginUserKey, int[] out, int[] in) {
+	public int modifyStudy(Study study, int[] out, int[] in) {
 		if(study == null) {
 			return 0;
-		} else if(study.getLeaderKey() == Integer.parseInt(loginUserKey)) {
+		} else {
 			if (out != null && out.length > 0) {
 				for (int key : out) {
 					// study-user 관계에서 제거
@@ -89,9 +89,8 @@ public class StudyServiceImpl implements StudyService {
 			if (in != null && in.length > 0) {
 				addMember(study, in);
 			}
-			return studyDao.updateStudy(study);
 		}
-		return -1;
+		return studyDao.updateStudy(study);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
 *{
     color: #54200c;
     font-family: 'NanumSquareNeo-Variable';
+    box-sizing: border-box;
 }
 
 #background{
@@ -49,6 +50,8 @@ import HeaderBar from '../src/components/common/HeaderBar.vue';
     max-width: 1000px;
     margin: auto;
     min-height: 100vh;
+    box-sizing:content-box;
+    overflow: hidden;
 }
 
 header{
