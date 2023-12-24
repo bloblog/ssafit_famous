@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <router-link to="/mainHome"><img src="../../../public/mainLogo.png"></router-link> <br/>
+            <router-link to="/mainHome"><img src="../../../mainLogo.png"></router-link> <br/>
             <div>
                 <div class="c" v-if="store.status">
                     <div class="dropdown">
